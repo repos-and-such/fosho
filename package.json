@@ -1,0 +1,28 @@
+{
+  "name": "fosho",
+  "version": "1.0.0",
+  "description": "shopping list",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/repos-and-such/fosho.git"
+  },
+  "author": "Märten Raidmets",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/repos-and-such/fosho/issues"
+  },
+  "homepage": "https://github.com/repos-and-such/fosho#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.3.0"
+  }
+}
