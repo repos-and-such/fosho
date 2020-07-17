@@ -1,31 +1,25 @@
-import Vue from 'vue'
-import App from './App.vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Login from './views/Login.vue'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import { domain, clientId } from "../auth_config.json";
+import { Auth0Plugin } from "./auth";
 
-
-
-Vue.use(Router)
-
-Vue.config.productionTip = false
-
-const routes = [
-  {
-    path:'/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path:'/login',
-    name: 'login',
-    component: Login
+Vue.use(Auth0Plugin, {
+  domain,
+  clientId,
+  onRedirectCallback: appState => {
+    router.push(
+      appState && appState.targetUrl
+        ? appState.targetUrl
+        : window.location.pathname
+    );
   }
-];
+});
+Vue.use(router);
 
-const router = new Router({routes});
+Vue.config.productionTip = false;
 
 new Vue({
   router,
-  render: h => h(App),
-}).$mount('#app')
+  render: h => h(App)
+}).$mount("#app");
