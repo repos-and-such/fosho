@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div v-for="item in myArray"
-      :item="item"
-      :key="item">
-      {{ item }}<shopping-list />
+    <div v-for="list in lists"
+      :list="list"
+      :key="list">
+      {{ list }}<shopping-list />
     </div>
-      {{ $auth.user }}
+      <!-- {{ $auth.user }} -->
 
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   name: "AppBody",
   data() {
     return {
-      lists: []
+      lists: ['helloImAList']
     }
   },
   methods: {

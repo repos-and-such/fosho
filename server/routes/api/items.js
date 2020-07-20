@@ -17,6 +17,7 @@ const router = express.Router();
 
 // Get all shopping items
 router.get('/', async (req,res) => {
+  console.log('server received call');
   res.send(
     await (async () => {
       const client = await pool.connect()

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div v-for="item in myArray"
+    <div v-for="item in items"
       :item="item"
       :key="item">
       {{ item }}<shopping-list-item />
@@ -9,7 +9,9 @@
 </template>
 
 <script>
-import ShoppingListItem from './ShoppingListItem.vue'
+import ShoppingListItem from './ShoppingListItem.vue';
+import ItemService from '../../api-service/ItemService';
+
 export default {
   components: {
     ShoppingListItem
@@ -17,19 +19,14 @@ export default {
   name: "ShoppingListBody",
   data() {
     return {
-      myArray: [
-        'item1',  
-        'item2',  
-        'item3',  
-        'item4',  
-        'item5',  
-        'item6',  
-        'item7'
-      ]
+      items: []
     }
   },
   methods: {
   },
+  created() {
+    this.items = ItemService.getItems();
+  }
 }
 </script>
 
