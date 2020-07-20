@@ -17,16 +17,7 @@ const router = express.Router();
 
 // Get all shopping items
 router.get('/', async (req,res) => {
-  res.send(
-    await (async () => {
-      const client = await pool.connect()
-      try {
-        const res = await client.query('select * from item;')
-        return res.rows
-      } finally {
-        client.release()
-      }
-    })().catch(err => console.log(err.stack)))
+  res.send('hello from server')
 });
 
 module.exports = router;

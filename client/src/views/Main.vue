@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; flex-direction: column; height: 95vh;">
     <app-header />
-    <app-body style="overflow-y: scroll; margin-top: 50px;" />
+    <app-body style="overflow-y: auto; margin-top: 50px;" />
   </div>
 </template>
 
