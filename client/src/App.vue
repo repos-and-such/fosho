@@ -28,7 +28,7 @@ export default {
 }
 @media screen and (max-width: 1000px){
 .container {
-  width: 98vw;
+  width: 97vw;
   overflow: hidden;
 }
 }

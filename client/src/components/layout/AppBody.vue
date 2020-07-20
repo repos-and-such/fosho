@@ -4,7 +4,6 @@
       :list="list"
       :key="list.id">
       <shopping-list :list="list"/>
-      <br>
     </div>
   </div>
 </template>
@@ -24,9 +23,22 @@ export default {
     }
   },
   methods: {
+    compare(a, b) {
+      const timeA = a.created_on;
+      const timeB = b.created_on;
+
+      let comparison = 0;
+      if (timeA > timeB) {
+        comparison = -1;
+      } else if (timeA < timeB) {
+        comparison = 1;
+      }
+      return comparison;
+    }
   },
   async created() {
     this.lists = await ListService.getLists(this.$auth.user.email);
+    this.lists.sort(this.compare);
   }
 }
 </script>

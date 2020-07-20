@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="shopping-list-body">
     <div v-for="item in items"
       :key="item.id"><shopping-item :itemName="item.name"/>
     </div>
@@ -32,4 +32,7 @@ export default {
 </script>
 
 <style scoped>
+#shopping-list-body {
+  padding-left: 12px;
+}
 </style>
