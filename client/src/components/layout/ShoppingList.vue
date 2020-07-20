@@ -1,11 +1,8 @@
 <template>
   <div id="shopping-list" @click="handleClick">
-    <div>
-      SHOPPING LIST {{ isOpen }}
-    </div>
+    <shopping-list-header :list="this.list"/>
     <div v-if="isOpen">
-      <shopping-list-header />
-      <shopping-list-body />
+      <shopping-list-body :listId="this.list.id"/>
     </div>
   </div>
 </template>
@@ -15,6 +12,9 @@ import ShoppingListHeader from './ShoppingListHeader.vue'
 import ShoppingListBody from './ShoppingListBody.vue'
 
 export default {
+  props: {
+    list: Object
+  },
   components: {
     ShoppingListHeader,
     ShoppingListBody
@@ -22,13 +22,13 @@ export default {
   name: "ShoppingList",
   data() {
     return {
-      ShoppingItems: ['item1', 'item2', 'item3'],
       isOpen: false
   }
   },
   methods: {
     handleClick() {
       this.isOpen = !this.isOpen;
+      console.log(this.list);
     }
   },
 }

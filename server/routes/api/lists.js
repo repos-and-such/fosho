@@ -15,13 +15,14 @@ pool.on('error', (err, client) => {
 
 const router = express.Router();
 
-// Get all shopping items for selected list
-router.get('/:listId', async (req,res) => {
+// Get all shopping lists for loggd in user
+router.get(`/:email`, async (req,res) => {
+  console.log('server received call');
   res.send(
     await (async () => {
       const client = await pool.connect()
       try {
-        const res = await client.query("select * from item where list_id = $1", [req.params.listId])
+        const res = await client.query("select * from list where user_email = $1", [req.params.email])
         return res.rows
       } finally {
         client.release()

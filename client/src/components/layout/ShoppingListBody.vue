@@ -1,20 +1,21 @@
 <template>
   <div class="container">
     <div v-for="item in items"
-      :item="item"
-      :key="item">
-      {{ item }}<shopping-list-item />
+      :key="item.id"><shopping-item :itemName="item.name"/>
     </div>
   </div>
 </template>
 
 <script>
-import ShoppingListItem from './ShoppingListItem.vue';
+import ShoppingItem from './ShoppingItem.vue';
 import ItemService from '../../api-service/ItemService';
 
 export default {
+  props: {
+    listId: Number
+  },
   components: {
-    ShoppingListItem
+    ShoppingItem
   },
   name: "ShoppingListBody",
   data() {
@@ -24,8 +25,8 @@ export default {
   },
   methods: {
   },
-  created() {
-    this.items = ItemService.getItems();
+  async created() {
+    this.items = await ItemService.getItems(this.listId);
   }
 }
 </script>

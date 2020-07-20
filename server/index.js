@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 
 const items = require('./routes/api/items');
+const lists = require('./routes/api/lists');
+
 app.use('/api/items', items);
+app.use('/api/lists', lists);
 
 if(process.env.NODE_ENV === 'production') {
     app.use(express.static(__dirname + '/public'));

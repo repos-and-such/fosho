@@ -4,9 +4,10 @@ const url = 'api/lists/';
 
 class ListService {
     // Get Lists
-    static getLists() {
+    static getLists(userEmail) {
+      console.log('useremail: ' + userEmail);
         return new Promise((resolve, reject) => {
-            axios.get(url).then((res) => {
+            axios.get(url + userEmail).then((res) => {
                 resolve(res.data)
             }).catch((err) => {
                 reject(err);

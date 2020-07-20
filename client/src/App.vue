@@ -19,6 +19,8 @@ export default {
   display: flex;
   justify-content: center;
   overflow: hidden;
+  font-family: monospace;
+  font-size: 20px;
 }
 .container {
   width: 70vw;
@@ -26,7 +28,7 @@ export default {
 }
 @media screen and (max-width: 1000px){
 .container {
-  width: 100vw;
+  width: 98vw;
   overflow: hidden;
 }
 }
