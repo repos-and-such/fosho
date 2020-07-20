@@ -1,33 +1,23 @@
 <template>
-  <div>    
-    <router-link to="/profile" id="button">
-      Profile
-    </router-link>
-    <a id="button" @click.prevent="logout">
-      Log out
-    </a></div>
-  
+  <div style="display: flex; flex-direction: column; height: 95vh;">
+    <app-header />
+    <app-body style="overflow-y: scroll; margin-top: 50px;" />
+  </div>
 </template>
 
 <script>
+import AppHeader from "../components/layout/AppHeader";
+import AppBody from "../components/layout/AppBody";
+
 export default {
   name: "Main",
+  components: {
+    AppHeader,
+    AppBody
+  },
   methods: {
-    logout() {
-      this.$auth.logout();
-    }
-  }
+  },
 };
 </script>
 <style scoped>
-#button {
-  border: 1px solid blue;
-  text-decoration: none;
-  padding: 4px;
-  margin: 4px;
-  color: blue;
-  cursor: pointer;
-
-}
-
 </style>
