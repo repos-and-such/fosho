@@ -15,7 +15,6 @@ pool.on('error', (err, client) => {
 
 const router = express.Router();
 
-// Get all shopping items for selected list
 router.get('/:listId', async (req,res) => {
   res.send(
     await (async () => {
@@ -26,7 +25,41 @@ router.get('/:listId', async (req,res) => {
       } finally {
         client.release()
       }
-    })().catch(err => console.log(err.stack)))
+    })().catch(err => {
+      console.log(err.stack);
+      return err.stack;
+    }))
+});
+
+router.post('/', async (req,res) => {
+  res.send(await (async () => {
+      const client = await pool.connect()
+      try {
+        const res = await client.query("insert into item (name, list_id, created_on) values ($1, $2, NOW()) returning id, name", [req.body.text, req.body.list_id]);
+        console.log(res.rows);
+        return res.rows
+      } finally {
+        client.release()
+      }
+    })().catch(err => {
+      console.log(err.stack);
+      return err.stack;
+    }))
+});
+
+router.delete('/:id', async (req, res) => {
+  res.send(await (async () => {
+    const client = await pool.connect()
+    try {
+        const res = await client.query(`delete from item where id = ${req.params.id} returning id, name;`);
+        return res.rows
+     } finally {
+        client.release()
+    }
+    })().catch(err => {
+      console.log(err.stack);
+      return err.stack;
+    }))
 });
 
 module.exports = router;

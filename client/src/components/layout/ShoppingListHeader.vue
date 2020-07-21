@@ -1,9 +1,11 @@
 <template>
-  <div id="shopping-list-header">
-    <div style="display:flex">
+  <div id="shopping-list-header" @click="handleClick">
+    <div>
       {{ dateTime }}
-      <i v-if="isOpen" class="material-icons">keyboard_arrow_up</i>
-      <i v-else class="material-icons">keyboard_arrow_down</i>
+      {{ this.list.name ? this.list.name : null }}
+    </div>
+    <div>
+      <i class="material-icons">menu</i>
     </div>
   </div>
 </template>
@@ -19,18 +21,30 @@ export default {
     return {
     }
   },
+  methods: {
+    handleClick() {
+      setTimeout(() => {
+        this.isOpen = !this.isOpen;
+      }, 200);
+    }
+  },
   computed: {
     dateTime() {
-      return this.list.created_on.replace('T', ' ').split('.')[0] + ' ' + (this.list.name ? this.list.name : '');
+      return this.list.created_on.replace('T', ' ').split('.')[0];
     }
   }
 }
 </script>
 <style scoped>
 #shopping-list-header{
-  background: rgb(219, 219, 219);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 6px;
-  padding: 6px;
+  padding: 8px;
+  padding-left: 10px;
+  padding-right: 12px;
+  border: 1px solid rgb(43, 184, 113);
+  box-shadow: 0 0 4px rgb(43, 184, 113);
 }
-
 </style>

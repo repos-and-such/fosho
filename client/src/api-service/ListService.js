@@ -5,7 +5,6 @@ const url = 'api/lists/';
 class ListService {
     // Get Lists
     static getLists(userEmail) {
-      console.log('useremail: ' + userEmail);
         return new Promise((resolve, reject) => {
             axios.get(url + userEmail).then((res) => {
                 resolve(res.data)

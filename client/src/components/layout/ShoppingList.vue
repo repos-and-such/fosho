@@ -1,6 +1,6 @@
 <template>
-  <div id="shopping-list" @click="handleClick">
-    <shopping-list-header :list="this.list" :isOpen="isOpen"/>
+  <div id="shopping-list">
+    <shopping-list-header :list="this.list"/>
     <div v-if="isOpen">
       <shopping-list-body :listId="this.list.id"/>
     </div>
@@ -22,15 +22,10 @@ export default {
   name: "ShoppingList",
   data() {
     return {
-      isOpen: false
-  }
+      isOpen: true
+    }
   },
   methods: {
-    handleClick() {
-      setTimeout(() => {
-        this.isOpen = !this.isOpen;
-      }, 200);
-    }
   },
 }
 </script>

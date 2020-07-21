@@ -4,6 +4,7 @@ const app = express();
 const items = require('./routes/api/items');
 const lists = require('./routes/api/lists');
 
+app.use(express.json());
 app.use('/api/items', items);
 app.use('/api/lists', lists);
 

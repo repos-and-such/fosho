@@ -27,7 +27,10 @@ router.get(`/:email`, async (req,res) => {
       } finally {
         client.release()
       }
-    })().catch(err => console.log(err.stack)))
+    })().catch(err => {
+      console.log(err.stack);
+      return err.stack;
+    }))
 });
 
 module.exports = router;

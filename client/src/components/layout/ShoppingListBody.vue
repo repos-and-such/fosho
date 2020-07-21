@@ -1,7 +1,8 @@
 <template>
   <div id="shopping-list-body">
+    <insert-item />
     <div v-for="item in items"
-      :key="item.id"><shopping-item :itemName="item.name"/>
+      :key="item.id"><shopping-item :item="item"/>
     </div>
   </div>
 </template>
@@ -9,13 +10,15 @@
 <script>
 import ShoppingItem from './ShoppingItem.vue';
 import ItemService from '../../api-service/ItemService';
+import InsertItem from './/InsertItem.vue';
 
 export default {
   props: {
     listId: Number
   },
   components: {
-    ShoppingItem
+    ShoppingItem,
+    InsertItem
   },
   name: "ShoppingListBody",
   data() {
@@ -34,5 +37,8 @@ export default {
 <style scoped>
 #shopping-list-body {
   padding-left: 12px;
+  padding-right: 12px;
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

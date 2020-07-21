@@ -3,7 +3,6 @@
     <div>
       <i class="material-icons" id="add-list">add</i>
       <i class="material-icons" id="search" @click="openSearch">search</i>
-      <textarea />
     </div>
     <div>
       <router-link to="/profile" id="button">
@@ -19,16 +18,15 @@ export default {
   name: "AppHeader",
   data() {
     return {
-  }
+    }
   },
   methods: {
     logout() {
       this.$auth.logout();
     },
     openSearch() {
-
     }
-  },
+  }
 }
 </script>
 
