@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import { domain, clientId } from "../auth_config.json";
 import { Auth0Plugin } from "./auth";
+import store from './store';
 
 Vue.use(Auth0Plugin, {
   domain,
@@ -21,5 +22,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

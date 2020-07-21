@@ -32,19 +32,21 @@ router.get('/:listId', async (req,res) => {
 });
 
 router.post('/', async (req,res) => {
+  console.log(req.body)
   res.send(await (async () => {
-      const client = await pool.connect()
-      try {
-        const res = await client.query("insert into item (name, list_id, created_on) values ($1, $2, NOW()) returning id, name", [req.body.text, req.body.list_id]);
-        console.log(res.rows);
-        return res.rows
-      } finally {
-        client.release()
-      }
-    })().catch(err => {
-      console.log(err.stack);
-      return err.stack;
-    }))
+    const client = await pool.connect()
+    try {
+      const res = await client.query("insert into item (name, list_id, created_on) values ($1, $2, NOW()) returning id, name, list_id, category, created_on",
+      [req.body.name, req.body.list_id]);
+      console.log(res.rows);
+      return res.rows
+    } finally {
+      client.release()
+    }
+  })().catch(err => {
+    console.log(err.stack);
+    return err.stack;
+  }))
 });
 
 router.delete('/:id', async (req, res) => {

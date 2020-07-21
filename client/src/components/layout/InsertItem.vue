@@ -23,7 +23,15 @@ export default {
   },
   methods: {
     insertItem() {
-      ItemService.insertItem(this.entry).then(this.entry = '');
+      ItemService.insertItem({name: this.entry, list_id: 2})
+        .then(response => {
+          if (response.data[0]) {
+            this.entry = '';
+            let insertedItem = Object.assign({}, response.data[0]);
+            console.log(insertedItem);
+            this.$store.commit('insertItem', insertedItem);
+          } 
+        });
     }
   }
 }

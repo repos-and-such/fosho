@@ -8,22 +8,29 @@
 <script>
 import ItemService from '../../api-service/ItemService'
 export default {
-  props: {
-    item: Object
-  },
   name: "ShoppingItem",
-  data() {
-    return {
-    }
-  },
   methods: {
     updateItem() {
 
     },
     deleteItem(id) {
-      ItemService.deleteItem(id);
+      ItemService.deleteItem(id)
+        .then(response => {
+          // should check for errors instead?
+          if (response.data[0]) {
+            this.$store.commit('deleteItem', this.item);
+          } 
+        });
     }
-  }  
+  },
+  computed: {
+    item() {
+      return this.$store.getters.getItemById(this.key);
+    },
+    key() {
+      return this.$vnode.key;
+    }
+  }
 }
 </script>
 

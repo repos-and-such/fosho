@@ -1,7 +1,7 @@
 <template>
-  <div id="shopping-list-header" @click="handleClick">
+  <div id="shopping-list-header" @click="toggleListBody">
     <div>
-      {{ dateTime }}
+      {{ this.list.created_on }}
       {{ this.list.name ? this.list.name : null }}
     </div>
     <div>
@@ -12,25 +12,30 @@
 
 <script>
 export default {
-  props: {
-    list: Object,
-    isOpen: Boolean
-  },
   name: "ShoppingListHeader",
   data() {
     return {
     }
   },
   methods: {
-    handleClick() {
-      setTimeout(() => {
-        this.isOpen = !this.isOpen;
-      }, 200);
+    toggleListBody() {
+      // console.log(this.list);
+      this.$store.commit('toggleListBody', this.list);
+      // this.$store.commit('changeTestArray', 'issand');
+
     }
   },
   computed: {
-    dateTime() {
-      return this.list.created_on.replace('T', ' ').split('.')[0];
+    list() {
+      return this.$store.getters.getListById(this.key);
+    },
+    // dateTime() {
+    //   if (this.list.created_on) {
+    //     return this.list.created_on.replace('T', ' ').split('.')[0];
+    //   }
+    // },
+    key() {
+      return this.$vnode.key;
     }
   }
 }

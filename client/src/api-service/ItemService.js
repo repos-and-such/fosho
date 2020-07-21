@@ -14,12 +14,12 @@ class ItemService {
       });
     }
 
-    static insertItem(text) {
+    static insertItem(item) {
       return axios.post(url, {
-        text: text,
-        list_id: 1
+        name: item.name,
+        list_id: item.list_id
       }).then(res => {
-        console.log(res);
+        return res;
       }).catch((err) => {
         console.log(err)
       });
@@ -28,7 +28,7 @@ class ItemService {
     static deleteItem(id) {
       return axios.delete(`${url}${id}`)
       .then(res => {
-        console.log(res);
+        return res;
       }).catch((err) => {
         console.log(err)
       });

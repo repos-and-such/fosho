@@ -1,10 +1,7 @@
 <template>
   <div class="container">
-    <div v-for="list in lists"
-      :list="list"
-      :key="list.id">
-      <shopping-list :list="list"/>
-    </div>
+    <shopping-list v-for="list in lists"
+      :key="list.id" />
   </div>
 </template>
 
@@ -19,7 +16,6 @@ export default {
   name: "AppBody",
   data() {
     return {
-      lists: []
     }
   },
   methods: {
@@ -37,8 +33,14 @@ export default {
     }
   },
   async created() {
-    this.lists = await ListService.getLists(this.$auth.user.email);
-    this.lists.sort(this.compare);
+    let listsFromApi = await ListService.getLists(this.$auth.user.email);
+    listsFromApi.sort(this.compare);
+    this.$store.commit('setLists', listsFromApi);
+  },
+  computed: {
+    lists() {
+      return this.$store.state.lists;
+    }
   }
 }
 </script>

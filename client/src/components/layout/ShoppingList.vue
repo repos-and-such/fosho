@@ -1,8 +1,8 @@
 <template>
   <div id="shopping-list">
-    <shopping-list-header :list="this.list"/>
+    <shopping-list-header :key="key" />
     <div v-if="isOpen">
-      <shopping-list-body :listId="this.list.id"/>
+      <shopping-list-body :key="key" />
     </div>
   </div>
 </template>
@@ -12,9 +12,6 @@ import ShoppingListHeader from './ShoppingListHeader.vue'
 import ShoppingListBody from './ShoppingListBody.vue'
 
 export default {
-  props: {
-    list: Object
-  },
   components: {
     ShoppingListHeader,
     ShoppingListBody
@@ -22,11 +19,21 @@ export default {
   name: "ShoppingList",
   data() {
     return {
-      isOpen: true
     }
   },
   methods: {
   },
+  computed: {
+    lists() {
+      return this.$store.state.lists;
+    },
+    isOpen() {
+      return this.$store.getters.getOpenStatusById(this.key);
+    },
+    key() {
+      return this.$vnode.key;
+    }
+  }
 }
 </script>
 <style scoped>
