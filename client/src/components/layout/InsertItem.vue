@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
+  <div style="display: flex; margin-right:20px">
     <textarea 
       spellcheck="false" 
       :placeholder="'insert item'" 
       id="insert-item" 
-      style="display: flex"
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertItem"
     />
-     </div>
+   <i class="material-icons" id="insert-button" @click="insertItem()">check</i>
+  </div>
 </template>
 
 <script>
@@ -23,15 +23,24 @@ export default {
   },
   methods: {
     insertItem() {
-      ItemService.insertItem({name: this.entry, list_id: 2})
-        .then(response => {
-          if (response.data[0]) {
-            this.entry = '';
-            let insertedItem = Object.assign({}, response.data[0]);
-            console.log(insertedItem);
-            this.$store.commit('insertItem', insertedItem);
-          } 
-        });
+      if (this.entry) {
+        let entryInput = this.entry;
+        this.entry = '';
+              console.log(this.key);
+
+        ItemService.insertItem({name: entryInput, list_id: this.key})
+          .then(res => {
+            if (res.data && res.data[0] !== 'ERROR') {
+              let insertedItem = Object.assign({}, res.data[0]);
+              this.$store.commit('insertItem', insertedItem);
+            } 
+          });        
+      }
+    }
+  },
+    computed: {
+    key() {
+      return this.$vnode.key;
     }
   }
 }
@@ -41,9 +50,10 @@ export default {
   margin-left: 16px;
   margin-bottom: 8px;
   padding-left: 9px;
+  padding-right: 9px;
   padding-top: 6px;
   font-size: 20px;
-  width: 70%;
+  width: 30vw;
   height: 76px;
   border: 1px solid  rgb(184, 184, 184);
   border-radius:2px;
@@ -59,12 +69,28 @@ export default {
     background-color: rgb(255, 250, 243);
     color: rgb(124, 66, 58);
 }
+#insert-button {
+  margin: 0px;
+  padding: 0px;
+  height: 34px;
+  margin-left: 9px;
+  color:rgb(105, 185, 98);
+  cursor:pointer;
+  font-size: 34px;
+  border: 2px solid rgb(105, 185, 98);
+  border-radius: 2px;
+  box-shadow: 0 0 5px rgb(105, 185, 98);
+}
+#insert-button:active {
+  box-shadow: none;
+}
+
 @media all and (max-width: 880px) {
 #insert-item {
   margin-left: 16px;
   margin-bottom: 5px;
   font-size: 20px;
-  width: 60%;
+  width: 85%;
   height: 28px;
   overflow: hidden;
   }

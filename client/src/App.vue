@@ -19,7 +19,7 @@ export default {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  font-family: monospace;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 20px;
 }
 .container {
@@ -28,7 +28,7 @@ export default {
 }
 @media screen and (max-width: 1000px){
 .container {
-  width: 97vw;
+  width: 100vw;
   overflow: hidden;
 }
 }

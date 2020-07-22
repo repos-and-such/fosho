@@ -15,24 +15,23 @@ pool.on('error', (err, client) => {
 
 const router = express.Router();
 
-router.get('/:listId', async (req,res) => {
+router.get('/:id', async (req,res) => {
   res.send(
     await (async () => {
       const client = await pool.connect()
       try {
-        const res = await client.query("select * from item where list_id = $1", [req.params.listId])
+        const res = await client.query("select * from item where list_id = $1", [req.params.id])
         return res.rows
       } finally {
         client.release()
       }
     })().catch(err => {
       console.log(err.stack);
-      return err.stack;
+      return [ 'ERROR', err.stack ];
     }))
 });
 
 router.post('/', async (req,res) => {
-  console.log(req.body)
   res.send(await (async () => {
     const client = await pool.connect()
     try {
@@ -45,7 +44,8 @@ router.post('/', async (req,res) => {
     }
   })().catch(err => {
     console.log(err.stack);
-    return err.stack;
+    return [ 'ERROR', err.stack ];
+
   }))
 });
 
@@ -60,7 +60,7 @@ router.delete('/:id', async (req, res) => {
     }
     })().catch(err => {
       console.log(err.stack);
-      return err.stack;
+      return [ 'ERROR', err.stack ];
     }))
 });
 

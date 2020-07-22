@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-      <i class="material-icons" id="add-list">add</i>
+      <i class="material-icons" id="add-list" @click="insertList">add</i>
       <i class="material-icons" id="search" @click="openSearch">search</i>
     </div>
     <div>
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import ListService from '../../api-service/ListService'
+
 export default {
   name: "AppHeader",
   data() {
@@ -23,6 +25,17 @@ export default {
   methods: {
     logout() {
       this.$auth.logout();
+    },
+    insertList() {
+      ListService.insertList(this.$auth.user.email)
+        .then(res => {
+          if (res.data && res.data[0] !== 'ERROR') {
+            let insertedList = Object.assign({}, res.data[0]);
+            this.$store.commit('insertList', insertedList);
+          } else {console.log('Database error: ' + res.data[1])}
+        }).catch(err => {
+          console.log(err)
+        });        
     },
     openSearch() {
     }

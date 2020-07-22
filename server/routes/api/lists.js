@@ -29,8 +29,41 @@ router.get(`/:email`, async (req,res) => {
       }
     })().catch(err => {
       console.log(err.stack);
-      return err.stack;
+      return [ 'ERROR', err.stack ];
     }))
+});
+
+router.post('/', async (req,res) => {
+  res.send(await (async () => {
+    const client = await pool.connect()
+    try {
+      const res = await client.query("insert into list (name, user_email, created_on) values (null, $1, NOW()) returning id, name, user_email, created_on",
+      [req.body.email]);
+      console.log(res.rows);
+      return res.rows
+    } finally {
+      client.release()
+    }
+  })().catch(err => {
+    console.log(err.stack);
+    return [ 'ERROR', err.stack ];
+  }))
+});
+
+router.put('/', async (req,res) => {
+  res.send(await (async () => {
+    const client = await pool.connect()
+    try {
+      const res = await client.query("update list set name = $1 where id = $2 returning id, name, user_email, created_on",
+      [req.body.name, req.body.list_id]);
+      return res.rows
+    } finally {
+      client.release()
+    }
+  })().catch(err => {
+    console.log(err.stack);
+    return [ 'ERROR', err.stack ];
+  }))
 });
 
 module.exports = router;

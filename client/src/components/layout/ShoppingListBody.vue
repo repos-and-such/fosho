@@ -1,8 +1,9 @@
 <template>
   <div id="shopping-list-body">
-    <insert-item />
-    <shopping-item v-for="item in items"
-      :key="item.id" />
+    <insert-item :key="key"/>
+    <div v-if="!itemsLoading" id="shopping-list-items">
+      <shopping-item v-for="item in items" :key="item.id" />
+    </div>
   </div>
 </template>
 
@@ -19,12 +20,19 @@ export default {
   name: "ShoppingListBody",
   methods: {
   },
-  async created() {
-    let itemsFromApi = await ItemService.getItems(this.list.id);
-    this.$store.commit('setItems', itemsFromApi);
-    console.log(this.key);
-    console.log(this.items);
-
+  created() {
+    this.$store.commit('setLoading', true);
+    ItemService.getItems(this.list.id)
+      .then(res => {
+        if (res) {
+          var itemsFromApi = res;
+          this.$store.commit('setItems', itemsFromApi);
+          this.$store.commit('setLoading', false);
+        }
+      }).catch(err => {
+        this.$store.commit('setLoading', false);
+        throw err;
+      });
   },
   computed: {
     list() {
@@ -35,16 +43,23 @@ export default {
     },
     key() {
       return this.$vnode.key;
+    },
+    itemsLoading() {
+      return this.$store.state.itemsLoading;
     }
   }
 }
 </script>
 
 <style scoped>
-#shopping-list-body {
+#shopping-list-items {
   padding-left: 12px;
   padding-right: 12px;
   display: flex;
   flex-wrap: wrap;
+}
+#shopping-list-body {
+  margin-bottom: 20px;
+  margin-top: 8px;
 }
 </style>

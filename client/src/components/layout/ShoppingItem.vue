@@ -15,9 +15,8 @@ export default {
     },
     deleteItem(id) {
       ItemService.deleteItem(id)
-        .then(response => {
-          // should check for errors instead?
-          if (response.data[0]) {
+        .then(res => {
+          if (res.data && res.data[0] !== 'ERROR') {
             this.$store.commit('deleteItem', this.item);
           } 
         });
@@ -47,7 +46,7 @@ export default {
   padding-right: 7px;
   margin-bottom: 7px;
   border: 1px solid rgb(255, 145, 0);
-  border-radius: 2px;
+  border-radius: 20px;
   box-shadow: 0 0 4px rgb(255, 145, 0);
   font-family:monospace;
   text-align: left;

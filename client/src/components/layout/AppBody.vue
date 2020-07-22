@@ -34,12 +34,12 @@ export default {
   },
   async created() {
     let listsFromApi = await ListService.getLists(this.$auth.user.email);
-    listsFromApi.sort(this.compare);
     this.$store.commit('setLists', listsFromApi);
   },
   computed: {
     lists() {
-      return this.$store.state.lists;
+      let listsUnsorted = this.$store.state.lists;  
+      return listsUnsorted.sort(this.compare);
     }
   }
 }
