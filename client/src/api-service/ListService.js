@@ -41,6 +41,17 @@ class ListService {
         console.log(err)
       });
     }
+
+    static deleteList(id, token) {
+      return axios.delete(url + id, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
+        return res;
+      }).catch((err) => {
+        console.log(err)
+      });
+    }
 }
 
 export default ListService;

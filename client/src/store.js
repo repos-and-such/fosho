@@ -8,18 +8,30 @@ export default new Vuex.Store({
     lists: [],
     items: [],
     openListIndex: 0,
+    openMenuId: null,
     itemsLoading: false,
     editedListId: null
   },
   mutations: {
-    setLists(state, listsFromApi) {
-      state.lists = listsFromApi;
+    setLoading(state, isLoading) {
+      state.itemsLoading = isLoading;
     },
+
+    // Items mutations
     setItems(state, itemsFromApi) {
       state.items = itemsFromApi;
     },
     insertItem(state, insertedItem) {
       state.items.push(insertedItem);
+    },
+    deleteItem(state, item) {
+      let index = state.items.indexOf(item);
+      state.items.splice(index, 1);
+    },
+
+    // Lists mutations
+    setLists(state, listsFromApi) {
+      state.lists = listsFromApi;
     },
     insertList(state, insertedList) {
       state.lists.push(insertedList);
@@ -29,16 +41,16 @@ export default new Vuex.Store({
       let tempCopy = {...lists[1]};
       state.lists.splice(index, 1, tempCopy);
     },
-    deleteItem(state, item) {
-      let index = state.items.indexOf(item);
-      state.items.splice(index, 1);
+    deleteList(state, list) {
+      let index = state.lists.indexOf(list);
+      state.lists.splice(index, 1);
     },
     setOpen(state, id) {
       let index = state.lists.indexOf(state.lists.find(list => list.id === id))
       state.openListIndex = index;
     },
-    setLoading(state, isLoading) {
-      state.itemsLoading = isLoading;
+    setOpenListMenu(state, id) {
+      state.openMenuId = id;
     },
     setEditedListId(state, id) {
       state.editedListId = id;
@@ -52,7 +64,11 @@ export default new Vuex.Store({
       return state.items.find(item => item.id === id);
     },
     getOpenStatusById: state => id => {
+      // saaks lihtsamini?
       return state.openListIndex === state.lists.indexOf(state.lists.find(list => list.id === id));
+    },
+    getOpenMenuStatusById: state => id => {
+      return state.openMenuId === id;
     }
   }
 });

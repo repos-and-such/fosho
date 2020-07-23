@@ -48,7 +48,6 @@ export default {
       }
     }, 
     closeNameField() {
-      console.log('closing')
       this.$store.commit('setEditedListId', null);
     }
   },

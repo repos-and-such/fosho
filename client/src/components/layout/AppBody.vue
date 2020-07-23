@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ShoppingList from './ShoppingList.vue'
+import ShoppingList from './ShoppingList'
 import ListService from '../../api-service/ListService';
 
 export default {

@@ -2,11 +2,12 @@
   <div 
     :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
     id="list-header"
-    @click="setOpen">
+  >
     <div 
       :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }" 
-      style="display: flex; align-items: center; flex-wrap: wrap;">
-
+      style="display: flex; align-items: center; flex-wrap: wrap;"
+      @click="setOpen"
+    >
       <span id="date-time" style="margin-right: 12px; display: flex; white-space: nowrap">
         {{ dateTimeDisplay }}
       </span>
@@ -28,7 +29,7 @@
 
     </div>
     <span v-if="itemsLoading && isOpen" class="lds-dual-ring" style="margin-right: 5px"></span>
-    <i v-else class="material-icons" style="display:flex;" @click="openListMenu">menu</i>
+    <i v-else class="material-icons" style="display:flex;" @click="toggleListMenu">menu</i>
   </div>
 </template>
 
@@ -44,11 +45,15 @@ export default {
   },
   methods: {
     setOpen() {
-      console.log(this.isOpen);
       this.$store.commit('setOpen', this.key);
     },
-    openListMenu() {
-      alert('yo')
+    toggleListMenu() {
+      if (this.menuIsOpen) {
+        this.$store.commit('setOpenListMenu', null);
+      } else {
+        this.$store.commit('setOpenListMenu', this.key);
+        console.log('opened menu id ' + this.key);
+      }
     },
     openNameField() {
       this.$store.commit('setEditedListId', this.key);
@@ -76,6 +81,10 @@ export default {
     },
     isOpen() {
       return this.$store.getters.getOpenStatusById(this.key);
+    },
+    menuIsOpen() {
+      console.log('check if menu open')
+      return this.$store.getters.getOpenMenuStatusById(this.key);
     },
     itemsLoading() {
       return this.$store.state.itemsLoading;

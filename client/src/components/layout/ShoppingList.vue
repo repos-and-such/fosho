@@ -1,29 +1,34 @@
 <template>
   <div id="shopping-list">
-    
     <shopping-list-header :key="key" />
+      <transition name="slide">
+        <div v-if="menuIsOpen">
+           <list-menu :key="key"/>
+        </div>
+      </transition>
       <transition name="slide">
         <div v-if="isOpen">
            <shopping-list-body :key="key" v-if="true"/>
-
-
         </div>
       </transition>
     </div>
 </template>
 
 <script>
-import ShoppingListHeader from './ShoppingListHeader.vue'
-import ShoppingListBody from './ShoppingListBody.vue'
+import ShoppingListHeader from './ShoppingListHeader'
+import ShoppingListBody from './ShoppingListBody'
+import ListMenu from './ListMenu'
 
 export default {
   components: {
     ShoppingListHeader,
-    ShoppingListBody
+    ShoppingListBody,
+    ListMenu
   },
   name: "ShoppingList",
   data() {
     return {
+      closingTime: false
     }
   },
   methods: {
@@ -35,6 +40,9 @@ export default {
     isOpen() {
       return this.$store.getters.getOpenStatusById(this.key);
     },
+    menuIsOpen() {
+      return this.$store.getters.getOpenMenuStatusById(this.key);
+    },
     key() {
       return this.$vnode.key;
     }
@@ -45,7 +53,6 @@ export default {
 #shopping-list {
   cursor: pointer;
 }
-
 .slide-enter-active {
    -moz-transition-duration: 0.8s;
    -webkit-transition-duration: 0.8s;
@@ -56,7 +63,6 @@ export default {
    -o-transition-timing-function: ease-in;
    transition-timing-function: ease-in;
 }
-
 .slide-leave-active {
    -moz-transition-duration: 0.6s;
    -webkit-transition-duration: 0.6s;
@@ -67,12 +73,10 @@ export default {
    -o-transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
-
 .slide-enter-to, .slide-leave {
    overflow: hidden;
    max-height: 1000px;
 }
-
 .slide-enter, .slide-leave-to {
    overflow: hidden;
    max-height: 0;

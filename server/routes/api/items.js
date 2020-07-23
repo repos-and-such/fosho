@@ -35,10 +35,10 @@ router.get('/:id', checkJwt, async (req,res) => {
 
 router.post('/', checkJwt, async (req,res) => {
   res.send(await (async () => {
-    console.log(req.header('Authorization'));
     const client = await pool.connect()
     try {
-      const res = await client.query("insert into item (name, list_id, user_id, bought, created_on) values ($1, $2, $3, false, NOW()) returning id, name, list_id, category, created_on",
+      const res = await client.query("insert into item (name, list_id, user_id, bought, created_on) values ($1, $2, $3, false, localtimestamp) " + 
+        "returning id, name, list_id, user_id, category, bought, created_on",
       [req.body.name, req.body.list_id, req.user.sub.split('|')[1]]);
       return res.rows
     } finally {

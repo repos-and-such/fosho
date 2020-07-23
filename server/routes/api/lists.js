@@ -16,7 +16,6 @@ pool.on('error', (err, client) => {
 
 const router = express.Router();
 
-// Get all shopping lists for loggd in user
 router.get(`/`, checkJwt, async (req,res) => {
   res.send(
     await (async () => {
@@ -37,7 +36,7 @@ router.post('/', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {
-      const res = await client.query("insert into list (name, user_id, created_on) values (null, $1, NOW()) returning id, name, user_id, created_on",
+      const res = await client.query("insert into list (name, user_id, created_on) values (null, $1, localtimestamp) returning id, name, user_id, created_on",
       [req.user.sub.split('|')[1]]);
       return res.rows
     } finally {
@@ -63,6 +62,21 @@ router.put('/', checkJwt, async (req,res) => {
     console.log(err.stack);
     return [ 'ERROR', err.stack ];
   }))
+});
+
+router.delete('/:id', checkJwt, async (req, res) => {
+  res.send(await (async () => {
+    const client = await pool.connect()
+    try {
+        const res = await client.query("delete from list where id = $1 and user_id = $2 returning id, name", [req.params.id, req.user.sub.split('|')[1]]);
+        return res.rows
+     } finally {
+        client.release()
+    }
+    })().catch(err => {
+      console.log(err.stack);
+      return [ 'ERROR', err.stack ];
+    }))
 });
 
 module.exports = router;

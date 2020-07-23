@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import ShoppingItem from './ShoppingItem.vue';
+import ShoppingItem from './ShoppingItem';
 import ItemService from '../../api-service/ItemService';
-import InsertItem from './/InsertItem.vue';
+import InsertItem from './/InsertItem';
 
 export default {
   components: {
