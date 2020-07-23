@@ -20,9 +20,9 @@ export default {
   name: "ShoppingListBody",
   methods: {
   },
-  created() {
+  async created() {
     this.$store.commit('setLoading', true);
-    ItemService.getItems(this.list.id)
+    ItemService.getItems(this.list.id, await this.$auth.getTokenSilently())
       .then(res => {
         if (res) {
           var itemsFromApi = res;

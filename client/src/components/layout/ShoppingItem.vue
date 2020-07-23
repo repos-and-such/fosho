@@ -13,8 +13,8 @@ export default {
     updateItem() {
 
     },
-    deleteItem(id) {
-      ItemService.deleteItem(id)
+    async deleteItem(id) {
+      ItemService.deleteItem(id, await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data && res.data[0] !== 'ERROR') {
             this.$store.commit('deleteItem', this.item);

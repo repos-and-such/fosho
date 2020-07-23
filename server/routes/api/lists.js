@@ -51,7 +51,7 @@ router.post('/', checkJwt, async (req,res) => {
   }))
 });
 
-router.put('/', async (req,res) => {
+router.put('/', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {

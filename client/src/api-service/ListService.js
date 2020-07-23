@@ -4,9 +4,13 @@ const url = 'api/lists/';
 
 class ListService {
     // Get Lists
-    static getLists(userEmail) {
+    static getLists(userEmail, token) {
         return new Promise((resolve, reject) => {
-            axios.get(url + userEmail).then((res) => {
+            axios.get(url + userEmail, 
+              {
+                headers: { Authorization: `Bearer ${token}` }
+              })
+              .then((res) => {
                 resolve(res.data)
             }).catch((err) => {
                 reject(err);
@@ -14,18 +18,26 @@ class ListService {
         });
     }
 
-    static insertList(email) {
+    static insertList(email, token) {
       return axios.post(url, {
         email: email
-      }).then(res => {
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(res => {
         return res;
       }).catch((err) => {
         console.log(err)
       });
     }
 
-    static updateList(updatedList) {
-      return axios.put(url, updatedList).then(res => {
+    static updateList(updatedList, token) {
+      return axios.put(url, updatedList, 
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(res => {
         return res;
       }).catch((err) => {
         console.log(err)

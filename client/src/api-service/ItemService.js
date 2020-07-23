@@ -3,9 +3,13 @@ import axios from 'axios';
 const url = 'api/items/';
 
 class ItemService {
-    static getItems(listId) {
+    static getItems(listId, token) {
       return new Promise((resolve, reject) => {
-          axios.get(url + listId).then((res) => {
+          axios.get(url + listId,
+            {
+              headers: { Authorization: `Bearer ${token}` }
+            })
+            .then((res) => {
               resolve(res.data)
           }).catch((err) => {
             console.log(err)
@@ -28,8 +32,10 @@ class ItemService {
       });
     }
 
-    static deleteItem(id) {
-      return axios.delete(`${url}${id}`)
+    static deleteItem(id, token) {
+      return axios.delete(url + id, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
       .then(res => {
         return res;
       }).catch((err) => {

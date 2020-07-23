@@ -25,23 +25,24 @@ export default {
     }
   },
   methods: {
-    insertListName() {
+    async insertListName() {
       if (this.entry) {
         let entryInput = this.entry;
         this.entry = '';
         ListService.updateList({
           name: entryInput, 
           list_id: this.key
-          })
-          .then(res => {
-            if (res.data && res.data[0] !== 'ERROR') {
-              let updatedList = Object.assign({}, res.data[0]);
-              this.$store.commit('updateList', [this.listBeforeUpdate, updatedList]);
-            } else {
-              console.log('Database error: ' + res.data[1]
-              )}
-            this.closeNameField();
-          }).catch(err => {
+          }, 
+          await this.$auth.getTokenSilently())
+            .then(res => {
+              if (res.data && res.data[0] !== 'ERROR') {
+                let updatedList = Object.assign({}, res.data[0]);
+                this.$store.commit('updateList', [this.listBeforeUpdate, updatedList]);
+              } else {
+                console.log('Database error: ' + res.data[1]
+                )}
+              this.closeNameField();
+            }).catch(err => {
           console.log(err)
         });        
       }

@@ -33,8 +33,17 @@ export default {
     }
   },
   async created() {
-    let listsFromApi = await ListService.getLists(this.$auth.user.email);
-    this.$store.commit('setLists', listsFromApi);
+    ListService.getLists(this.$auth.user.email, await this.$auth.getTokenSilently())
+      .then(res => {
+        if (res) {
+          var listsFromApi = res;
+          this.$store.commit('setLists', listsFromApi);
+          this.$store.commit('setLoading', false);
+        }
+      }).catch(err => {
+        this.$store.commit('setLoading', false);
+        throw err;
+      });
   },
   computed: {
     lists() {

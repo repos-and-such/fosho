@@ -26,8 +26,8 @@ export default {
     logout() {
       this.$auth.logout();
     },
-    insertList() {
-      ListService.insertList(this.$auth.user.email)
+    async insertList() {
+      ListService.insertList(this.$auth.user.email, await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data && res.data[0] !== 'ERROR') {
             let insertedList = Object.assign({}, res.data[0]);
