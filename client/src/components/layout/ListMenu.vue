@@ -1,14 +1,17 @@
 <template>
-  <div>
+  <div id="list-menu" style="display: flex; justify-content: flex-end">
     <div @click="deleteList">
       delete list
     </div>
     <div>
       copy list
     </div>
-    <div>
-      edit ??? 
-    </div>
+     <i
+        v-if="editedListId !== key"
+        class="material-icons" 
+        style="display:inline-flex; padding-left: 10px; font-size: 22px;"
+        @click="openNameField"
+      >create</i>
   </div>
 </template>
 

@@ -1,8 +1,9 @@
 <template>
-  <div style="display: flex; margin-right:20px">
-    <textarea 
+  <div style="display: flex; margin-right:10px; margin-top: 6px">
+    <input
+      ref="insertItem"
       spellcheck="false" 
-      :placeholder="'insert item'" 
+      :placeholder="'insert shopping item'" 
       id="insert-item" 
       v-model="entry" 
       @keydown.enter.prevent
@@ -44,7 +45,17 @@ export default {
     computed: {
     key() {
       return this.$vnode.key;
+    },
+    editedListId() {
+      return this.$store.state.editedListId;
     }
+  },
+  created() {
+    setTimeout(() => {
+      if (!this.editedListId) {
+        this.$refs.insertItem.focus();
+      }
+    }, 0);
   }
 }
 </script>
@@ -64,6 +75,7 @@ export default {
   box-shadow: 0 0 5px rgb(184, 184, 184);
   caret-color: rgb(124, 79, 58);
   color: gray;
+  font-family:"Helvetica Neue", Helvetica, Sans-serif;
 }
 #insert-item:focus {
     outline: none !important;

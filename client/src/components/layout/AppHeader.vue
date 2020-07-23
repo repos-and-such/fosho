@@ -1,16 +1,19 @@
 <template>
-  <div class="container">
-    <div style="display: flex;">
-      <loading-icon v-if="insertListLoadingTemp" style="padding: 10px"/>
-      <i v-else class="material-icons" id="add-list" @click="insertList">add</i>
-      <i class="material-icons" id="search" @click="openSearch">search</i>
+  <div id="app-header">
+    <div style="display: flex; color: white">
+      <loading-icon v-if="insertListLoading" style="padding: 10px"/>
+      <i v-else class="material-icons" id="header-icon" @click="insertList">add</i>
+      <i class="material-icons" id="header-icon" @click="openSearch">search</i>
     </div>
-    <div>
-      <router-link to="/profile" id="button">
-      <i class="material-icons" id="profile">person</i>
+    <router-link to="/profile" style="display:flex; background-color: w">
+      <img
+        v-if="$auth.user.picure"
+        :src="$auth.user.picture"
+        width="50"
+        id="profile-icon"
+      />
+      <i v-else class="material-icons" id="header-icon" @click="insertList">settings</i>
     </router-link>
-    <i class="material-icons" @click.prevent="logout" id="settings">settings</i>
-    </div>
   </div>
 </template>
 
@@ -23,23 +26,19 @@ export default {
   name: "AppHeader",
   data() {
     return {
-      insertListLoadingTemp: false
+      insertListLoading: false
     }
   },
   methods: {
-    logout() {
-      this.$auth.logout();
-    },
     async insertList() {
-      this.insertListLoadingTemp = true;
-      console.log(this.insertListLoadingTemp);
-
+      this.insertListLoading = true;
       ListService.insertList(await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data && res.data[0] !== 'ERROR') {
             let insertedList = Object.assign({}, res.data[0]);
             this.$store.commit('insertList', insertedList);
-            this.insertListLoadingTemp = false;
+            this.insertListLoading = false;
+            this.$store.commit('setEditedListId', insertedList.id);
           } else {console.log(res.data[1])}
         }).catch(err => {
           console.log(err)
@@ -48,37 +47,26 @@ export default {
     openSearch() {
     }
   },
-  computed: {
-    listInsertLoading() {
-      return this.$store.state.listInsertLoading;
-    }
-  }
 }
 </script>
 
 <style scoped>
-.container {
+#app-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  position: fixed;
-  margin-bottom: 40px;
+  background-color: rgb(209, 80, 80);
+  padding: 0px 4px;
 }
-#settings {
-  margin: 5px;
-  color: rgb(59, 35, 80);
-  font-size: 34px;
+#header-icon {
+  padding: 10px;
+  color: white;
+  font-size: 40px;
   cursor:pointer;
 }
-#profile {
-  margin: 5px;
-  color: rgb(59, 35, 80);
-  font-size: 34px;
-  cursor:pointer;
+#profile-icon {
+  font-size: 40px;
+  box-shadow: 0 0 8px rgb(0, 0, 0);
 }
-#add-list {
-  margin: 5px;
-  color: rgb(59, 35, 80);
-  font-size: 34px;
-  cursor:pointer;
-}
+
 </style>

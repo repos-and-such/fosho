@@ -5,7 +5,7 @@
   >
     <div 
       :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }" 
-      style="display: flex; align-items: center; flex-wrap: wrap;"
+      style="display: flex; align-items: center; flex-wrap: wrap; width: 95%;"
       @click="setOpen"
     >
       <span id="date-time" style="margin-right: 12px; display: flex; white-space: nowrap">
@@ -17,12 +17,6 @@
           {{ list.name }}
         </span>
         <span style="display: flex; align-items: center;">
-          <i
-            v-if="editedListId !== key"
-            class="material-icons" 
-            style="display:inline-flex; padding-left: 10px; font-size: 22px;"
-            @click="openNameField"
-          >create</i>
           <insert-list-name v-if="key === editedListId" :key="this.key"/>
         </span>
       </span>
@@ -54,6 +48,7 @@ export default {
         this.$store.commit('setOpenListMenu', this.key);
       }
     },
+    // red?
     openNameField() {
       this.$store.commit('setEditedListId', this.key);
     }

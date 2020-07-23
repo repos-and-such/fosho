@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 const url = 'api/items/';
 
@@ -21,7 +22,8 @@ class ItemService {
     static insertItem(item, token) {
       return axios.post(url, {
         name: item.name,
-        list_id: item.list_id
+        list_id: item.list_id,
+        localTimeStamp: moment().format()
       }, 
       {
         headers: { Authorization: `Bearer ${token}` }

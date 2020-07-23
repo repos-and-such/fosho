@@ -11,7 +11,6 @@ export default new Vuex.Store({
     openMenuId: null,
     itemsLoading: false,
     editedListId: null,
-    listInsertLoading: false
   },
   mutations: {
     setLoading(state, isLoading) {

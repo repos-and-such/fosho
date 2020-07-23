@@ -24,7 +24,7 @@ export default {
   font-size: 20px;
 }
 .container {
-  width: 70vw;
+  width: 100vw;
   max-width: 1000px;
 }
 @media screen and (max-width: 1000px){

@@ -4,6 +4,7 @@
     <div id="shopping-list-items">
       <shopping-item v-for="item in items" :key="item.id" />
     </div>
+    <div v-if="items.length === 0" style="height: 300px; display: flex; align-items: center; justify-content: center;">Please insert some items</div>
   </div>
 </template>
 
