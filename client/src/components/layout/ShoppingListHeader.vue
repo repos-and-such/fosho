@@ -59,13 +59,17 @@ export default {
       return this.$store.getters.getListById(this.key);
     },
     dateTimeDisplay() {
-      let date = this.list.created_on.split('T')[0];
-      let dateArray = date.split('-');
-      let dateReversed = dateArray.reverse().join('-');  
-      let time = this.list.created_on.split('T')[1];
-      time = time.split('.')[0]
-    
-      return dateReversed + ' ' + time;
+        if (this.list.created_on) {
+        let date = this.list.created_on.split('T')[0];
+        let dateArray = date.split('-');
+        let dateReversed = dateArray.reverse().join('-');  
+        let time = this.list.created_on.split('T')[1];
+        time = time.split('.')[0]
+      
+        return dateReversed + ' ' + time;
+      } else {
+        return '';
+      }
     },
     key() {
       return this.$vnode.key;

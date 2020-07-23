@@ -27,12 +27,12 @@ export default {
       this.$auth.logout();
     },
     async insertList() {
-      ListService.insertList(this.$auth.user.email, await this.$auth.getTokenSilently())
+      ListService.insertList(await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data && res.data[0] !== 'ERROR') {
             let insertedList = Object.assign({}, res.data[0]);
             this.$store.commit('insertList', insertedList);
-          } else {console.log('Database error: ' + res.data[1])}
+          } else {console.log(res.data[1])}
         }).catch(err => {
           console.log(err)
         });        

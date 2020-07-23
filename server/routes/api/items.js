@@ -22,7 +22,7 @@ router.get('/:id', checkJwt, async (req,res) => {
     await (async () => {
       const client = await pool.connect()
       try {
-        const res = await client.query("select * from item where list_id = $1", [req.params.id])
+        const res = await client.query("select * from item where list_id = $1 and user_id = $2", [req.params.id, req.user.sub.split('|')[1]])
         return res.rows
       } finally {
         client.release()
@@ -34,13 +34,12 @@ router.get('/:id', checkJwt, async (req,res) => {
 });
 
 router.post('/', checkJwt, async (req,res) => {
-  console.log(checkJwt)
   res.send(await (async () => {
     console.log(req.header('Authorization'));
     const client = await pool.connect()
     try {
-      const res = await client.query("insert into item (name, list_id, created_on) values ($1, $2, NOW()) returning id, name, list_id, category, created_on",
-      [req.body.name, req.body.list_id]);
+      const res = await client.query("insert into item (name, list_id, user_id, bought, created_on) values ($1, $2, $3, false, NOW()) returning id, name, list_id, category, created_on",
+      [req.body.name, req.body.list_id, req.user.sub.split('|')[1]]);
       return res.rows
     } finally {
       client.release()
@@ -56,7 +55,7 @@ router.delete('/:id', checkJwt, async (req, res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {
-        const res = await client.query(`delete from item where id = ${req.params.id} returning id, name;`);
+        const res = await client.query("delete from item where id = $1 and user_id = $2 returning id, name", [req.params.id, req.user.sub.split('|')[1]]);
         return res.rows
      } finally {
         client.release()

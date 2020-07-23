@@ -17,13 +17,12 @@ pool.on('error', (err, client) => {
 const router = express.Router();
 
 // Get all shopping lists for loggd in user
-router.get(`/:email`, checkJwt, async (req,res) => {
-  console.log('server received call');
+router.get(`/`, checkJwt, async (req,res) => {
   res.send(
     await (async () => {
       const client = await pool.connect()
       try {
-        const res = await client.query("select * from list where user_email = $1", [req.params.email])
+        const res = await client.query("select * from list where user_id = $1", [req.user.sub.split('|')[1]])
         return res.rows
       } finally {
         client.release()
@@ -38,9 +37,8 @@ router.post('/', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {
-      const res = await client.query("insert into list (name, user_email, created_on) values (null, $1, NOW()) returning id, name, user_email, created_on",
-      [req.body.email]);
-      console.log(res.rows);
+      const res = await client.query("insert into list (name, user_id, created_on) values (null, $1, NOW()) returning id, name, user_id, created_on",
+      [req.user.sub.split('|')[1]]);
       return res.rows
     } finally {
       client.release()
@@ -55,8 +53,8 @@ router.put('/', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {
-      const res = await client.query("update list set name = $1 where id = $2 returning id, name, user_email, created_on",
-      [req.body.name, req.body.list_id]);
+      const res = await client.query("update list set name = $1 where id = $2 and user_id = $3 returning id, name, user_id, created_on",
+      [req.body.name, req.body.list_id, req.user.sub.split('|')[1]]);
       return res.rows
     } finally {
       client.release()

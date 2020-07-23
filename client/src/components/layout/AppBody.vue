@@ -33,8 +33,7 @@ export default {
     }
   },
   async created() {
-    console.log(this.$auth.user.sub)
-    ListService.getLists(this.$auth.user.email, await this.$auth.getTokenSilently())
+    ListService.getLists(await this.$auth.getTokenSilently())
       .then(res => {
         if (res) {
           var listsFromApi = res;
@@ -48,8 +47,8 @@ export default {
   },
   computed: {
     lists() {
-      let listsUnsorted = this.$store.state.lists;  
-      return listsUnsorted.sort(this.compare);
+      let listsUnsorted = this.$store.state.lists;
+      return listsUnsorted ? listsUnsorted.sort(this.compare) : '';
     }
   }
 }

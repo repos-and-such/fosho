@@ -39,7 +39,7 @@ export default {
                 let updatedList = Object.assign({}, res.data[0]);
                 this.$store.commit('updateList', [this.listBeforeUpdate, updatedList]);
               } else {
-                console.log('Database error: ' + res.data[1]
+                console.log(res.data[1]
                 )}
               this.closeNameField();
             }).catch(err => {
