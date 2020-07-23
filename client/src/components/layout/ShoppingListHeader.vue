@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import InsertListName from './InsertListName'
+import InsertListName from './InsertListName';
 
 export default {
   name: "ShoppingListHeader",
@@ -52,7 +52,6 @@ export default {
         this.$store.commit('setOpenListMenu', null);
       } else {
         this.$store.commit('setOpenListMenu', this.key);
-        console.log('opened menu id ' + this.key);
       }
     },
     openNameField() {
@@ -83,7 +82,6 @@ export default {
       return this.$store.getters.getOpenStatusById(this.key);
     },
     menuIsOpen() {
-      console.log('check if menu open')
       return this.$store.getters.getOpenMenuStatusById(this.key);
     },
     itemsLoading() {
