@@ -1,7 +1,9 @@
 <template>
   <div class="container">
-    <shopping-list v-for="list in lists"
-      :key="list.id" />
+      <shopping-list 
+        v-for="list in lists"
+        :key="list.id" 
+      />
   </div>
 </template>
 
@@ -55,4 +57,10 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 </style>

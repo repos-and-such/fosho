@@ -101,7 +101,7 @@ export default {
 }
 .list-open {
   color: white;
-  background-color: rgb(70, 4, 114);
+  background-color: rgb(93, 1, 81);
 }
 .list-closed {
   background-color: rgb(228, 228, 228);

@@ -1,17 +1,20 @@
 <template>
-  <div id="list-menu" style="display: flex; justify-content: flex-end">
-    <div @click="deleteList">
-      delete list
-    </div>
-    <div>
-      copy list
-    </div>
-     <i
-        v-if="editedListId !== key"
-        class="material-icons" 
-        style="display:inline-flex; padding-left: 10px; font-size: 22px;"
-        @click="openNameField"
-      >create</i>
+  <div id="list-menu">
+    <i
+      id="delete-list"
+      class="material-icons"
+      @click="deleteList"
+    >delete_forever</i>
+    <i
+      id="copy-list"
+      class="material-icons" 
+      @click="copyList"
+    >content_copy</i>
+    <i
+      id="edit-list"
+      class="material-icons" 
+      @click="editList"
+    >create</i>
   </div>
 </template>
 
@@ -40,3 +43,28 @@ export default {
   }
 }
 </script>
+<style scoped>
+#list-menu {
+  height: 60px;
+  display: flex; 
+  justify-content: space-around;
+  align-items: center;
+}
+#delete-list {
+  color: rgb(185, 2, 2);
+  font-size: 36px;
+  margin: 10px;
+}
+#copy-list {
+  color: rgb(68, 68, 68);
+  font-size: 30px;
+  margin: 10px;
+  margin-top: 14px;
+}
+#edit-list {
+  color: rgb(36, 48, 128);
+  font-size: 34px;
+  margin: 10px;
+  margin-top: 12px;
+}
+</style>

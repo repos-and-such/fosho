@@ -5,9 +5,9 @@
       <i v-else class="material-icons" id="header-icon" @click="insertList">add</i>
       <i class="material-icons" id="header-icon" @click="openSearch">search</i>
     </div>
-    <router-link to="/profile" style="display:flex; background-color: w">
+    <router-link to="/profile" style="display:flex; background-color: w; text-decoration: none;">
       <img
-        v-if="$auth.user.picure"
+        v-if="$auth.user.piture"
         :src="$auth.user.picture"
         width="50"
         id="profile-icon"
@@ -65,8 +65,9 @@ export default {
   cursor:pointer;
 }
 #profile-icon {
+  border-radius: 50px;
   font-size: 40px;
-  box-shadow: 0 0 8px rgb(0, 0, 0);
+  box-shadow: 0 0 8px white;
 }
 
 </style>
