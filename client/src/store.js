@@ -10,7 +10,8 @@ export default new Vuex.Store({
     openListIndex: 0,
     openMenuId: null,
     itemsLoading: false,
-    editedListId: null
+    editedListId: null,
+    listInsertLoading: false
   },
   mutations: {
     setLoading(state, isLoading) {

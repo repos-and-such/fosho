@@ -2,7 +2,6 @@ const express = require('express');
 const { Pool } = require('pg');
 const checkJwt = require('../../config/checkJwt');
 require('dotenv').config();
-const moment = require('moment');
 
 const connectionString = process.env.DATABASE_URL || process.env.CONNECTION_STRING 
 const pool = new Pool({
@@ -34,11 +33,12 @@ router.get(`/`, checkJwt, async (req,res) => {
 });
 
 router.post('/', checkJwt, async (req,res) => {
+  console.log(req.body.localTimestamp);
   res.send(await (async () => {
     const client = await pool.connect()
     try {
       const res = await client.query("insert into list (name, user_id, created_on) values (null, $1, $2) returning id, name, user_id, created_on",
-      [req.user.sub.split('|')[1], moment().format()]);
+      [req.user.sub.split('|')[1], req.body.localTimestamp]);
       return res.rows
     } finally {
       client.release()
