@@ -33,6 +33,7 @@ export default {
     }
   },
   async created() {
+    console.log(this.$auth.user.sub)
     ListService.getLists(this.$auth.user.email, await this.$auth.getTokenSilently())
       .then(res => {
         if (res) {
