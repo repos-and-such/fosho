@@ -1,11 +1,11 @@
 
 // confida
 <template>
-  <div style="display: flex; margin-right:20px">
+  <div id="insert-list-name" style="display: flex; align-items: center; margin-right:20px">
     <textarea 
       spellcheck="false" 
-      :placeholder="'insert list name'" 
-      id="insert-list-name" 
+      :placeholder="'list name'" 
+      id="text-area" 
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertListName"
@@ -63,35 +63,35 @@ export default {
 </script>
 <style scoped>
 #insert-list-name {
-  margin-left: 10px;
+  margin: 0px;
+}
+#text-area {
+  margin-left: 2px;
   padding-left: 9px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   padding-right: 9px;
-  padding-top: 2px;
-  font-size: 16px;
+  padding-top: 5px;
+  font-size: 20px;
   width: 30vw;
-  height: 24px;
-  border: 1px solid  rgb(184, 184, 184);
-  border-radius:2px;
+  height: 28px;
   resize: none;
-  box-shadow: 0 0 5px rgb(184, 184, 184);
   caret-color: rgb(124, 79, 58);
   color: gray;
 }
-#insert-list:focus {
+#text-area:focus {
     outline: none !important;
-    border:1px solid rgb(255, 145, 0);
-    box-shadow: 0 0 5px rgb(255, 145, 0);
     background-color: rgb(255, 250, 243);
     color: rgb(124, 66, 58);
 }
 #insert-button {
   margin: 0px;
   padding: 0px;
-  height: 22px;
+  height: 28px;
   margin-left: 9px;
   color:rgb(105, 185, 98);
   cursor:pointer;
-  font-size: 22px;
+  font-size: 28px;
   border: 2px solid rgb(105, 185, 98);
   border-radius: 2px;
   box-shadow: 0 0 5px rgb(105, 185, 98);
@@ -102,13 +102,16 @@ export default {
 #close-button {
   margin: 0px;
   padding: 0px;
-  height: 22px;
+  height: 28px;
   margin-left: 9px;
   color:rgb(185, 2, 2);
   cursor:pointer;
-  font-size: 22px;
+  font-size: 28px;
   border: 2px solid rgb(185, 2, 2);
   border-radius: 2px;
   box-shadow: 0 0 5px rgb(185, 2, 2);
+}
+#close-button:active {
+  box-shadow: none;
 }
 </style>

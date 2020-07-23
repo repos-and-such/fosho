@@ -22,19 +22,22 @@ export default {
     }
   },
   methods: {
-    insertItem() {
+    async insertItem() {
       if (this.entry) {
         let entryInput = this.entry;
         this.entry = '';
               console.log(this.key);
 
-        ItemService.insertItem({name: entryInput, list_id: this.key})
-          .then(res => {
-            if (res.data && res.data[0] !== 'ERROR') {
-              let insertedItem = Object.assign({}, res.data[0]);
-              this.$store.commit('insertItem', insertedItem);
-            } 
-          });        
+        ItemService.insertItem(
+          { name: entryInput, list_id: this.key }, 
+          await this.$auth.getTokenSilently()
+          )
+            .then(res => {
+              if (res.data[0]) {
+                let insertedItem = Object.assign({}, res.data[0]);
+                this.$store.commit('insertItem', insertedItem);
+              } 
+            });        
       }
     }
   },

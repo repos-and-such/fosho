@@ -48,7 +48,7 @@ export default {
   border: 1px solid rgb(255, 145, 0);
   border-radius: 20px;
   box-shadow: 0 0 4px rgb(255, 145, 0);
-  font-family:monospace;
+  /* font-family:monospace; */
   text-align: left;
   overflow-wrap: break-word;
 }

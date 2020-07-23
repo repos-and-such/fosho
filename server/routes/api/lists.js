@@ -1,6 +1,7 @@
-const express = require('express')
-const { Pool } = require('pg')
-require('dotenv').config()
+const express = require('express');
+const { Pool } = require('pg');
+const checkJwt = require('../../config/checkJwt');
+require('dotenv').config();
 
 const connectionString = process.env.DATABASE_URL || process.env.CONNECTION_STRING 
 const pool = new Pool({
@@ -16,7 +17,7 @@ pool.on('error', (err, client) => {
 const router = express.Router();
 
 // Get all shopping lists for loggd in user
-router.get(`/:email`, async (req,res) => {
+router.get(`/:email`, checkJwt, async (req,res) => {
   console.log('server received call');
   res.send(
     await (async () => {
@@ -33,7 +34,7 @@ router.get(`/:email`, async (req,res) => {
     }))
 });
 
-router.post('/', async (req,res) => {
+router.post('/', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {

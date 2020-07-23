@@ -19,7 +19,8 @@ export default {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family:"Helvetica Neue", Helvetica, Sans-serif;
+  -webkit-font-smoothing: antialiased;
   font-size: 20px;
 }
 .container {

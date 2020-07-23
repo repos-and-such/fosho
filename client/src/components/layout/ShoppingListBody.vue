@@ -1,7 +1,7 @@
 <template>
-  <div id="shopping-list-body">
+  <div v-if="!itemsLoading" id="shopping-list-body">
     <insert-item :key="key"/>
-    <div v-if="!itemsLoading" id="shopping-list-items">
+    <div id="shopping-list-items">
       <shopping-item v-for="item in items" :key="item.id" />
     </div>
   </div>
@@ -54,12 +54,12 @@ export default {
 <style scoped>
 #shopping-list-items {
   padding-left: 12px;
-  padding-right: 12px;
+  padding-right: 20px;
   display: flex;
   flex-wrap: wrap;
 }
 #shopping-list-body {
-  margin-bottom: 20px;
-  margin-top: 8px;
+  /* margin-bottom: 20px; */
+  /* margin-top: 8px; */
 }
 </style>

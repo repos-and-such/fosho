@@ -14,10 +14,13 @@ class ItemService {
       });
     }
 
-    static insertItem(item) {
+    static insertItem(item, token) {
       return axios.post(url, {
         name: item.name,
         list_id: item.list_id
+      }, 
+      {
+        headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         return res;
       }).catch((err) => {

@@ -1,6 +1,8 @@
-const express = require('express')
-const { Pool } = require('pg')
-require('dotenv').config()
+const express = require('express');
+const { Pool } = require('pg');
+const checkJwt = require('../../config/checkJwt');
+
+require('dotenv').config();
 
 const connectionString = process.env.DATABASE_URL || process.env.CONNECTION_STRING 
 const pool = new Pool({
@@ -15,7 +17,7 @@ pool.on('error', (err, client) => {
 
 const router = express.Router();
 
-router.get('/:id', async (req,res) => {
+router.get('/:id', checkJwt, async (req,res) => {
   res.send(
     await (async () => {
       const client = await pool.connect()
@@ -31,13 +33,14 @@ router.get('/:id', async (req,res) => {
     }))
 });
 
-router.post('/', async (req,res) => {
+router.post('/', checkJwt, async (req,res) => {
+  console.log(checkJwt)
   res.send(await (async () => {
+    console.log(req.header('Authorization'));
     const client = await pool.connect()
     try {
       const res = await client.query("insert into item (name, list_id, created_on) values ($1, $2, NOW()) returning id, name, list_id, category, created_on",
       [req.body.name, req.body.list_id]);
-      console.log(res.rows);
       return res.rows
     } finally {
       client.release()
@@ -49,7 +52,7 @@ router.post('/', async (req,res) => {
   }))
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', checkJwt, async (req, res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {

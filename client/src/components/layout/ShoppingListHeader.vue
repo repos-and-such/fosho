@@ -3,26 +3,32 @@
     :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
     id="list-header"
     @click="setOpen">
-    <div :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }">
-      <span style="margin-right: 12px;">
-        {{ dateTime }}
+    <div 
+      :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }" 
+      style="display: flex; align-items: center; flex-wrap: wrap;">
+
+      <span id="date-time" style="margin-right: 12px; display: flex; white-space: nowrap">
+        {{ dateTimeDisplay }}
       </span>
-      
-      <span v-if="list.name">
-        {{ list.name }}
+
+      <span id="list-name" style="display: flex; align-items: center; white-space: nowrap">
+        <span v-if="list.name && editedListId !== key">
+          {{ list.name }}
+        </span>
+        <span style="display: flex; align-items: center;">
+          <i
+            v-if="editedListId !== key"
+            class="material-icons" 
+            style="display:inline-flex; padding-left: 10px; font-size: 22px;"
+            @click="openNameField"
+          >create</i>
+          <insert-list-name v-if="key === editedListId" :key="this.key"/>
+        </span>
       </span>
-      <i
-        v-if="!editedListId"
-        class="material-icons" 
-        style="display:inline-flex; align-self: center; padding-left: 10px; font-size: 22px;"
-        @click="openNameField"
-      >create</i>
-      <insert-list-name v-if="key === editedListId" :key="this.key"/>
+
     </div>
-    <span v-if="itemsLoading && isOpen" class="lds-dual-ring"></span>
-    <div>
-      <i class="material-icons" style="display:flex;" @click="openListMenu">menu</i>
-    </div>
+    <span v-if="itemsLoading && isOpen" class="lds-dual-ring" style="margin-right: 5px"></span>
+    <i v-else class="material-icons" style="display:flex;" @click="openListMenu">menu</i>
   </div>
 </template>
 
@@ -38,6 +44,7 @@ export default {
   },
   methods: {
     setOpen() {
+      console.log(this.isOpen);
       this.$store.commit('setOpen', this.key);
     },
     openListMenu() {
@@ -51,8 +58,14 @@ export default {
     list() {
       return this.$store.getters.getListById(this.key);
     },
-    dateTime() {
-      return this.list.created_on.replace('T', ' ').split('.')[0];
+    dateTimeDisplay() {
+      let date = this.list.created_on.split('T')[0];
+      let dateArray = date.split('-');
+      let dateReversed = dateArray.reverse().join('-');  
+      let time = this.list.created_on.split('T')[1];
+      time = time.split('.')[0]
+    
+      return dateReversed + ' ' + time;
     },
     key() {
       return this.$vnode.key;
@@ -74,28 +87,25 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3px;
-  padding: 8px;
   padding-left: 10px;
   padding-right: 12px;
-  margin-right: 0px;
-  margin-left: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
 }
 .list-open {
-  /* box-shadow: 0 0 4px rgb(8, 116, 62); */
   color: white;
   background-color: rgb(70, 4, 114);
-;
 }
 .list-closed {
-  border: 1px solid rgb(151, 151, 151);
+  background-color: rgb(228, 228, 228);
+  border: 1px solid rgb(255, 255, 255);
+  border-bottom: 0px;
 }
 .list-text-open {
-  display: flex;
   color: white;
 }
 .list-text-closed {
-  display: flex;
   color: rgb(151, 151, 151);
 }
 .lds-dual-ring {
