@@ -7,9 +7,6 @@
       copy list
     </div>
     <div>
-      share ??? 
-    </div>
-    <div>
       edit ??? 
     </div>
   </div>

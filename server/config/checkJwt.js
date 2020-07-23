@@ -9,7 +9,7 @@ const checkJwt = jwt({
     jwksUri: `https://fo-sho.eu.auth0.com/.well-known/jwks.json`
   }),
 
-  audience: 'fosho-general',
+  audience: 'https://fo-sho.eu.auth0.com/api/v2/',
   issuer: `https://fo-sho.eu.auth0.com/`,
   algorithms: ["RS256"]
 });
