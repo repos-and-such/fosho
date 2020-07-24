@@ -43,7 +43,10 @@ export default new Vuex.Store({
       state.lists.splice(index, 1, updatedList);
     },
     deleteList(state, list) {
+////////////////////
       let index = state.lists.indexOf(list);
+      console.log(list);
+
       state.lists.splice(index, 1);
     },
     setOpen(state, id) {

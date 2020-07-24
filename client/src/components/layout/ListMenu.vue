@@ -24,6 +24,10 @@ export default {
   name: "ListMenu",
   methods: {
     async deleteList() {
+      console.log(this.items);
+      if (this.items.length !== 0) {
+        alert('yo')
+      }
       ListService.deleteList(this.key, await this.$auth.getTokenSilently())
         .then(res => {
           if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
@@ -55,6 +59,9 @@ export default {
     },
     items() {
       return this.$store.state.items;
+    },
+    list() {
+      return this.$store.getters.getListById(this.key);
     }
   }
 }

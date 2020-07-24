@@ -8,7 +8,7 @@
       style="display: flex; align-items: center; flex-wrap: wrap; width: 95%;"
       @click="setOpen"
     >
-      <span id="date-time" style="margin-right: 12px; display: flex; white-space: nowrap">
+      <span id="createdDate-time" style="margin-right: 12px; display: flex; white-space: nowrap">
         {{ dateTimeDisplay }}
       </span>
 
@@ -58,26 +58,21 @@ export default {
       return this.$store.getters.getListById(this.key);
     },
     dateTimeDisplay() {
-      let sinceCreated = new Date(moment().format()) - new Date(this.list.created_on);
-      console.log('current timeStamp: ' + new Date(moment().format()));
-      console.log('created_on timeStamp: ' + new Date(this.list.created_on));
-
-      let date = this.list.created_on.split('T')[0];
-      let dateArray = date.split('-');
-      let dateReversed = dateArray.reverse().join('-');  
       let time = this.list.created_on.split('T')[1];
       time = time.split('.')[0]
 
-      console.log(sinceCreated);
-      console.log(sinceCreated / 3600000);
+      let currentDate = moment().format('YYYY-MM-DD');
+      let yesterDaysDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
+      let createdDate = moment(this.list.created_on).format('YYYY-MM-DD');
 
-
-      if (sinceCreated < 86400000) {
+      if (createdDate === currentDate) {
         return 'Today ' + time;
-      } else if (sinceCreated < 172800000) {
+      } else if (createdDate === yesterDaysDate) {
         return 'Yesterday ' + time;
       } else if (this.list.created_on) {
-        return dateReversed + ' ' + time;
+        let createdDateArray = createdDate.split('-');
+        let createdDateReversed = createdDateArray.reverse().join('-');  
+        return createdDateReversed + ' ' + time;
       } else {
         return '';
       }
