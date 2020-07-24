@@ -37,8 +37,7 @@ export default {
       this.$store.commit('setEditedListId', this.key);
     },
     copyListToClipboard() {
-      let listContent = [];
-      this.items.map(item => listContent.push(item.name));
+      let listContent = this.items.map(item => listContent.push(item.name));
       let dummy = document.createElement("textarea");
       document.body.appendChild(dummy);
       dummy.value = listContent.join(', ');

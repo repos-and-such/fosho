@@ -68,6 +68,10 @@ export default {
       let time = this.list.created_on.split('T')[1];
       time = time.split('.')[0]
 
+      console.log(sinceCreated);
+      console.log(sinceCreated / 3600000);
+
+
       if (sinceCreated < 86400000) {
         return 'Today ' + time;
       } else if (sinceCreated < 172800000) {
