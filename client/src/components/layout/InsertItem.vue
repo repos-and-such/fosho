@@ -27,17 +27,17 @@ export default {
       if (this.entry) {
         let entryInput = this.entry;
         this.entry = '';
-              console.log(this.key);
-
         ItemService.insertItem(
           { name: entryInput, list_id: this.key }, 
           await this.$auth.getTokenSilently()
           )
             .then(res => {
-              if (res.data[0]) {
+              if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
                 let insertedItem = Object.assign({}, res.data[0]);
                 this.$store.commit('insertItem', insertedItem);
-              } 
+              } else {
+                console.log(res.data[1])
+              }
             });        
       }
     }

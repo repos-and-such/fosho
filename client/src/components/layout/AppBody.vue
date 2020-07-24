@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="main">
       <shopping-list 
         v-for="list in lists"
         :key="list.id" 
@@ -37,10 +37,12 @@ export default {
   async created() {
     ListService.getLists(await this.$auth.getTokenSilently())
       .then(res => {
-        if (res) {
+        if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
           var listsFromApi = res;
           this.$store.commit('setLists', listsFromApi);
           this.$store.commit('setLoading', false);
+        } else {
+           console.log(res.data[1]);
         }
       }).catch(err => {
         this.$store.commit('setLoading', false);
@@ -57,6 +59,11 @@ export default {
 </script>
 
 <style scoped>
+.main {
+  width: 100vw;
+  max-width: 1000px;
+  overflow-y: auto;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s;
 }

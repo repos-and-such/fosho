@@ -8,7 +8,7 @@
     <i
       id="copy-list"
       class="material-icons" 
-      @click="copyList"
+      @click="copyListToClipboard"
     >content_copy</i>
     <i
       id="edit-list"
@@ -24,21 +24,38 @@ export default {
   name: "ListMenu",
   methods: {
     async deleteList() {
-      console.log('deleted key:' + this.key)
       ListService.deleteList(this.key, await this.$auth.getTokenSilently())
         .then(res => {
-          if (res.data && res.data[0] !== 'ERROR') {
+          if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
             this.$store.commit('deleteList', this.list);
-          } 
+          } else {
+            console.log(res.data[1]);
+          }
         });
+    },
+    editList() {
+      this.$store.commit('setEditedListId', this.key);
+    },
+    copyListToClipboard() {
+      let listContent = [];
+      this.items.map(item => listContent.push(item.name));
+      let dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = listContent.join(', ');
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+      let timeout = 1000;
+      let message = 'List copied to Clipboard';
+      this.$store.commit('activateModal', { timeout, message }); 
     }
   },
   computed: {
-    list() {
-      return this.$store.getters.getListById(this.key);
-    },
     key() {
       return this.$vnode.key;
+    },
+    items() {
+      return this.$store.state.items;
     }
   }
 }

@@ -29,6 +29,7 @@
 
 <script>
 import InsertListName from './InsertListName';
+import moment from 'moment';
 
 export default {
   name: "ShoppingListHeader",
@@ -48,7 +49,6 @@ export default {
         this.$store.commit('setOpenListMenu', this.key);
       }
     },
-    // red?
     openNameField() {
       this.$store.commit('setEditedListId', this.key);
     }
@@ -58,13 +58,21 @@ export default {
       return this.$store.getters.getListById(this.key);
     },
     dateTimeDisplay() {
-        if (this.list.created_on) {
-        let date = this.list.created_on.split('T')[0];
-        let dateArray = date.split('-');
-        let dateReversed = dateArray.reverse().join('-');  
-        let time = this.list.created_on.split('T')[1];
-        time = time.split('.')[0]
-      
+      let sinceCreated = new Date(moment().format()) - new Date(this.list.created_on);
+      console.log('current timeStamp: ' + new Date(moment().format));
+      console.log('created_on timeStamp: ' + new Date(this.list.created_on));
+
+      let date = this.list.created_on.split('T')[0];
+      let dateArray = date.split('-');
+      let dateReversed = dateArray.reverse().join('-');  
+      let time = this.list.created_on.split('T')[1];
+      time = time.split('.')[0]
+
+      if (sinceCreated < 86400000) {
+        return 'Today ' + time;
+      } else if (sinceCreated < 172800000) {
+        return 'Yesterday ' + time;
+      } else if (this.list.created_on) {
         return dateReversed + ' ' + time;
       } else {
         return '';

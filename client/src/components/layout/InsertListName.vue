@@ -38,12 +38,13 @@ export default {
           }, 
           await this.$auth.getTokenSilently())
             .then(res => {
-              if (res.data && res.data[0] !== 'ERROR') {
+              if (Array.isArray(res.data) && res.data[0] !== 'ERROR') {
                 let updatedList = Object.assign({}, res.data[0]);
-                this.$store.commit('updateList', [this.listBeforeUpdate, updatedList]);
+                let originalList = this.listBeforeUpdate;
+                this.$store.commit('updateList', { originalList, updatedList });
               } else {
-                console.log(res.data[1]
-                )}
+                console.log(res.data[1])
+              }
               this.closeNameField();
             }).catch(err => {
           console.log(err)
@@ -66,7 +67,6 @@ export default {
     // this.$refs.nameField.focus();
     setTimeout(() => {
       this.$refs.nameField.focus();
-      console.log(this.$refs.nameField)
     }, 0);
   }
 }

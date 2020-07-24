@@ -25,10 +25,12 @@ export default {
     this.$store.commit('setLoading', true);
     ItemService.getItems(this.list.id, await this.$auth.getTokenSilently())
       .then(res => {
-        if (res) {
+        if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
           var itemsFromApi = res;
           this.$store.commit('setItems', itemsFromApi);
           this.$store.commit('setLoading', false);
+        } else {
+          console.log(res.data[1]);
         }
       }).catch(err => {
         this.$store.commit('setLoading', false);

@@ -12,7 +12,7 @@
         width="50"
         id="profile-icon"
       />
-      <i v-else class="material-icons" id="header-icon" @click="insertList">settings</i>
+      <i v-else class="material-icons" id="header-icon">settings</i>
     </router-link>
   </div>
 </template>
@@ -34,19 +34,22 @@ export default {
       this.insertListLoading = true;
       ListService.insertList(await this.$auth.getTokenSilently())
         .then(res => {
-          if (res.data && res.data[0] !== 'ERROR') {
+          if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
             let insertedList = Object.assign({}, res.data[0]);
             this.$store.commit('insertList', insertedList);
             this.insertListLoading = false;
             this.$store.commit('setEditedListId', insertedList.id);
-          } else {console.log(res.data[1])}
+            this.$store.commit('openTopList'); 
+          } else {
+            console.log(res.data[1]);
+          }
         }).catch(err => {
           console.log(err)
         });
     },
     openSearch() {
     }
-  },
+  }
 }
 </script>
 

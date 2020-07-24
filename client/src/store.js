@@ -11,6 +11,8 @@ export default new Vuex.Store({
     openMenuId: null,
     itemsLoading: false,
     editedListId: null,
+    modalOpen: false,
+    modalMessage: ''
   },
   mutations: {
     setLoading(state, isLoading) {
@@ -36,10 +38,9 @@ export default new Vuex.Store({
     insertList(state, insertedList) {
       state.lists.push(insertedList);
     },
-    updateList(state, lists) {
-      let index = state.lists.indexOf(lists[0]);
-      let tempCopy = {...lists[1]};
-      state.lists.splice(index, 1, tempCopy);
+    updateList(state, { originalList, updatedList }) {
+      let index = state.lists.indexOf(originalList);
+      state.lists.splice(index, 1, updatedList);
     },
     deleteList(state, list) {
       let index = state.lists.indexOf(list);
@@ -49,11 +50,22 @@ export default new Vuex.Store({
       let index = state.lists.indexOf(state.lists.find(list => list.id === id))
       state.openListIndex = index;
     },
+    openTopList(state) {
+      state.openListIndex = 0;
+    },
     setOpenListMenu(state, id) {
       state.openMenuId = id;
     },
     setEditedListId(state, id) {
       state.editedListId = id;
+    },
+    activateModal(state, { timeout, message }) {
+      console.log(timeout);
+      state.modalMessage = message;
+      state.modalOpen = true;
+      setTimeout(() => {
+        state.modalOpen = false;
+      }, timeout);
     }
   },
   getters: {
@@ -64,7 +76,6 @@ export default new Vuex.Store({
       return state.items.find(item => item.id === id);
     },
     getOpenStatusById: state => id => {
-      // saaks lihtsamini?
       return state.openListIndex === state.lists.indexOf(state.lists.find(list => list.id === id));
     },
     getOpenMenuStatusById: state => id => {

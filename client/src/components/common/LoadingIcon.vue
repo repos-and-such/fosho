@@ -12,52 +12,10 @@ export default {
     }
   },
   methods: {
-  //   setOpen() {
-  //     this.$store.commit('setOpen', this.key);
-  //   },
-  //   toggleListMenu() {
-  //     if (this.menuIsOpen) {
-  //       this.$store.commit('setOpenListMenu', null);
-  //     } else {
-  //       this.$store.commit('setOpenListMenu', this.key);
-  //     }
-  //   },
-  //   openNameField() {
-  //     this.$store.commit('setEditedListId', this.key);
-  //   }
+  
   },
   computed: {
-    // list() {
-    //   return this.$store.getters.getListById(this.key);
-    // },
-    // dateTimeDisplay() {
-    //     if (this.list.created_on) {
-    //     let date = this.list.created_on.split('T')[0];
-    //     let dateArray = date.split('-');
-    //     let dateReversed = dateArray.reverse().join('-');  
-    //     let time = this.list.created_on.split('T')[1];
-    //     time = time.split('.')[0]
-      
-    //     return dateReversed + ' ' + time;
-    //   } else {
-    //     return '';
-    //   }
-    // },
-    // key() {
-    //   return this.$vnode.key;
-    // },
-    // isOpen() {
-    //   return this.$store.getters.getOpenStatusById(this.key);
-    // },
-    // menuIsOpen() {
-    //   return this.$store.getters.getOpenMenuStatusById(this.key);
-    // },
-    // itemsLoading() {
-    //   return this.$store.state.itemsLoading;
-    // },
-    // editedListId() {
-    //   return this.$store.state.editedListId;
-    // }
+
   }
 }
 </script>

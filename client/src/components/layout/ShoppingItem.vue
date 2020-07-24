@@ -16,9 +16,11 @@ export default {
     async deleteItem(id) {
       ItemService.deleteItem(id, await this.$auth.getTokenSilently())
         .then(res => {
-          if (res.data && res.data[0] !== 'ERROR') {
+          if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
             this.$store.commit('deleteItem', this.item);
-          } 
+          } else {
+            console.log(res.data[1]);
+          }
         });
     }
   },
