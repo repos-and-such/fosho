@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; justify-content: center">
-    <div class="modal" v-if="$store.state.modalOpen">{{ $store.state.modalMessage }}</div>
+    <custom-alert />
     <div class="app">
       <error />
       <router-view />
@@ -10,10 +10,12 @@
 
 <script>
 import Error from "./components/Error";
+import CustomAlert from "./components/common/CustomAlert"
 
 export default {
   components: {
     Error,
+    CustomAlert
   }
 };
 </script>
@@ -27,15 +29,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
 }
-.modal {
-  position: absolute;
-  margin-top: 180px;
-  width: 80vw;
-  z-index: 9999;
-  padding: 20px 30px;
-  background-color: rgb(196, 103, 204);
-  opacity: 0.8;
-}
+
 @media screen and (max-width: 1000px){
 .container {
   width: 100vw;

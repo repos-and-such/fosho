@@ -5,6 +5,7 @@
       <i v-else class="material-icons" id="header-icon" @click="insertList">add</i>
       <i class="material-icons" id="header-icon" @click="openSearch">search</i>
     </div>
+    hello
     <router-link to="/profile" style="display:flex; background-color: w; text-decoration: none;">
       <img
         v-if="$auth.user.piture"
@@ -41,10 +42,10 @@ export default {
             this.$store.commit('setEditedListId', insertedList.id);
             this.$store.commit('openTopList'); 
           } else {
-            console.log(res.data[1]);
+            this.$store.commit('showGenericError');
           }
-        }).catch(err => {
-          console.log(err)
+        }).catch(() => {
+          this.$store.commit('showGenericError');
         });
     },
     openSearch() {

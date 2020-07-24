@@ -19,7 +19,7 @@ export default {
           if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
             this.$store.commit('deleteItem', this.item);
           } else {
-            console.log(res.data[1]);
+            this.$store.commit('showGenericError');
           }
         });
     }

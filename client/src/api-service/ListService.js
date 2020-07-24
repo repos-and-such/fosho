@@ -14,7 +14,8 @@ class ListService {
         .then((res) => {
           resolve(res.data)
       }).catch((err) => {
-          reject(err);
+        this.$store.commit('showGenericError');
+        reject(err);
       })
     });
   }
@@ -27,8 +28,8 @@ class ListService {
     })
     .then(res => {
       return res;
-    }).catch((err) => {
-      console.log(err)
+    }).catch(() => {
+      this.$store.commit('showGenericError');
     });
   }
  static updateList(updatedList, token) {
@@ -38,8 +39,8 @@ class ListService {
       })
       .then(res => {
       return res;
-    }).catch((err) => {
-      console.log(err)
+    }).catch(() => {
+      this.$store.commit('showGenericError');
     });
   }
  static deleteList(id, token) {
@@ -48,8 +49,8 @@ class ListService {
     })
     .then(res => {
       return res;
-    }).catch((err) => {
-      console.log(err)
+    }).catch(() => {
+      this.$store.commit('showGenericError');
     });
   }
 }

@@ -43,11 +43,11 @@ export default {
                 let originalList = this.listBeforeUpdate;
                 this.$store.commit('updateList', { originalList, updatedList });
               } else {
-                console.log(res.data[1])
+                this.$store.commit('showGenericError');
               }
               this.closeNameField();
-            }).catch(err => {
-          console.log(err)
+            }).catch(() => {
+            this.$store.commit('showGenericError');
         });        
       }
     }, 

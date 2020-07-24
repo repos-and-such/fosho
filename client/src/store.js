@@ -11,8 +11,9 @@ export default new Vuex.Store({
     openMenuId: null,
     itemsLoading: false,
     editedListId: null,
-    modalOpen: false,
-    modalMessage: ''
+    alertOpen: false,
+    alertMessage: '',
+    alertType: ''
   },
   mutations: {
     setLoading(state, isLoading) {
@@ -43,10 +44,7 @@ export default new Vuex.Store({
       state.lists.splice(index, 1, updatedList);
     },
     deleteList(state, list) {
-////////////////////
       let index = state.lists.indexOf(list);
-      console.log(list);
-
       state.lists.splice(index, 1);
     },
     setOpen(state, id) {
@@ -62,13 +60,21 @@ export default new Vuex.Store({
     setEditedListId(state, id) {
       state.editedListId = id;
     },
-    activateModal(state, { timeout, message }) {
-      console.log(timeout);
-      state.modalMessage = message;
-      state.modalOpen = true;
+    showAlert(state, { timeout, message, type }) {
+      state.alertMessage = message;
+      state.alertOpen = true;
+      state.alertType = type;
       setTimeout(() => {
-        state.modalOpen = false;
+        state.alertOpen = false;
       }, timeout);
+    },
+    showGenericError(state) {
+      state.alertMessage = 'Oops, something went wrong :(';
+      state.alertOpen = true;
+      state.alertType = 'error';
+      setTimeout(() => {
+        state.alertOpen = false;
+      }, 2000);
     }
   },
   getters: {

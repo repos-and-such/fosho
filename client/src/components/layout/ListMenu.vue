@@ -3,7 +3,7 @@
     <i
       id="delete-list"
       class="material-icons"
-      @click="deleteList"
+      @click="openDeleteConfirmation"
     >delete_forever</i>
     <i
       id="copy-list"
@@ -23,17 +23,21 @@ import ListService from '../../api-service/ListService'
 export default {
   name: "ListMenu",
   methods: {
-    async deleteList() {
-      console.log(this.items);
+    openDeleteConfirmation() {
       if (this.items.length !== 0) {
-        alert('yo')
+        alert('yo');
+      } else {
+        this.deleteList();
       }
+    },
+    async deleteList() {      
       ListService.deleteList(this.key, await this.$auth.getTokenSilently())
         .then(res => {
           if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
             this.$store.commit('deleteList', this.list);
+            this.$store.commit('showAlert', { timeout: 1000, message: 'List Deleted', type: 'success' });
           } else {
-            console.log(res.data[1]);
+            this.$store.commit('showGenericError');
           }
         });
     },
@@ -48,9 +52,7 @@ export default {
       dummy.select();
       document.execCommand("copy");
       document.body.removeChild(dummy);
-      let timeout = 1000;
-      let message = 'List copied to Clipboard';
-      this.$store.commit('activateModal', { timeout, message }); 
+      this.$store.commit('showAlert', { timeout: 1000, message: 'List copied to Clipboard', type: 'success' });
     }
   },
   computed: {

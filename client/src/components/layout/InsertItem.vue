@@ -36,7 +36,7 @@ export default {
                 let insertedItem = Object.assign({}, res.data[0]);
                 this.$store.commit('insertItem', insertedItem);
               } else {
-                console.log(res.data[1])
+                this.$store.commit('showGenericError');
               }
             });        
       }

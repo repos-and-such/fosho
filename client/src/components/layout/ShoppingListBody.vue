@@ -30,11 +30,10 @@ export default {
           this.$store.commit('setItems', itemsFromApi);
           this.$store.commit('setLoading', false);
         } else {
-          console.log(res.data[1]);
+          this.$store.commit('showGenericError');
         }
-      }).catch(err => {
+      }).catch(() => {
         this.$store.commit('setLoading', false);
-        throw err;
       });
   },
   computed: {

@@ -13,7 +13,7 @@ class ItemService {
             .then((res) => {
               resolve(res.data)
           }).catch((err) => {
-            console.log(err)
+            this.$store.commit('showGenericError');
             reject(err);
           })
       });
@@ -29,8 +29,8 @@ class ItemService {
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         return res;
-      }).catch((err) => {
-        console.log(err)
+      }).catch(() => {
+        this.$store.commit('showGenericError');
       });
     }
 
@@ -40,8 +40,8 @@ class ItemService {
       })
       .then(res => {
         return res;
-      }).catch((err) => {
-        console.log(err)
+      }).catch(() => {
+        this.$store.commit('showGenericError');
       });
     }
 }
