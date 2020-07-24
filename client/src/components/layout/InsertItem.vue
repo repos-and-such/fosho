@@ -1,15 +1,14 @@
 <template>
   <div style="display: flex; margin-right:10px; margin-top: 6px">
-    <input
+    <textarea
       ref="insertItem"
       spellcheck="false" 
-      :placeholder="'insert shopping item'" 
       id="insert-item" 
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertItem"
     />
-   <i class="material-icons" id="insert-button" @click="insertItem()">check</i>
+   <i class="material-icons" id="insert-button" @click="insertItem">add</i>
   </div>
 </template>
 

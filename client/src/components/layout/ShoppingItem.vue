@@ -1,7 +1,8 @@
 <template>
   <div id="shopping-item" style="display: flex">
       {{ item.name }}
-      <i class="material-icons" id="clear-icon" @click="deleteItem(item.id)">clear</i>
+      <i v-if="menuIsOpen" class="material-icons" id="clear-icon" @click="deleteItem">clear</i>
+      <i v-if="menuIsOpen" class="material-icons" id="edit-icon" @click="updateItem">create</i>
   </div>
 </template>
 
@@ -9,12 +10,14 @@
 import ItemService from '../../api-service/ItemService'
 export default {
   name: "ShoppingItem",
+  props: {
+    listKey: Number
+  },
   methods: {
     updateItem() {
-
     },
-    async deleteItem(id) {
-      ItemService.deleteItem(id, await this.$auth.getTokenSilently())
+    async deleteItem() {
+      ItemService.deleteItem(this.key, await this.$auth.getTokenSilently())
         .then(res => {
           if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
             this.$store.commit('deleteItem', this.item);
@@ -30,15 +33,23 @@ export default {
     },
     key() {
       return this.$vnode.key;
-    }
+    },
+    menuIsOpen() {
+      console.log(this.listKey)
+      return this.$store.getters.getOpenMenuStatusById(this.listKey);
+    },
   }
 }
 </script>
 
 <style scoped>
 #clear-icon {
-  margin-left: 4px;
+  margin-left: 16px;
   color:rgb(185, 2, 2);
+}
+#edit-icon {
+  margin-left: 16px;
+  color:rgb(2, 0, 138);
 }
 #shopping-item {
   margin: 3px;

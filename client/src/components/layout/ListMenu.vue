@@ -10,11 +10,12 @@
       class="material-icons" 
       @click="copyListToClipboard"
     >content_copy</i>
-    <i
-      id="edit-list"
+
+    <!-- <i
+      id="close-list-menu"
       class="material-icons" 
       @click="editList"
-    >create</i>
+    >keyboard_arrow_up</i> -->
   </div>
 </template>
 
@@ -41,11 +42,10 @@ export default {
           }
         });
     },
-    editList() {
-      this.$store.commit('setEditedListId', this.key);
-    },
     copyListToClipboard() {
-      let listContent = this.items.map(item => listContent.push(item.name));
+      console.log('copied')
+      let listContent = []
+      this.items.forEach(item => listContent.push(item.name));
       let dummy = document.createElement("textarea");
       document.body.appendChild(dummy);
       dummy.value = listContent.join(', ');
@@ -53,7 +53,10 @@ export default {
       document.execCommand("copy");
       document.body.removeChild(dummy);
       this.$store.commit('showAlert', { timeout: 1000, message: 'List copied to Clipboard', type: 'success' });
-    }
+    },
+    editList() {
+      this.$store.commit('setEditedListId', this.key);
+    },
   },
   computed: {
     key() {
@@ -65,6 +68,9 @@ export default {
     list() {
       return this.$store.getters.getListById(this.key);
     }
+  },
+  created() {
+    this.editList();
   }
 }
 </script>
@@ -74,20 +80,21 @@ export default {
   display: flex; 
   justify-content: space-around;
   align-items: center;
+  background-color: rgb(209, 80, 80);
 }
 #delete-list {
-  color: rgb(185, 2, 2);
+  color: rgb(230, 172, 172);
   font-size: 36px;
   margin: 10px;
 }
 #copy-list {
-  color: rgb(68, 68, 68);
+  color: white;
   font-size: 30px;
   margin: 10px;
   margin-top: 14px;
 }
-#edit-list {
-  color: rgb(36, 48, 128);
+#close-list-menu {
+  color: white;
   font-size: 34px;
   margin: 10px;
   margin-top: 12px;

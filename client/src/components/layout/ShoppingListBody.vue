@@ -2,7 +2,7 @@
   <div v-if="!itemsLoading" id="shopping-list-body">
     <insert-item :key="key"/>
     <div id="shopping-list-items">
-      <shopping-item v-for="item in items" :key="item.id" />
+      <shopping-item v-for="item in items" :key="item.id" :listKey="key" />
     </div>
     <div v-if="items.length === 0" style="height: 300px; display: flex; align-items: center; justify-content: center;">Please insert some items</div>
   </div>

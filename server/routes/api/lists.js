@@ -69,7 +69,7 @@ router.delete('/:id', checkJwt, async (req, res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {
-        const res = await client.query("withd deletedItems as (delete from item where list_id = $1 returning *) delete from list where id = $1 and user_id = $2 returning id, name", [req.params.id, req.user.sub.split('|')[1]]);
+        const res = await client.query("with deletedItems as (delete from item where list_id = $1 returning *) delete from list where id = $1 and user_id = $2 returning id, name", [req.params.id, req.user.sub.split('|')[1]]);
         return res.rows
      } finally {
         client.release()

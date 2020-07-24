@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; flex-direction: column; height: 95vh;">
+  <div style="display: flex; flex-direction: column; height: 100vh;">
     <app-header />
     <app-body />
   </div>

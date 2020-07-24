@@ -6,12 +6,15 @@
       ref="nameField"
       @blur="closeNameField"
       spellcheck="false" 
-      :placeholder="'insert name (optional)'" 
+      :placeholder="'insert list name (optional)'" 
       id="text-area" 
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertListName"
     />
+    <span>
+      
+    </span>
    <i class="material-icons" id="insert-button" @click="insertListName">check</i>
    <i class="material-icons" id="close-button" @click="closeNameField">clear</i>
   </div>
@@ -29,6 +32,7 @@ export default {
   },
   methods: {
     async insertListName() {
+      console.log('inserting')
       if (this.entry) {
         let entryInput = this.entry;
         this.entry = '';
@@ -52,7 +56,9 @@ export default {
       }
     }, 
     closeNameField() {
-      this.$store.commit('setEditedListId', null);
+      setTimeout(() => {
+        this.$store.commit('setEditedListId', null);      
+      }, 150);
     }
   },
   computed: {
@@ -81,7 +87,7 @@ export default {
   padding-right: 9px;
   padding-top: 2px;
   font-size: 20px;
-  width: 30vw;
+  width: 100%;
   height: 30px;
   border: 1px solid  rgb(184, 184, 184);
   border-radius:2px;

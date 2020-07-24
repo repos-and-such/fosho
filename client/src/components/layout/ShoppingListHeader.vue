@@ -12,7 +12,7 @@
         {{ dateTimeDisplay }}
       </span>
 
-      <span id="list-name" style="display: flex; align-items: center; white-space: nowrap">
+      <span id="list-name" style="display: flex; align-items: center; white-space: nowrap;">
         <span v-if="list.name && editedListId !== key">
           {{ list.name }}
         </span>
@@ -23,7 +23,9 @@
 
     </div>
     <span v-if="itemsLoading && isOpen" class="lds-dual-ring" style="margin-right: 5px"></span>
-    <i v-else class="material-icons" style="display:flex;" @click="toggleListMenu">menu</i>
+    <span v-else :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }">
+      <i class="material-icons" style="display:flex;" @click="toggleListMenu">create</i>
+    </span>
   </div>
 </template>
 
@@ -108,12 +110,12 @@ export default {
 }
 .list-open {
   color: white;
-  background-color: rgb(93, 1, 81);
+  background-color: rgb(209, 80, 80);
 }
 .list-closed {
-  background-color: rgb(228, 228, 228);
-  border: 1px solid rgb(255, 255, 255);
-  border-bottom: 0px;
+  background-color: white;
+  /* border: 1px solid rgb(255, 255, 255);
+  border-bottom: 0px; */
 }
 .list-text-open {
   color: white;
