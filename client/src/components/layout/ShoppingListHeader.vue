@@ -59,7 +59,7 @@ export default {
     },
     dateTimeDisplay() {
       let sinceCreated = new Date(moment().format()) - new Date(this.list.created_on);
-      console.log('current timeStamp: ' + new Date(moment().format));
+      console.log('current timeStamp: ' + new Date(moment().format()));
       console.log('created_on timeStamp: ' + new Date(this.list.created_on));
 
       let date = this.list.created_on.split('T')[0];
