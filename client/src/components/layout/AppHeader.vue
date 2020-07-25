@@ -1,7 +1,7 @@
 <template>
   <div id="app-header">
     <div style="display: flex; color: white">
-      <loading-icon v-if="insertListLoading" style="padding: 10px"/>
+      <div v-if="insertListLoading" class="lds-dual-ring-large" style="margin: 16px 0px 0px 20px;"/>
       <i v-else class="material-icons" id="header-icon" @click="insertList">add</i>
       <i class="material-icons" id="header-icon" @click="openSearch">search</i>
     </div>
@@ -14,23 +14,15 @@
       </span>
     </span>
     <router-link to="/profile" style="display:flex; background-color: w; text-decoration: none;">
-      <!-- <img
-        v-if="$auth.user.picture"
-        :src="$auth.user.picture"
-        width="42"
-        id="profile-icon"
-      /> -->
-      <i class="material-icons" id="header-icon">settings</i>
+      <i class="material-icons" id="header-icon">person</i>
     </router-link>
   </div>
 </template>
 
 <script>
 import ListService from '../../api-service/ListService';
-import LoadingIcon from '../common/LoadingIcon';
 
 export default {
-  components: { LoadingIcon },
   name: "AppHeader",
   data() {
     return {

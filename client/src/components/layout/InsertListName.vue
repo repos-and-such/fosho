@@ -16,7 +16,6 @@
       
     </span>
    <i class="material-icons" id="insert-button" @click="insertListName">check</i>
-   <i class="material-icons" id="close-button" @click="closeNameField">clear</i>
   </div>
 </template>
 

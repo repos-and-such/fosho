@@ -22,7 +22,7 @@
       </span>
 
     </div>
-    <span v-if="itemsLoading && isOpen" class="lds-dual-ring" style="margin-right: 5px"></span>
+    <span v-if="itemsLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>
     <span v-else :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }">
       <i class="material-icons" style="display:flex;" @click="toggleListMenu">create</i>
     </span>
@@ -106,7 +106,7 @@ export default {
   padding-right: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
-
+  border-top: 1px solid white;
 }
 .list-open {
   color: white;
@@ -123,28 +123,5 @@ export default {
 .list-text-closed {
   color: rgb(151, 151, 151);
 }
-.lds-dual-ring {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-}
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 15px;
-  height: 15px;
-  margin: 0px;
-  border-radius: 50%;
-  border: 3px solid white;
-  border-color: white transparent white transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
+
 </style>

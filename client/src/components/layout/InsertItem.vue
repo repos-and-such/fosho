@@ -99,7 +99,7 @@ export default {
   box-shadow: none;
 }
 
-@media all and (max-width: 880px) {
+/* @media all and (max-width: 880px) {
 #insert-item {
   margin-left: 16px;
   margin-bottom: 5px;
@@ -108,6 +108,6 @@ export default {
   height: 28px;
   overflow: hidden;
   }
-}
+} */
 
 </style>
