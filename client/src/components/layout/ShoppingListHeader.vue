@@ -106,16 +106,15 @@ export default {
   padding-right: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-top: 1px solid white;
 }
 .list-open {
   color: white;
   background-color: rgb(209, 80, 80);
+  border-top: 1px solid rgb(224, 141, 141);
 }
 .list-closed {
   background-color: white;
-  /* border: 1px solid rgb(255, 255, 255);
-  border-bottom: 0px; */
+  border-top: 1px solid rgb(230, 227, 227);
 }
 .list-text-open {
   color: white;
