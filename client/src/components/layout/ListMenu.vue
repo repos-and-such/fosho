@@ -71,6 +71,7 @@ export default {
   },
   created() {
     this.editList();
+    this.$store.commit('showAlert', { timeout: 1000, message: 'List Editing Mode Active', type: 'success' });
   }
 }
 </script>
@@ -83,7 +84,7 @@ export default {
   background-color: rgb(209, 80, 80);
 }
 #delete-list {
-  color: rgb(230, 172, 172);
+  color: rgb(255, 255, 255);
   font-size: 36px;
   margin: 10px;
 }

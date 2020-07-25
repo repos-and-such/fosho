@@ -14,7 +14,7 @@ export default {
 #custom-alert {
   position: absolute;
   width: 100vw;
-  height: 60px;
+  height: 61px;
   z-index: 9999;
   font-family:"Helvetica Neue", Helvetica, Sans-serif;
   display:flex;
@@ -25,6 +25,6 @@ export default {
   background-color: rgb(177, 0, 0);
 }
 .success {
-  background-color: rgb(3, 102, 61);
+  background-color: rgb(61, 134, 89);
 }
 </style>
