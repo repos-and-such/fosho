@@ -34,6 +34,24 @@ class ItemService {
       });
     }
 
+    static updateItem(item, token) {
+      return axios.put(url, {
+        id: item.id,
+        name: item.name,
+        list_id: item.list_id,
+        bought: item.bought,
+        
+        localTimeStamp: moment().format()
+      }, 
+      {
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(res => {
+        return res;
+      }).catch(() => {
+        this.$store.commit('showGenericError');
+      });
+    }
+
     static deleteItem(id, token) {
       return axios.delete(url + id, {
         headers: { Authorization: `Bearer ${token}` }

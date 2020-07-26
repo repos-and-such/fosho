@@ -1,9 +1,9 @@
 <template>
   <div class="main">
-      <shopping-list 
-        v-for="list in lists"
-        :key="list.id" 
-      />
+    <shopping-list 
+      v-for="list in lists"
+      :key="list.id" 
+    />
   </div>
 </template>
 
@@ -62,11 +62,5 @@ export default {
   width: 100vw;
   max-width: 1000px;
   overflow-y: auto;
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
 }
 </style>

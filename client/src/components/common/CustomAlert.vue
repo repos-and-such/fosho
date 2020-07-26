@@ -1,7 +1,9 @@
 <template>
-  <div v-if="$store.state.alertOpen" id="custom-alert" :class="[$store.state.alertType]">
-    <div style="color: white; font-size: 22px;">{{ $store.state.alertMessage }}</div>
-  </div>
+  <transition name="fade">
+    <div v-if="$store.state.alertOpen" id="custom-alert" :class="[$store.state.alertType]">
+      <div>{{ $store.state.alertMessage }}</div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -20,11 +22,14 @@ export default {
   display:flex;
   justify-content: center;
   align-items: center;
+  font-size: 22px;
 }
 .error {
   background-color: rgb(177, 0, 0);
+  color: white;
 }
 .success {
-  background-color: rgb(61, 134, 89);
+  background-color: rgb(255, 255, 255);
+  color: rgb(209, 80, 80);
 }
 </style>

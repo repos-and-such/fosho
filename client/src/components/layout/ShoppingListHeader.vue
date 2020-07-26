@@ -23,7 +23,7 @@
 
     </div>
     <span v-if="itemsLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>
-    <span v-else :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }">
+    <span v-else-if="isOpen" :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }">
       <i class="material-icons" style="display:flex;" @click="toggleListMenu">create</i>
     </span>
   </div>
@@ -109,8 +109,7 @@ export default {
 }
 .list-open {
   color: white;
-  background-color: rgb(209, 80, 80);
-  border-top: 1px solid rgb(224, 141, 141);
+  background-color: rgb(213, 82, 68);
 }
 .list-closed {
   background-color: white;

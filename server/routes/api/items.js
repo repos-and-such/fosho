@@ -51,6 +51,25 @@ router.post('/', checkJwt, async (req,res) => {
   }))
 });
 
+router.put('/', checkJwt, async (req,res) => {
+  res.send(await (async () => {
+    console.log(req.body);
+    const client = await pool.connect()
+    try {
+      const res = await client.query("update item set name = $1, bought = $2 where id = $3 and user_id = $4 " + 
+        "returning id, name, list_id, user_id, category, bought, created_on",
+      [req.body.name, req.body.bought, req.body.id, req.user.sub.split('|')[1]]);
+      return res.rows
+    } finally {
+      client.release()
+    }
+  })().catch(err => {
+    console.log(err.stack);
+    return [ 'ERROR', err.stack ];
+
+  }))
+});
+
 router.delete('/:id', checkJwt, async (req, res) => {
   res.send(await (async () => {
     const client = await pool.connect()

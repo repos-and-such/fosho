@@ -8,7 +8,9 @@
       @keydown.enter.prevent
       @keydown.enter="insertItem"
     />
-   <i class="material-icons" id="insert-button" @click="insertItem">add</i>
+    <span class="custom-button">
+     <i class="material-icons" @click="insertItem">add</i>
+    </span>
   </div>
 </template>
 
@@ -83,22 +85,9 @@ export default {
     background-color: rgb(255, 250, 243);
     color: rgb(124, 66, 58);
 }
-#insert-button {
-  margin: 0px;
-  padding: 0px;
-  height: 34px;
-  margin-left: 9px;
-  color:rgb(105, 185, 98);
-  cursor:pointer;
-  font-size: 34px;
-  border: 2px solid rgb(105, 185, 98);
-  border-radius: 2px;
-  box-shadow: 0 0 5px rgb(105, 185, 98);
+.custom-button {
+  margin-top: 0px;
 }
-#insert-button:active {
-  box-shadow: none;
-}
-
 #insert-item {
   margin-left: 16px;
   margin-bottom: 5px;

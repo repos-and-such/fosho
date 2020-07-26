@@ -10,12 +10,6 @@
       class="material-icons" 
       @click="copyListToClipboard"
     >content_copy</i>
-
-    <!-- <i
-      id="close-list-menu"
-      class="material-icons" 
-      @click="editList"
-    >keyboard_arrow_up</i> -->
   </div>
 </template>
 
@@ -26,7 +20,12 @@ export default {
   methods: {
     openDeleteConfirmation() {
       if (this.items.length !== 0) {
-        alert('yo');
+        this.$store.commit('toggleConfirmDiag',
+          {
+            open: true, 
+            message: 'This list contains items, are you sure you want to delete it?', 
+            type: 'deleteListConfirm'
+          });
       } else {
         this.deleteList();
       }
@@ -67,11 +66,21 @@ export default {
     },
     list() {
       return this.$store.getters.getListById(this.key);
+    },
+    triggerListDelete() {
+      return this.$store.state.triggerListDelete;
     }
+    
   },
   created() {
     this.editList();
     this.$store.commit('showAlert', { timeout: 1000, message: 'List Editing Mode Active', type: 'success' });
+  },
+  watch: {
+    triggerListDelete() {
+      console.log('triggering in watch')
+      this.deleteList();
+    }
   }
 }
 </script>

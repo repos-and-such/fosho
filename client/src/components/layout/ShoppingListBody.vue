@@ -2,7 +2,10 @@
   <div v-if="!itemsLoading" id="shopping-list-body">
     <insert-item :key="key"/>
     <div id="shopping-list-items">
-      <shopping-item v-for="item in items" :key="item.id" :listKey="key" />
+      <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
+    </div>
+    <div id="shopping-list-items">
+      <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </div>
     <div v-if="items.length === 0" style="height: 300px; display: flex; align-items: center; justify-content: center;">Please insert some items</div>
   </div>
@@ -42,6 +45,12 @@ export default {
     },
     items() {
       return this.$store.state.items;
+    },
+    itemsBought() {
+      return this.items.filter(item => item.bought)
+    },
+    itemsToBuy() {
+      return this.items.filter(item => !item.bought)
     },
     key() {
       return this.$vnode.key;

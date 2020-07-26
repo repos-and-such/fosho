@@ -3,6 +3,7 @@
 <template>
   <div id="insert-list-name" style="display: flex; align-items: center; margin-right:20px; font-size: 14px">
     <input 
+      maxlength="20"
       ref="nameField"
       @blur="closeNameField"
       spellcheck="false" 
@@ -13,9 +14,10 @@
       @keydown.enter="insertListName"
     />
     <span>
-      
     </span>
-   <i class="material-icons" id="insert-button" @click="insertListName">check</i>
+    <span class="custom-button">
+      <i class="material-icons" @click="insertListName">check</i>
+    </span>
   </div>
 </template>
 
@@ -67,7 +69,7 @@ export default {
     listBeforeUpdate() {
       return this.$store.getters.getListById(this.key);
     }
-  }, 
+  },
   created() {
     // this.$refs.nameField.focus();
     setTimeout(() => {
@@ -101,34 +103,8 @@ export default {
     background-color: rgb(255, 250, 243);
     color: rgb(124, 66, 58);
 }
-#insert-button {
-  margin: 0px;
-  padding: 0px;
-  height: 28px;
-  margin-left: 9px;
-  color:rgb(105, 185, 98);
-  cursor:pointer;
-  font-size: 28px;
-  border: 2px solid rgb(105, 185, 98);
-  border-radius: 2px;
-  box-shadow: 0 0 5px rgb(105, 185, 98);
-}
-#insert-button:active {
-  box-shadow: none;
-}
-#close-button {
-  margin: 0px;
-  padding: 0px;
-  height: 28px;
-  margin-left: 9px;
-  color:rgb(185, 2, 2);
-  cursor:pointer;
-  font-size: 28px;
-  border: 2px solid rgb(185, 2, 2);
-  border-radius: 2px;
-  box-shadow: 0 0 5px rgb(185, 2, 2);
-}
-#close-button:active {
-  box-shadow: none;
+.custom-button {
+  height: 20px;
+  width: 20px;
 }
 </style>

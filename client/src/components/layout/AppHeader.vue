@@ -42,9 +42,12 @@ export default {
             this.$store.commit('openTopList'); 
           } else {
             this.$store.commit('showGenericError');
+            this.insertListLoading = false;
           }
         }).catch(() => {
           this.$store.commit('showGenericError');
+          this.insertListLoading = false;
+
         });
     },
     openSearch() {
@@ -71,7 +74,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(209, 80, 80);
+  background-color: rgb(187, 57, 42);
   padding: 0px 4px;
 }
 #header-icon {

@@ -13,11 +13,20 @@ export default new Vuex.Store({
     editedListId: null,
     alertOpen: false,
     alertMessage: '',
-    alertType: ''
+    alertType: '',
+    diagOpen: false,
+    diagType: '',
+    diagMessage: 'tests',
+    triggerListDelete: 0
   },
   mutations: {
     setLoading(state, isLoading) {
       state.itemsLoading = isLoading;
+    },
+    toggleConfirmDiag(state, params) {
+      state.diagOpen = params.open;
+      state.diagMessage = params.message;
+      state.diagType = params.type;
     },
 
     // Items mutations
@@ -27,10 +36,17 @@ export default new Vuex.Store({
     insertItem(state, insertedItem) {
       state.items.push(insertedItem);
     },
+    updateItem(state, { originalItem, updatedItem }) {
+      let index = state.items.indexOf(originalItem);
+      state.items.splice(index, 1, updatedItem);
+    },
     deleteItem(state, item) {
       let index = state.items.indexOf(item);
       state.items.splice(index, 1);
     },
+    triggerListDelete(state) {
+      state.triggerListDelete++;
+    }, 
 
     // Lists mutations
     setLists(state, listsFromApi) {
