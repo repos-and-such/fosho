@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    lists: [],
+    lists: [-1],
     items: [],
     openListIndex: 0,
     openMenuId: null,

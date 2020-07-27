@@ -139,11 +139,12 @@ export default {
   border: 10px solid rgb(210, 170, 248);
   border-radius: 20px;
   box-shadow: 0 0 5px blueviolet;
-
+  cursor: pointer;
 }
 #shopping-item-text {
   padding: 3px 14px;
   font-size: 22px;
+  cursor: pointer;
 }
 .item-active {
   border: 1px solid rgb(255, 145, 0);

@@ -70,8 +70,4 @@ export default {
 .text-field {
   width: 85%;
 }
-.text-field:focus {
-  border: 1px solid rgb(105, 185, 98);
-  box-shadow: 0 0 5px rgb(105, 185, 98); 
-}
 </style>

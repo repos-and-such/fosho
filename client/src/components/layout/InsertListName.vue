@@ -83,10 +83,6 @@ export default {
 #insert-list-name {
   margin: 0px;
 }
-.custom-button {
-  height: 20px;
-  width: 20px;
-}
 .text-field {
   margin-left: 0px;
   width: 60vw;
