@@ -1,6 +1,7 @@
 <template>
-  <div class="insert-item">
-    <textarea
+  <div id="insert-item">
+    <input
+      maxlength="500"
       ref="insertItem"
       spellcheck="false" 
       class="text-field" 
@@ -8,8 +9,8 @@
       @keydown.enter.prevent
       @keydown.enter="insertItem"
     />
-    <span class="custom-button">
-     <i class="material-icons" @click="insertItem">add</i>
+    <span class="custom-button" style="border: 2px solid">
+     <i class="material-icons" style="font-size: 32px;" @click="insertItem">add</i>
     </span>
   </div>
 </template>
@@ -61,13 +62,13 @@ export default {
 }
 </script>
 <style scoped>
-.insert-item {
+#insert-item {
   display: flex;
   align-items: center;
-  margin-right:10px;
-  margin: 10px 0px;
+  margin: 0px 0px 7px 0px;
 }
 .text-field {
-  width: 85%;
+  width: 70%;
+  padding-top: 6px;
 }
 </style>

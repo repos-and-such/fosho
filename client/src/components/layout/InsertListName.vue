@@ -6,19 +6,19 @@
       maxlength="20"
       ref="nameField"
       class="text-field"
-      @blur="closeNameField"
       spellcheck="false" 
-      :placeholder="'insert list name (optional)'" 
+      :placeholder="'insert list name'" 
       id="text-area" 
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertListName"
     />
+    <i class="material-icons" @click="insertListName" style="padding: 0px 10px;">check</i>
+    <i class="material-icons" @click="closeNameField">clear</i>
+
     <span>
     </span>
-    <span class="custom-button">
-      <i class="material-icons" @click="insertListName">check</i>
-    </span>
+
   </div>
 </template>
 
@@ -44,8 +44,8 @@ export default {
           }, 
           await this.$auth.getTokenSilently())
             .then(res => {
-              if (Array.isArray(res.data) && res.data[0] !== 'ERROR') {
-                let updatedList = Object.assign({}, res.data[0]);
+              if (res.data[0] === 'SUCCESS') {
+                let updatedList = Object.assign({}, res.data[1]);
                 let originalList = this.listBeforeUpdate;
                 this.$store.commit('updateList', { originalList, updatedList });
               } else {
@@ -85,7 +85,13 @@ export default {
 }
 .text-field {
   margin-left: 0px;
-  width: 60vw;
+  width: 80%;
+  height: 26px;
+  font-size: 18px;
+}
+.custom-button {
+  height: 26px;
+  width: 26px;
 }
 
 </style>

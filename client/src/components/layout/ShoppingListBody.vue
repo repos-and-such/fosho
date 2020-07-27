@@ -7,7 +7,8 @@
     <div id="shopping-list-items">
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </div>
-    <div v-if="items.length === 0" style="height: 300px; display: flex; align-items: center; justify-content: center;">Please insert some items</div>
+    <div v-if="items.length === 0" class="empty-body-message">
+      Type item name and push plus button or hit enter</div>
   </div>
 </template>
 
@@ -64,12 +65,19 @@ export default {
 </script>
 
 <style scoped>
+.empty-body-message {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  padding: 50px 20px; 
+  color: gray;
+}
 #shopping-list-items {
   padding-right: 20px;
   display: flex;
   flex-wrap: wrap;
 }
 #shopping-list-body {
-  padding: 10px 10px 40px 10px;
+  padding: 10px 8px 40px 8px;
 }
 </style>

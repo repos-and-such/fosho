@@ -11,7 +11,7 @@
       </div>
       <div style="display: flex; margin-top: 10px;">
         <div class="custom-button" v-if="diagType === 'deleteListConfirm'" @click="triggerListDelete">Delete</div>
-        <div class="custom-button" v-if="diagType === 'editItem'" @click="triggerConfirmUpdate">Confirm</div>
+        <div class="custom-button" v-if="diagType === 'editItem'" @click="triggerConfirmUpdate" style="padding: 5px 12px;">Confirm</div>
         <div class="custom-button" id="cancel-button" @click="closeDiag">Cancel</div>
       </div>
     </div>
@@ -83,7 +83,7 @@ export default {
   justify-content: center;
   align-items: center;
   top: 20vh;
-  width: 90vw;
+  width: 80vw;
   max-width: 350px;
   z-index: 9999;
   padding: 10px;
@@ -92,8 +92,9 @@ export default {
 }
 .header-text {
   color: rgb(187, 57, 42);
-  margin-bottom: 10px;
-  font-size: 22px;
+  margin: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .custom-button {
   width: 100px;

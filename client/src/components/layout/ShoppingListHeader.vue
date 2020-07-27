@@ -1,11 +1,12 @@
 <template>
-  <div 
+  <div
+    v-if="list"
     :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
     id="list-header"
   >
     <div 
       :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }" 
-      style="display: flex; align-items: center; flex-wrap: wrap; width: 95%;"
+      style="display: flex; align-items: center; flex-wrap: wrap; width: 88%;"
       @click="setOpen"
     >
       <span id="createdDate-time" style="margin-right: 12px; display: flex; white-space: nowrap">
@@ -23,8 +24,8 @@
 
     </div>
     <span v-if="itemsLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>
-    <span v-else-if="isOpen" :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }">
-      <i class="material-icons" style="display:flex;" @click="toggleListMenu">create</i>
+    <span v-else-if="isOpen" :class="{ 'edit-icon-pressed': menuIsOpen, 'edit-icon': !menuIsOpen}">
+      <i class="material-icons" @click="toggleListMenu">create</i>
     </span>
   </div>
 </template>
@@ -106,6 +107,7 @@ export default {
   padding-right: 12px;
   padding-top: 8px;
   padding-bottom: 8px;
+  cursor: pointer;
 }
 .list-open {
   color: white;
@@ -122,6 +124,24 @@ export default {
 }
 .list-text-closed {
   color: rgb(151, 151, 151);
+}
+.edit-icon {
+  display:flex;
+  justify-content: center;
+  align-items: center; 
+  height: 40px; 
+  width: 40px; 
+  border-radius: 30px;
+}
+.edit-icon-pressed {
+  display:flex;
+  justify-content: center;
+  align-items: center; 
+  height: 40px; 
+  width: 40px; 
+  border-radius: 30px;
+  box-shadow: inset 0 0 4px rgba(34, 32, 32, 0.692);
+  background: rgb(187, 57, 42);
 }
 
 </style>

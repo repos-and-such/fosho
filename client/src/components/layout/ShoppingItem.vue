@@ -55,9 +55,6 @@ export default {
       ItemService.updateItem(item, this.item, await this.$auth.getTokenSilently())
           .then(res => {
             if (res.data[0] === 'SUCCESS') {
-              if (res.data[2] !== 'SUCCESS') {
-                this.$store.commit('showGenericError');
-              }
               let originalItem = this.item;
               let updatedItem = Object.assign({}, res.data[1]);
               this.$store.commit('updateItem', { originalItem, updatedItem });
@@ -71,6 +68,7 @@ export default {
       ItemService.deleteItem(this.key, await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
+            console.log('lets delete')
             this.$store.commit('deleteItem', this.item);
           } else {
             this.$store.commit('showGenericError');
@@ -132,7 +130,6 @@ export default {
   margin-bottom: 7px;
   border-radius: 20px;
   text-align: left;
-  overflow-wrap: break-word;
 }
 #category-indicator {
   margin: 0px 9px;
@@ -142,9 +139,10 @@ export default {
   cursor: pointer;
 }
 #shopping-item-text {
-  padding: 3px 14px;
-  font-size: 22px;
+  padding: 3px 6px 3px 14px;
+  font-size: 24px;
   cursor: pointer;
+  word-break: break-word;
 }
 .item-active {
   border: 1px solid rgb(255, 145, 0);

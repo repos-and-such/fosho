@@ -4,6 +4,7 @@
       <div v-if="insertListLoading" class="lds-dual-ring-large" style="margin: 16px 0px 0px 20px;"/>
       <i v-else class="material-icons" id="header-icon" @click="insertList">add</i>
       <i class="material-icons" id="header-icon" @click="openSearch">search</i>
+      <!-- <input class="text-field"> -->
     </div>
     <span style="display:flex;">
       <span id="f-bomb">
@@ -60,6 +61,13 @@ export default {
 </script>
 
 <style scoped>
+#app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(187, 57, 42);
+  padding: 0px 4px;
+}
 #f-bomb {
   color: white;
   font-size: 36px;
@@ -75,13 +83,6 @@ export default {
   margin-right: 1vw;
   color: white;
   font-size: 30px;
-}
-#app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgb(187, 57, 42);
-  padding: 0px 4px;
 }
 #header-icon {
   padding: 10px;

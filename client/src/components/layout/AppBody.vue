@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div id="app-body">
     <shopping-list 
       v-for="list in lists"
       :key="list.id" 
@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style scoped>
-.main {
+#app-body {
   width: 100vw;
   max-width: 1000px;
   overflow-y: auto;
