@@ -22,7 +22,7 @@ router.get(`/`, checkJwt, async (req,res) => {
       const client = await pool.connect()
       try {
         const res = await client.query("select * from list where user_id = $1", [req.user.sub.split('|')[1]])
-        return res.rows
+        return ['SUCCESS', res.rows]
       } finally {
         client.release()
       }
@@ -39,7 +39,7 @@ router.post('/', checkJwt, async (req,res) => {
     try {
       const res = await client.query("insert into list (name, user_id, created_on) values (null, $1, $2) returning id, name, user_id, created_on",
       [req.user.sub.split('|')[1], req.body.localTimestamp]);
-      return res.rows
+      return ['SUCCESS', res.rows]
     } finally {
       client.release()
     }
@@ -55,7 +55,7 @@ router.put('/', checkJwt, async (req,res) => {
     try {
       const res = await client.query("update list set name = $1 where id = $2 and user_id = $3 returning id, name, user_id, created_on",
       [req.body.name, req.body.list_id, req.user.sub.split('|')[1]]);
-      return res.rows
+      return ['SUCCESS', res.rows]
     } finally {
       client.release()
     }
@@ -70,7 +70,7 @@ router.delete('/:id', checkJwt, async (req, res) => {
     const client = await pool.connect()
     try {
         const res = await client.query("with deletedItems as (delete from item where list_id = $1 returning *) delete from list where id = $1 and user_id = $2 returning id, name", [req.params.id, req.user.sub.split('|')[1]]);
-        return res.rows
+        return ['SUCCESS', res.rows]
      } finally {
         client.release()
     }

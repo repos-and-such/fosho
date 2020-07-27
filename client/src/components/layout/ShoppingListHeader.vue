@@ -104,16 +104,18 @@ export default {
   align-items: center;
   padding-left: 10px;
   padding-right: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .list-open {
   color: white;
   background-color: rgb(213, 82, 68);
 }
 .list-closed {
+  margin-top: -1px; 
   background-color: white;
   border-top: 1px solid rgb(230, 227, 227);
+  border-bottom: 1px solid rgb(230, 227, 227);
 }
 .list-text-open {
   color: white;

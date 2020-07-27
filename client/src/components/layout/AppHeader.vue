@@ -9,8 +9,11 @@
       <span id="f-bomb">
         f
       </span>
+      <span id="o">
+        o
+      </span>
       <span id="osho">
-        o sho      
+        sho      
       </span>
     </span>
     <router-link to="/profile" style="display:flex; background-color: w; text-decoration: none;">
@@ -34,8 +37,8 @@ export default {
       this.insertListLoading = true;
       ListService.insertList(await this.$auth.getTokenSilently())
         .then(res => {
-          if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
-            let insertedList = Object.assign({}, res.data[0]);
+          if (res.data[0] === 'SUCCESS') {
+            let insertedList = Object.assign({}, res.data[1]);
             this.$store.commit('insertList', insertedList);
             this.insertListLoading = false;
             this.$store.commit('setEditedListId', insertedList.id);
@@ -58,15 +61,18 @@ export default {
 
 <style scoped>
 #f-bomb {
-  font: helvetica;
   color: white;
   font-size: 36px;
   margin-right: 4px;
   margin-top: 3px;
 }
+#o {
+  margin-right: 20px;
+  color: white;
+  font-size: 30px;
+}
 #osho {
   margin-right: 1vw;
-  font: helvetica;
   color: white;
   font-size: 30px;
 }

@@ -17,7 +17,10 @@ export default new Vuex.Store({
     diagOpen: false,
     diagType: '',
     diagMessage: 'tests',
-    triggerListDelete: 0
+    triggerListDelete: 0,
+    editedItem: {},
+    triggerConfirmUpdate: 0,
+    openCategoryMenuId: null
   },
   mutations: {
     setLoading(state, isLoading) {
@@ -43,10 +46,17 @@ export default new Vuex.Store({
     deleteItem(state, item) {
       let index = state.items.indexOf(item);
       state.items.splice(index, 1);
+    },    
+    triggerConfirmUpdate(state) {
+      state.triggerConfirmUpdate++;
     },
-    triggerListDelete(state) {
-      state.triggerListDelete++;
-    }, 
+    setEditedItem(state, item) {
+      state.editedItem = Object.assign({}, item);
+    },
+    setOpenCategoryMenuId(state, id) {
+      state.openCategoryMenuId = id;
+
+    },
 
     // Lists mutations
     setLists(state, listsFromApi) {
@@ -63,6 +73,9 @@ export default new Vuex.Store({
       let index = state.lists.indexOf(list);
       state.lists.splice(index, 1);
     },
+    triggerListDelete(state) {
+      state.triggerListDelete++;
+    }, 
     setOpen(state, id) {
       let index = state.lists.indexOf(state.lists.find(list => list.id === id))
       state.openListIndex = index;

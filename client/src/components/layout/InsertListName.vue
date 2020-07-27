@@ -5,6 +5,7 @@
     <input 
       maxlength="20"
       ref="nameField"
+      class="text-field"
       @blur="closeNameField"
       spellcheck="false" 
       :placeholder="'insert list name (optional)'" 
@@ -82,29 +83,13 @@ export default {
 #insert-list-name {
   margin: 0px;
 }
-#text-area {
-  margin-left: 4px;
-  padding-left: 9px;
-  padding-right: 9px;
-  padding-top: 2px;
-  font-size: 20px;
-  width: 100%;
-  height: 30px;
-  border: 1px solid  rgb(184, 184, 184);
-  border-radius:2px;
-  resize: none;
-  box-shadow: 0 0 5px rgb(184, 184, 184);
-  caret-color: rgb(124, 79, 58);
-  color: gray;
-  font-family:"Helvetica Neue", Helvetica, Sans-serif;
-}
-#text-area:focus {
-    outline: none !important;
-    background-color: rgb(255, 250, 243);
-    color: rgb(124, 66, 58);
-}
 .custom-button {
   height: 20px;
   width: 20px;
 }
+.text-field {
+  margin-left: 0px;
+  width: 60vw;
+}
+
 </style>

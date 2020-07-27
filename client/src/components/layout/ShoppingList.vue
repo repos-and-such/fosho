@@ -46,6 +46,11 @@ export default {
     key() {
       return this.$vnode.key;
     }
+  },
+  watch: {
+    isOpen() {
+      this.$store.commit('setOpenListMenu', null);
+    }
   }
 }
 </script>

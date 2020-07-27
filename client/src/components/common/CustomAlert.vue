@@ -18,7 +18,7 @@ export default {
   width: 100vw;
   height: 61px;
   z-index: 9999;
-  font-family:"Helvetica Neue", Helvetica, Sans-serif;
+  /* font-family:"Helvetica Neue", Helvetica, Sans-serif; */
   display:flex;
   justify-content: center;
   align-items: center;

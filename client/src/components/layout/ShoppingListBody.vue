@@ -15,6 +15,7 @@
 import ShoppingItem from './ShoppingItem';
 import ItemService from '../../api-service/ItemService';
 import InsertItem from './/InsertItem';
+// 
 
 export default {
   components: {
@@ -28,8 +29,8 @@ export default {
     this.$store.commit('setLoading', true);
     ItemService.getItems(this.list.id, await this.$auth.getTokenSilently())
       .then(res => {
-        if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
-          var itemsFromApi = res;
+        if (res[0] === 'SUCCESS') {
+          var itemsFromApi = res[1];
           this.$store.commit('setItems', itemsFromApi);
           this.$store.commit('setLoading', false);
         } else {
@@ -64,13 +65,11 @@ export default {
 
 <style scoped>
 #shopping-list-items {
-  padding-left: 12px;
   padding-right: 20px;
   display: flex;
   flex-wrap: wrap;
 }
 #shopping-list-body {
-  /* margin-bottom: 20px; */
-  /* margin-top: 8px; */
+  padding: 10px 10px 40px 10px;
 }
 </style>

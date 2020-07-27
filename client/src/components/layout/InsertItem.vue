@@ -1,9 +1,9 @@
 <template>
-  <div style="display: flex; margin-right:10px; margin-top: 6px">
+  <div class="insert-item">
     <textarea
       ref="insertItem"
       spellcheck="false" 
-      id="insert-item" 
+      class="text-field" 
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertItem"
@@ -33,8 +33,8 @@ export default {
           await this.$auth.getTokenSilently()
           )
             .then(res => {
-              if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
-                let insertedItem = Object.assign({}, res.data[0]);
+              if (res.data[0] === 'SUCCESS') {
+                let insertedItem = Object.assign({}, res.data[1]);
                 this.$store.commit('insertItem', insertedItem);
               } else {
                 this.$store.commit('showGenericError');
@@ -43,7 +43,7 @@ export default {
       }
     }
   },
-    computed: {
+  computed: {
     key() {
       return this.$vnode.key;
     },
@@ -61,40 +61,17 @@ export default {
 }
 </script>
 <style scoped>
-#insert-item {
-  margin-left: 16px;
-  margin-bottom: 8px;
-  padding-left: 9px;
-  padding-right: 9px;
-  padding-top: 6px;
-  font-size: 20px;
-  width: 30vw;
-  height: 76px;
-  border: 1px solid  rgb(184, 184, 184);
-  border-radius:2px;
-  resize: none;
-  box-shadow: 0 0 5px rgb(184, 184, 184);
-  caret-color: rgb(124, 79, 58);
-  color: gray;
-  font-family:"Helvetica Neue", Helvetica, Sans-serif;
+.insert-item {
+  display: flex;
+  align-items: center;
+  margin-right:10px;
+  margin: 10px 0px;
 }
-#insert-item:focus {
-    outline: none !important;
-    border:1px solid rgb(255, 145, 0);
-    box-shadow: 0 0 5px rgb(255, 145, 0);
-    background-color: rgb(255, 250, 243);
-    color: rgb(124, 66, 58);
-}
-.custom-button {
-  margin-top: 0px;
-}
-#insert-item {
-  margin-left: 16px;
-  margin-bottom: 5px;
-  font-size: 20px;
+.text-field {
   width: 85%;
-  height: 28px;
-  overflow: hidden;
-  }
-
+}
+.text-field:focus {
+  border: 1px solid rgb(105, 185, 98);
+  box-shadow: 0 0 5px rgb(105, 185, 98); 
+}
 </style>

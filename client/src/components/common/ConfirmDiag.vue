@@ -1,13 +1,17 @@
+// originally meant to be shared
 <template>
   <div class="dialog">
     <div class="background" v-if="$store.state.diagOpen" @click.self="closeDiag"></div>
     <div class="confirm-diag" v-if="$store.state.diagOpen">
       <div class="header-text">{{ $store.state.diagMessage }}</div>
-      <input v-if="diagType === 'editItem'"/>
-      <input v-if="diagType === 'editItem'"/>
-      <div style="display: flex;">
+      <div id="input-area" v-if="diagType === 'editItem'">
+        <div class="input-row" id="name-input">
+          <input class="text-field" v-model="currentName" spellcheck="false" />
+        </div>
+      </div>
+      <div style="display: flex; margin-top: 10px;">
         <div class="custom-button" v-if="diagType === 'deleteListConfirm'" @click="triggerListDelete">Delete</div>
-        <div class="custom-button" v-if="diagType === 'editItem'" @click="triggerEditItem">Confirm</div>
+        <div class="custom-button" v-if="diagType === 'editItem'" @click="triggerConfirmUpdate">Confirm</div>
         <div class="custom-button" id="cancel-button" @click="closeDiag">Cancel</div>
       </div>
     </div>
@@ -19,6 +23,7 @@ export default {
   name: "ConfirmDiag",
   data() {
     return {
+      currentName: '',
     }
   },
   methods: {
@@ -26,14 +31,31 @@ export default {
       this.$store.commit('toggleConfirmDiag', false);
     },
     triggerListDelete() {
-      console.log('confirm-diag: triggeringdelete')
       this.$store.commit('triggerListDelete');
       this.closeDiag();
+    },
+    triggerConfirmUpdate() {
+      let prepareEditedItem = Object.assign({}, this.$store.state.editedItem);
+      prepareEditedItem.name = this.currentName;
+      this.$store.commit('setEditedItem', prepareEditedItem);
+      this.$store.commit('triggerConfirmUpdate');
     }
   },
   computed: {
     diagType() {
       return this.$store.state.diagType;
+    },
+    diagOpen() {
+      return this.$store.state.diagOpen;
+    }
+  },
+  watch: {
+    diagOpen() {
+      if (this.diagOpen) {
+        this.currentName = this.$store.state.editedItem.name;
+      } else {
+        this.currentName = '';
+      }
     }
   }
 }
@@ -42,7 +64,7 @@ export default {
 <style scoped>
 .dialog {
   z-index: 9996; 
-  font-family:"Helvetica Neue", Helvetica, Sans-serif;
+  /* font-family:"Helvetica Neue", Helvetica, Sans-serif; */
 }
 .background {
   position: absolute;
@@ -61,17 +83,16 @@ export default {
   justify-content: center;
   align-items: center;
   top: 20vh;
-  width: 80vw;
-  max-width: 300px;
+  width: 90vw;
+  max-width: 350px;
   z-index: 9999;
-  padding: 20px;
+  padding: 10px;
   background-color:white;
   border-radius: 11px;
 }
-
 .header-text {
   color: rgb(187, 57, 42);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 22px;
 }
 .custom-button {
@@ -79,11 +100,18 @@ export default {
 }
 #cancel-button {
   color:rgb(187, 57, 42);
-  border: 2px solid rgb(187, 57, 42);
+  border: 1px solid rgb(187, 57, 42);
   box-shadow: 0 0 5px rgb(187, 57, 42);
 }
 #cancel-button:active {
   box-shadow: none;
 }
-
+.input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-field {
+  width:90%;
+}
 </style>

@@ -10,7 +10,7 @@
           About this app
         </div>
         <div>
-          <div class="sub-heading">Purpose</div>
+          <div class="sub-heading">Why I made it</div>
           <div class="sub-text">Personal use, learning and showcasing what I have learned so far</div>
 
           <div class="sub-heading" style="margin-top:10px;">Tools and Services used</div>
@@ -19,7 +19,7 @@
           <div class="sub-text">This app is still in development. Some features are lacking, there could be bugs, 
             code is dirty at some places. Author of this app cannot be held accountable for any of the following (non-exhaustive list):
           <div style="font-size: 10px; color:grey; margin: 6px 20px 0px 20px">Loss of data, loss of sensitive information, loss of vision or hearing, 
-            loss of faith in humanity etc etc...</div>
+            loss of hope etc...</div>
           
 
           </div>
@@ -40,7 +40,7 @@
     <div id="profile-page-item" class="profile-page-footer">
       <span @click.prevent="logout" class="profile-button">
         <i class="material-icons" style="font-size: 34px; margin-right: 8px;">exit_to_app</i>
-        <span class="mobile-hide">log out</span>
+        <span>Log out</span>
       </span>
       <span @click.prevent="back" class="profile-button">
         <i class="material-icons" id="settings" style="font-size:30px;">arrow_back_ios</i>
@@ -74,6 +74,7 @@ export default {
   height: 100vh; 
   width: 100vw;
   font-size: 20px;
+  max-width: 1000px;
 }
 .profile-page-header {
   display: flex;
@@ -86,7 +87,6 @@ export default {
 }
 #profile-page-item {
   padding: 20px 0px;
-  border-bottom: 1px solid rgb(209, 80, 80);
   font-weight: bold;
 }
 .sub-heading {

@@ -33,7 +33,7 @@ export default {
     async deleteList() {      
       ListService.deleteList(this.key, await this.$auth.getTokenSilently())
         .then(res => {
-          if ((Array.isArray(res.data) && res.data[0] !== 'ERROR') || !Array.isArray(res.data)) {
+          if (res.data[0] === 'SUCCESS') {
             this.$store.commit('deleteList', this.list);
             this.$store.commit('showAlert', { timeout: 1000, message: 'List Deleted', type: 'success' });
           } else {
@@ -86,11 +86,11 @@ export default {
 </script>
 <style scoped>
 #list-menu {
-  height: 60px;
+  height: 50px;
   display: flex; 
   justify-content: space-around;
   align-items: center;
-  background-color: rgb(209, 80, 80);
+  background-color: rgb(213, 82, 68);
 }
 #delete-list {
   color: rgb(255, 255, 255);

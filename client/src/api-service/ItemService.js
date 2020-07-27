@@ -34,15 +34,21 @@ class ItemService {
       });
     }
 
-    static updateItem(item, token) {
-      return axios.put(url, {
-        id: item.id,
-        name: item.name,
-        list_id: item.list_id,
-        bought: item.bought,
-        
-        localTimeStamp: moment().format()
-      }, 
+    static updateItem(item, oldItem, token) {
+      // -- teema ka
+      if (item.category, oldItem) {
+        console.log('new');
+
+        console.log(item);
+        console.log('old');
+
+        console.log(oldItem);
+
+
+      } 
+      item.localTimeStamp = moment().format();
+      
+      return axios.put(url, item, 
       {
         headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
