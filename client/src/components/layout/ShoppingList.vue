@@ -56,6 +56,6 @@ export default {
 </script>
 <style scoped>
 #shopping-list {
-  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 </style>
