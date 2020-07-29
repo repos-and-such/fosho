@@ -30,8 +30,8 @@ export default {
       let catA = a.category ? ('0' + a.category) : '1';
       let catB = b.category ? ('0' + b.category) : '1';
 
-      const argA = catA + a.name.toLowerCase();
-      const argB = catB + b.name.toLowerCase();
+      const argA = catA + a.created_on.toLowerCase();
+      const argB = catB + b.created_on.toLowerCase();
 
       let comparison = 0;
       if (argA < argB) {

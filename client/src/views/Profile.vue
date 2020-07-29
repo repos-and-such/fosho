@@ -1,6 +1,7 @@
 <template>
   <div class="profile-page">
     <div class="profile-page-bar" id="profile-page-header">Profile and Settings</div>
+    <div class="gradient-bar"></div>
     <div class="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
       <div id="separator-line"/>
@@ -65,6 +66,7 @@
           @click="submit">Submit</button>
       </div>
     </div>
+    <div class="gradient-bar" id="reverse-gradient"></div>
     <div class="profile-page-bar" id="profile-page-footer">
       <span @click.prevent="logout" class="profile-button">
         <i class="material-icons">exit_to_app</i>
@@ -88,7 +90,6 @@ export default {
     return {
       category: '',
       items: '',
-      vh: 0
     }
   },
   methods: {
@@ -115,9 +116,11 @@ export default {
     }
   },
   created() {
-    this.vh = window.innerHeight;
-    document.documentElement.style.setProperty('--vh', `${this.vh}px`);
-  }
+    window.addEventListener('resize', () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+  },
 };
 </script>
 <style scoped>
@@ -125,7 +128,7 @@ export default {
   display:flex; 
   flex-direction: column;
   height: 100vh; 
-  height: calc(var(--vh, 1vh)); 
+  height: calc(var(--vh * 100, 1vh)); 
   width: 100vw;
   font-size: 20px;
   max-width: 1000px;
@@ -177,6 +180,7 @@ export default {
   word-wrap: break-word;
   overflow: auto;
 }
+
 #category {
   height: 34px;
   border-radius: 30px;
