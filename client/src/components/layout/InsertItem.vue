@@ -51,13 +51,6 @@ export default {
     editedListId() {
       return this.$store.state.editedListId;
     }
-  },
-  created() {
-    setTimeout(() => {
-      if (!this.editedListId) {
-        this.$refs.insertItem.focus();
-      }
-    }, 0);
   }
 }
 </script>

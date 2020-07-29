@@ -3,8 +3,11 @@
     <div id="profile-page-item" class="profile-page-header">Profile and Settings</div>
     <div class="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
+      <div id="separator-line"/>
       <div id="profile-page-item">How to use</div>
+      <div id="separator-line"/>
       <div id="profile-page-item">Settings</div>
+      <div id="separator-line"/>
       <div id="profile-page-item">
         <div>
           About this app
@@ -36,6 +39,31 @@
             Add multiple items</div>
         </div>
       </div>
+      <div id="admin-section" v-if="development">
+        <div id="separator-line"/>
+        <div id="profile-page-item">
+          admin
+        </div>
+        <div style="margin: 20px 0px">
+          Enter item-category bindings
+        </div>
+        <div style="margin: 20px 0px">
+          Category
+        </div>
+        <textarea class="text-field" style="height: 30px; width: 80vw;" v-model="category" />
+        <div style="margin: 20px 0px;">
+          Item(s)
+        </div>
+        <textarea 
+          class="text-field" 
+          v-model="items"
+          @keyup.enter="submit" 
+          />
+        <button 
+          class="custom-button" 
+          style="width:140px; height: 60px; margin: 40px;" 
+          @click="submit">Submit</button>
+      </div>
     </div>
     <div id="profile-page-item" class="profile-page-footer">
       <span @click.prevent="logout" class="profile-button">
@@ -47,24 +75,44 @@
         <span class="mobile-hide">back</span>
       </span>
     </div>
-
-
     <div>
     </div>
   </div>
 </template>
 <script>
+import ItemService from '../api-service/ItemService';
 
 export default {
   name: "Profile",
+  data() {
+    return {
+      category: '',
+      items: ''
+    }
+  },
   methods: {
     back() {
       this.$router.push('/');
     },
     logout() {
+      this.$router.push('/');
       this.$auth.logout();
+    },
+    async submit() {
+      ItemService.bindCategory(
+        { category: this.category, items: this.items }, 
+        await this.$auth.getTokenSilently()
+        )
+          .then(() => {
+            this.items = '';
+          });        
     }
   },
+  computed: {
+    development() {
+      return process.env.NODE_ENV === 'development';
+    }
+  }
 };
 </script>
 <style scoped>
@@ -83,27 +131,27 @@ export default {
   color: white;
   width: 100vw;
   font-size: 28px;
-  height: 5vh;
-}
-#profile-page-item {
-  padding: 20px 0px;
-  font-weight: bold;
-}
-.sub-heading {
-  margin: 30px 0px 10px 0px;
-  font-weight: normal;
-}
-.sub-text {
-  margin: 0px 0px 28px 10px;
-  font-size: 18px;
-  font-weight: normal;
+  height: 5%;
 }
 .profile-page-body {
   padding: 0px 20px;
   color: rgb(80, 80, 80);
   overflow: auto;
-  height: 80vh;
-
+  min-height: 80%;
+  min-height: (-webkit-fill-available)*0.8;
+}
+#profile-page-item {
+  padding: 10px 0px;
+  font-weight: bold;
+}
+.sub-heading {
+  margin: 20px 0px 10px 0px;
+  font-weight: normal;
+}
+.sub-text {
+  margin: 0px 0px 20px 10px;
+  font-size: 18px;
+  font-weight: normal;
 }
 .profile-button {
   display: flex;
@@ -118,6 +166,12 @@ export default {
   width: 100vw;
   padding: 30px;
   font-size: 28px;
-  height: 5vh;
+}
+.text-field {
+  width: 80vw; 
+  height: 60vh; 
+  border-radius: 20px; 
+  word-wrap: break-word;
+  overflow: auto;
 }
 </style>

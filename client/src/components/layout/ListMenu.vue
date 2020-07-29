@@ -103,7 +103,7 @@ export default {
   margin: 10px;
   margin-top: 14px;
 }
-#close-list-menu {
+#sort-list {
   color: white;
   font-size: 34px;
   margin: 10px;

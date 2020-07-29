@@ -34,10 +34,6 @@
         Push the pen icon on the shopping list header to switch on Edit Mode. Use recycle-bin or pen icon
         to delete or edit item.
       </div>
-      
-
-
-
       <div id="separator-line"/>
       <div id="welcome-message-item">
         <div>
@@ -88,7 +84,7 @@ export default {
     }
   },
   methods: {
-    compare(a, b) {
+    compareLists(a, b) {
       const timeA = a.created_on;
       const timeB = b.created_on;
 
@@ -118,7 +114,7 @@ export default {
   computed: {
     lists() {
       let listsUnsorted = this.$store.state.lists;
-      return listsUnsorted ? listsUnsorted.sort(this.compare) : '';
+      return listsUnsorted ? listsUnsorted.sort(this.compareLists) : '';
     }
   }
 }

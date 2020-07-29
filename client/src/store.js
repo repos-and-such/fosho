@@ -20,7 +20,7 @@ export default new Vuex.Store({
     triggerListDelete: 0,
     editedItem: {},
     triggerConfirmUpdate: 0,
-    openCategoryMenuId: null
+    openCategoryMenuId: null,
   },
   mutations: {
     setLoading(state, isLoading) {

@@ -5,7 +5,26 @@
         <span id="shopping-item-text" @click="toggleBought">
           {{ item.name }}
         </span>
-        <span v-if="!menuIsOpen" id="category-indicator" @click.self="toggleCategoryMenu"/>
+        <span 
+          v-if="!menuIsOpen" 
+          @click.self="toggleCategoryMenu"
+          id="category-indicator"
+          :class="{
+            'uncategorized': !item.category,
+            'fruit': item.category === 'fruit',
+            'vegetable': item.category === 'vegetable',
+            'drink': item.category === 'drink',
+            'break-bakery': item.category === 'bread-bakery',
+            'baby': item.category === 'baby',
+            'dairy': item.category === 'dairy',
+            'solid': item.category === 'solid',
+            'meat': item.category === 'meat',
+            'personal-care': item.category === 'personal-care',
+            'household': item.category === 'household',
+            'snack': item.category === 'snack',
+            'frozen': item.category === 'frozen'
+            }"
+        />
         <i v-if="menuIsOpen" class="material-icons" id="delete-icon" @click="deleteItem">delete_forever</i>
         <i v-if="menuIsOpen" class="material-icons" id="edit-icon" @click="editItem">create</i>
       </div>
@@ -126,18 +145,37 @@ export default {
 #shopping-item {
   display: flex;
   align-items: center;
-  margin: 3px;
+  margin: 0px 2px 0px 3px;
   margin-bottom: 7px;
   border-radius: 20px;
   text-align: left;
 }
 #category-indicator {
   margin: 0px 9px;
-  border: 10px solid rgb(210, 170, 248);
   border-radius: 20px;
-  box-shadow: 0 0 5px blueviolet;
   cursor: pointer;
 }
+.uncategorized {
+  background-color: transparent;
+  border: 10px solid transparent;
+  box-shadow: 0 0 5px rgb(128, 128, 128);
+}
+.fruit {
+  background-color: transparent;
+  border: 10px solid rgba(255, 115, 0, 0.3);
+  box-shadow: 0 0 5px rgb(255, 115, 0);
+}
+.vegetable {
+  background-color: transparent;
+  border: 10px solid rgba(90, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(90, 209, 54);
+}
+.drink {
+  background-color: transparent;
+  border: 10px solid rgba(207, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(207, 209, 54);
+}
+
 #shopping-item-text {
   padding: 3px 6px 3px 14px;
   font-size: 24px;

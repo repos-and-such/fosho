@@ -64,7 +64,6 @@ export default {
 <style scoped>
 .dialog {
   z-index: 9996; 
-  /* font-family:"Helvetica Neue", Helvetica, Sans-serif; */
 }
 .background {
   position: absolute;
@@ -82,6 +81,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   top: 20vh;
   width: 80vw;
   max-width: 350px;

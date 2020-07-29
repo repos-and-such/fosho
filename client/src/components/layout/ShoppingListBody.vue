@@ -4,6 +4,8 @@
     <div id="shopping-list-items">
       <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
     </div>
+    <div v-if="itemsBought.length !== 0" id="separator-line"/>
+    <div v-if="itemsBought.length !== 0" style="font-size: 15px; margin: 0px 0px 10px 5px; color: rgba(209, 80, 80, 0.718);">BOUGHT:</div>
     <div id="shopping-list-items">
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </div>
@@ -16,7 +18,6 @@
 import ShoppingItem from './ShoppingItem';
 import ItemService from '../../api-service/ItemService';
 import InsertItem from './/InsertItem';
-// 
 
 export default {
   components: {
@@ -25,6 +26,23 @@ export default {
   },
   name: "ShoppingListBody",
   methods: {
+     compareItems(a, b) {
+      let catA = a.category ? ('0' + a.category) : '1';
+      let catB = b.category ? ('0' + b.category) : '1';
+
+      const argA = catA + a.name.toLowerCase();
+      const argB = catB + b.name.toLowerCase();
+      console.log(argA)
+
+
+      let comparison = 0;
+      if (argA < argB) {
+        comparison = -1;
+      } else if (argA > argB) {
+        comparison = 1;
+      }
+      return comparison;
+     }
   },
   async created() {
     this.$store.commit('setLoading', true);
@@ -46,7 +64,9 @@ export default {
       return this.$store.getters.getListById(this.key);
     },
     items() {
-      return this.$store.state.items;
+      let unsortedItems = this.$store.state.items;
+      console.log(unsortedItems.sort(this.compareItems))
+      return unsortedItems.sort(this.compareItems);
     },
     itemsBought() {
       return this.items.filter(item => item.bought)
@@ -78,6 +98,6 @@ export default {
   flex-wrap: wrap;
 }
 #shopping-list-body {
-  padding: 10px 8px 40px 8px;
+  padding: 10px 8px 22px 8px;
 }
 </style>
