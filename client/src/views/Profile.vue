@@ -1,7 +1,6 @@
 <template>
-  <div class="profile-page">
+  <div id="profile-page">
     <div class="profile-page-bar" id="profile-page-header">Profile and Settings</div>
-    <div class="gradient-bar"></div>
     <div class="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
       <div id="separator-line"/>
@@ -9,7 +8,7 @@
       <div id="separator-line"/>
       <div id="profile-page-item">Settings</div>
       <div id="separator-line"/>
-      <div id="profile-page-item">
+      <div id="profilte-page-item">
         <div>
           About this app
         </div>
@@ -66,7 +65,6 @@
           @click="submit">Submit</button>
       </div>
     </div>
-    <div class="gradient-bar" id="reverse-gradient"></div>
     <div class="profile-page-bar" id="profile-page-footer">
       <span @click.prevent="logout" class="profile-button">
         <i class="material-icons">exit_to_app</i>
@@ -115,16 +113,18 @@ export default {
       return process.env.NODE_ENV === 'development';
     }
   },
-  created() {
+  mounted() {
     window.addEventListener('resize', () => {
-      let vh = window.innerHeight * 0.01;
+      let element = document.getElementById("profile-page");
+
+      let vh = element.clientHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     });
   },
 };
 </script>
 <style scoped>
-.profile-page {
+#profile-page {
   display:flex; 
   flex-direction: column;
   height: 100vh; 

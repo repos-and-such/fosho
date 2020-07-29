@@ -14,7 +14,7 @@
             'fruit': item.category === 'fruit',
             'vegetable': item.category === 'vegetable',
             'drink': item.category === 'drink',
-            'break-bakery': item.category === 'bread-bakery',
+            'bread-bakery': item.category === 'bread-bakery',
             'baby': item.category === 'baby',
             'dairy': item.category === 'dairy',
             'solid': item.category === 'solid',
