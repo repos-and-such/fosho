@@ -1,6 +1,9 @@
 <template>
   <div id="profile-page">
     <div class="profile-page-bar" id="profile-page-header">Profile and Settings</div>
+    {{ vh }}
+    {{ inner }}
+    {{ doc }}
     <div class="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
       <div id="separator-line"/>
@@ -88,6 +91,9 @@ export default {
     return {
       category: '',
       items: '',
+      vh: '',
+      doc: '',
+      inner: ''
     }
   },
   methods: {
@@ -113,10 +119,16 @@ export default {
       return process.env.NODE_ENV === 'development';
     }
   },
-  created() {
+  mounted() {
     window.addEventListener('resize', () => {
-      let vh = window.screen.availHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      let element = document.getElementById("profile-page");
+      this.doc = document.documentElement.clientHeight;
+      this.inner = window.innerHeight
+
+      this.vh = element.clientHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${this.vh}px`);
+   
+
     });
   },
 };
