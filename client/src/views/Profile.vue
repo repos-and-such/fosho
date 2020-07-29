@@ -126,7 +126,7 @@ export default {
       this.inner = window.innerHeight
 
       this.vh = element.clientHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${this.vh}px`);
+      document.documentElement.style.setProperty('--vh', `${this.inner = window.innerHeight}px`);y
    
 
     });
