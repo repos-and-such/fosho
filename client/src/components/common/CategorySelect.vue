@@ -41,7 +41,6 @@ export default {
   },
   methods: {
     setCategory() {
-      console.log('closing time')
       this.$store.commit('setOpenCategoryMenuId', null);
     }
   },

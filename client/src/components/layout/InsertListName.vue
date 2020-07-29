@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     async insertListName() {
-      console.log('inserting')
       if (this.entry) {
         let entryInput = this.entry;
         this.entry = '';

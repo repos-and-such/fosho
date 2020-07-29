@@ -3,6 +3,7 @@
     <div id="profile-page-item" class="profile-page-header">Profile and Settings</div>
     <div class="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
+      <div>{{vh}}</div>
       <div id="separator-line"/>
       <div id="profile-page-item">How to use</div>
       <div id="separator-line"/>
@@ -87,7 +88,8 @@ export default {
   data() {
     return {
       category: '',
-      items: ''
+      items: '',
+      vh: 0
     }
   },
   methods: {
@@ -112,14 +114,19 @@ export default {
     development() {
       return process.env.NODE_ENV === 'development';
     }
+  },
+  created() {
+    this.vh = window.innerHeight;
+    document.documentElement.style.setProperty('--vh', `${this.vh}px`);
   }
 };
 </script>
 <style scoped>
 .profile-page {
   display:flex; 
-  flex-direction: column; 
+  flex-direction: column;
   height: 100vh; 
+  height: calc(var(--vh, 1vh)); 
   width: 100vw;
   font-size: 20px;
   max-width: 1000px;
@@ -137,8 +144,17 @@ export default {
   padding: 0px 20px;
   color: rgb(80, 80, 80);
   overflow: auto;
-  min-height: 80%;
-  min-height: (-webkit-fill-available)*0.8;
+  min-height: 90%;
+}
+.profile-page-footer {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(209, 80, 80);
+  color: white;
+  height: 5%;
+  width: 100vw;
+  padding: 30px;
+  font-size: 28px;
 }
 #profile-page-item {
   padding: 10px 0px;
@@ -157,15 +173,6 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
-}
-.profile-page-footer {
-  display: flex;
-  justify-content: space-around;
-  background-color: rgb(209, 80, 80);
-  color: white;
-  width: 100vw;
-  padding: 30px;
-  font-size: 28px;
 }
 .text-field {
   width: 80vw; 

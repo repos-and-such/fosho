@@ -87,7 +87,6 @@ export default {
       ItemService.deleteItem(this.key, await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
-            console.log('lets delete')
             this.$store.commit('deleteItem', this.item);
           } else {
             this.$store.commit('showGenericError');

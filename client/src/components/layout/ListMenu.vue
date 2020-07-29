@@ -42,7 +42,6 @@ export default {
         });
     },
     copyListToClipboard() {
-      console.log('copied')
       let listContent = []
       this.items.forEach(item => listContent.push(item.name));
       let dummy = document.createElement("textarea");
@@ -78,7 +77,6 @@ export default {
   },
   watch: {
     triggerListDelete() {
-      console.log('triggering in watch')
       this.deleteList();
     }
   }

@@ -32,8 +32,6 @@ export default {
 
       const argA = catA + a.name.toLowerCase();
       const argB = catB + b.name.toLowerCase();
-      console.log(argA)
-
 
       let comparison = 0;
       if (argA < argB) {
@@ -65,7 +63,6 @@ export default {
     },
     items() {
       let unsortedItems = this.$store.state.items;
-      console.log(unsortedItems.sort(this.compareItems))
       return unsortedItems.sort(this.compareItems);
     },
     itemsBought() {
