@@ -8,6 +8,7 @@
       <div id="separator-line"/>
       <div id="profile-page-item">Settings</div>
       <div id="separator-line"/>
+      <div>{{ inner }}</div>
       <div id="profilte-page-item">
         <div>
           About this app
@@ -90,7 +91,7 @@ export default {
       items: '',
       vh: '',
       doc: '',
-      inner: ''
+      inner: 'notYetSet'
     }
   },
   methods: {
@@ -117,17 +118,11 @@ export default {
     }
   },
   mounted() {
-    document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
-
+    this.inner = window.innerHeight;
+    document.documentElement.style.setProperty('--vh', `${this.inner}px`);
     window.addEventListener('resize', () => {
-      let element = document.getElementById("profile-page");
-      this.doc = document.documentElement.clientHeight;
       this.inner = window.innerHeight
-
-      this.vh = element.clientHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
-   
-
+      document.documentElement.style.setProperty('--vh', `${this.inner}px`);
     });
   },
 };
@@ -136,7 +131,7 @@ export default {
 #profile-page {
   display:flex; 
   flex-direction: column;
-  height: 94vh;
+  /* height: 94vh; */
   height: calc(var(--vh, 1vh));
   font-size: 20px;
   max-width: 1000px;
