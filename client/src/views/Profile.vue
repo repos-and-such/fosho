@@ -1,9 +1,8 @@
 <template>
   <div class="profile-page">
-    <div id="profile-page-item" class="profile-page-header">Profile and Settings</div>
+    <div class="profile-page-bar" id="profile-page-header">Profile and Settings</div>
     <div class="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
-      <div>{{vh}}</div>
       <div id="separator-line"/>
       <div id="profile-page-item">How to use</div>
       <div id="separator-line"/>
@@ -17,9 +16,9 @@
           <div class="sub-heading">Why I made it</div>
           <div class="sub-text">Personal use, learning and showcasing what I have learned so far</div>
 
-          <div class="sub-heading" style="margin-top:10px;">Tools and Services used</div>
+          <div class="sub-heading">Tools and Services used</div>
           <div class="sub-text">Node, Express, Postgres, Vue, Auth0, Heroku</div>
-          <div class="sub-heading" style="margin-top:10px;">Disclaimer and Apologies</div>
+          <div class="sub-heading">Disclaimer and Apologies</div>
           <div class="sub-text">This app is still in development. Some features are lacking, there could be bugs, 
             code is dirty at some places. Author of this app cannot be held accountable for any of the following (non-exhaustive list):
           <div style="font-size: 10px; color:grey; margin: 6px 20px 0px 20px">Loss of data, loss of sensitive information, loss of vision or hearing, 
@@ -27,7 +26,7 @@
           
 
           </div>
-          <div class="sub-heading" style="margin-top:10px;">Coming Soon(er or later)</div>
+          <div class="sub-heading">Coming Soon(er or later)</div>
           <div class="sub-text">
             Classification of items into categories<br>
             Language settings<br>
@@ -51,8 +50,8 @@
         <div style="margin: 20px 0px">
           Category
         </div>
-        <textarea class="text-field" style="height: 30px; width: 80vw;" v-model="category" />
-        <div style="margin: 20px 0px;">
+        <textarea class="text-field" id="category" v-model="category" />
+        <div>
           Item(s)
         </div>
         <textarea 
@@ -61,19 +60,19 @@
           @keyup.enter="submit" 
           />
         <button 
-          class="custom-button" 
-          style="width:140px; height: 60px; margin: 40px;" 
+          class="custom-button"
+          id="submit-button"
           @click="submit">Submit</button>
       </div>
     </div>
-    <div id="profile-page-item" class="profile-page-footer">
+    <div class="profile-page-bar" id="profile-page-footer">
       <span @click.prevent="logout" class="profile-button">
-        <i class="material-icons" style="font-size: 34px; margin-right: 8px;">exit_to_app</i>
+        <i class="material-icons">exit_to_app</i>
         <span>Log out</span>
       </span>
       <span @click.prevent="back" class="profile-button">
-        <i class="material-icons" id="settings" style="font-size:30px;">arrow_back_ios</i>
-        <span class="mobile-hide">back</span>
+        <i class="material-icons">arrow_back_ios</i>
+        <span class="mobile-hide">Back</span>
       </span>
     </div>
     <div>
@@ -131,34 +130,36 @@ export default {
   font-size: 20px;
   max-width: 1000px;
 }
-.profile-page-header {
+#profile-page-item {
+  padding: 10px 0px;
+  font-weight: bold;
+}
+.profile-page-bar {
   display: flex;
-  justify-content: center;
+  align-items: center;
   background-color: rgb(209, 80, 80);
   color: white;
-  width: 100vw;
+  width: 100%;
   font-size: 28px;
-  height: 5%;
+  height: 7%;
+}
+#profile-page-header {
+  justify-content: center;
 }
 .profile-page-body {
   padding: 0px 20px;
   color: rgb(80, 80, 80);
   overflow: auto;
-  min-height: 90%;
+  height: 86%;
 }
-.profile-page-footer {
+#profile-page-footer {
+  justify-content: space-between;
+}
+.profile-button {
   display: flex;
-  justify-content: space-around;
-  background-color: rgb(209, 80, 80);
-  color: white;
-  height: 5%;
-  width: 100vw;
-  padding: 30px;
-  font-size: 28px;
-}
-#profile-page-item {
-  padding: 10px 0px;
-  font-weight: bold;
+  align-items: center;
+  cursor: pointer;
+  padding: 20px;
 }
 .sub-heading {
   margin: 20px 0px 10px 0px;
@@ -169,16 +170,20 @@ export default {
   font-size: 18px;
   font-weight: normal;
 }
-.profile-button {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
 .text-field {
-  width: 80vw; 
+  width: 90%; 
   height: 60vh; 
-  border-radius: 20px; 
+  border-radius: 16px; 
   word-wrap: break-word;
   overflow: auto;
+}
+#category {
+  height: 34px;
+  border-radius: 30px;
+}
+#submit-button {
+  width: 132px;
+  height: 40px;
+  margin: 18px 0px;
 }
 </style>
