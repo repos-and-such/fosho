@@ -113,11 +113,9 @@ export default {
       return process.env.NODE_ENV === 'development';
     }
   },
-  mounted() {
+  created() {
     window.addEventListener('resize', () => {
-      let element = document.getElementById("profile-page");
-
-      let vh = element.clientHeight * 0.01;
+      let vh = window.screen.availHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     });
   },
