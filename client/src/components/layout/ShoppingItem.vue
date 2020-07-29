@@ -15,14 +15,11 @@
             'vegetable': item.category === 'vegetable',
             'drink': item.category === 'drink',
             'bread-bakery': item.category === 'bread-bakery',
-            'baby': item.category === 'baby',
             'dairy': item.category === 'dairy',
             'solid': item.category === 'solid',
             'meat': item.category === 'meat',
             'personal-care': item.category === 'personal-care',
             'household': item.category === 'household',
-            'snack': item.category === 'snack',
-            'frozen': item.category === 'frozen'
             }"
         />
         <i v-if="menuIsOpen" class="material-icons" id="delete-icon" @click="deleteItem">delete_forever</i>

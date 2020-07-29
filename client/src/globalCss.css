@@ -107,10 +107,10 @@
   overflow-y: hidden;
 }
 .text-field:focus {
-    outline: none !important;
-    border: 1px solid  rgb(213, 82, 68);
-    box-shadow: 0 0 5px rgb(213, 82, 68);
-    color: rgb(71, 7, 0);
+  outline: none !important;
+  border: 1px solid  rgba(213, 102, 68, 0.637);
+  box-shadow: 0 0 5px rgba(213, 102, 68, 0.637);
+  color: rgb(71, 7, 0);
 }
 
 .material-icons {

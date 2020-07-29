@@ -61,28 +61,32 @@ export default {
 </script>
 
 <style scoped>
+#f-bomb {
+  color: white;
+  font-size: 48px;
+  margin-top: 5px;
+  margin-right: 4px;
+}
+#o {
+  margin-top: 4px;
+  margin-right: 20px;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+#osho {
+  margin-top: 4px;
+  margin-right: 1vw;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
 #app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
   padding: 0px 4px;
-}
-#f-bomb {
-  color: white;
-  font-size: 36px;
-  margin-right: 4px;
-  margin-top: 3px;
-}
-#o {
-  margin-right: 20px;
-  color: white;
-  font-size: 30px;
-}
-#osho {
-  margin-right: 1vw;
-  color: white;
-  font-size: 30px;
 }
 #header-icon {
   padding: 10px;

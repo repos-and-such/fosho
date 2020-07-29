@@ -1,9 +1,6 @@
 <template>
   <div id="profile-page">
     <div class="profile-page-bar" id="profile-page-header">Profile and Settings</div>
-    {{ vh }}
-    {{ inner }}
-    {{ doc }}
     <div class="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
       <div id="separator-line"/>
@@ -120,13 +117,15 @@ export default {
     }
   },
   mounted() {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
+
     window.addEventListener('resize', () => {
       let element = document.getElementById("profile-page");
       this.doc = document.documentElement.clientHeight;
       this.inner = window.innerHeight
 
       this.vh = element.clientHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${this.inner = window.innerHeight}px`);y
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
    
 
     });
@@ -137,9 +136,8 @@ export default {
 #profile-page {
   display:flex; 
   flex-direction: column;
-  height: 100vh; 
-  height: calc(var(--vh * 100, 1vh)); 
-  width: 100vw;
+  height: 94vh;
+  height: calc(var(--vh, 1vh));
   font-size: 20px;
   max-width: 1000px;
 }
@@ -158,6 +156,7 @@ export default {
 }
 #profile-page-header {
   justify-content: center;
+  box-shadow: 10px 0px 20px rgb(146, 146, 146);
 }
 .profile-page-body {
   padding: 0px 20px;

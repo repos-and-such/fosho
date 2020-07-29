@@ -16,7 +16,7 @@ export default {
 #custom-alert {
   position: absolute;
   width: 100vw;
-  height: 61px;
+  height: 64px;
   z-index: 9999;
   display:flex;
   justify-content: center;
