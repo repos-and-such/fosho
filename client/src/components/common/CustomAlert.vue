@@ -13,6 +13,18 @@ export default {
 </script>
 
 <style scoped>
+.error {
+  background-color: rgb(177, 0, 0);
+  color: white;
+  font-weight: bold;
+}
+
+.success {
+  background-color: rgb(255, 255, 255);
+  color: rgb(25, 129, 65);
+  font-weight: bold;
+}
+
 #custom-alert {
   position: absolute;
   width: 100vw;
@@ -22,13 +34,5 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 22px;
-}
-.error {
-  background-color: rgb(177, 0, 0);
-  color: white;
-}
-.success {
-  background-color: rgb(255, 255, 255);
-  color: rgb(209, 80, 80);
 }
 </style>

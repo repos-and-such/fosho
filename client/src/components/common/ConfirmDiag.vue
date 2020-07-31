@@ -65,6 +65,7 @@ export default {
 .dialog {
   z-index: 9996; 
 }
+
 .background {
   position: absolute;
   left: 0px;
@@ -75,6 +76,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .confirm-diag {
   position: relative;
   display: flex;
@@ -90,29 +92,35 @@ export default {
   background-color:white;
   border-radius: 11px;
 }
+
 .header-text {
   color: rgb(187, 57, 42);
   margin: 10px 20px;
   font-size: 20px;
   font-weight: bold;
 }
+
 .custom-button {
   width: 100px;
 }
-#cancel-button {
-  color:rgb(187, 57, 42);
-  border: 1px solid rgb(187, 57, 42);
-  box-shadow: 0 0 5px rgb(187, 57, 42);
-}
-#cancel-button:active {
-  box-shadow: none;
-}
+
 .input-row {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .text-field {
   width:90%;
+}
+
+#cancel-button {
+  color:rgb(187, 57, 42);
+  border: 1px solid rgb(187, 57, 42);
+  box-shadow: 0 0 5px rgb(187, 57, 42);
+}
+
+#cancel-button:active {
+  box-shadow: none;
 }
 </style>

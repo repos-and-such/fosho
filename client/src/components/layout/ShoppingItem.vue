@@ -10,13 +10,13 @@
           @click.self="toggleCategoryMenu"
           id="category-indicator"
           :class="{
-            'uncategorized': !item.category,
+            'none': !item.category,
             'fruit': item.category === 'fruit',
             'vegetable': item.category === 'vegetable',
             'drink': item.category === 'drink',
-            'bread-bakery': item.category === 'bread-bakery',
+            'bread-and-bakery': item.category === 'bread-and-bakery',
             'dairy': item.category === 'dairy',
-            'solid': item.category === 'solid',
+            'grains': item.category === 'grains',
             'meat': item.category === 'meat',
             'personal-care': item.category === 'personal-care',
             'household': item.category === 'household',
@@ -26,7 +26,10 @@
         <i v-if="menuIsOpen" class="material-icons" id="edit-icon" @click="editItem">create</i>
       </div>
     </transition>
-    <category-select v-if="thisCategoryMenuIsOpen"/>
+    <category-select 
+      v-if="thisCategoryMenuIsOpen"
+      :item="item"
+    />
   </div>
 </template>
 
@@ -44,10 +47,14 @@ export default {
   },
   methods: {
     toggleBought() {
+      console.log(this.item)
+
       if (!this.menuIsOpen) {
         let updatedItem = Object.assign({}, this.item);
         updatedItem.bought = !updatedItem.bought;
         this.executeUpdate(updatedItem);
+      } else {
+        this.$store.commit('showAlert', { timeout: 1400, message: 'Edit mode Active', type: 'success' });
       }
     },
     toggleCategoryMenu() {
@@ -64,7 +71,6 @@ export default {
           message: 'Edit item', 
           type: 'editItem'
         });
-        // ???
         this.$store.commit('setEditedItem', this.item);
     },
     async executeUpdate(item) {
@@ -131,53 +137,7 @@ export default {
 .material-icons {
   margin-left: 16px;
 }
-#delete-icon {
-  color:rgb(185, 2, 2);
-}
-#edit-icon {
-  margin-right: 12px;
-  color:rgb(70, 70, 92);
-}
-#shopping-item {
-  display: flex;
-  align-items: center;
-  margin: 0px 2px 0px 3px;
-  margin-bottom: 7px;
-  border-radius: 20px;
-  text-align: left;
-}
-#category-indicator {
-  margin: 0px 9px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-.uncategorized {
-  background-color: transparent;
-  border: 10px solid transparent;
-  box-shadow: 0 0 5px rgb(128, 128, 128);
-}
-.fruit {
-  background-color: transparent;
-  border: 10px solid rgba(255, 115, 0, 0.3);
-  box-shadow: 0 0 5px rgb(255, 115, 0);
-}
-.vegetable {
-  background-color: transparent;
-  border: 10px solid rgba(90, 209, 54, 0.3);
-  box-shadow: 0 0 5px rgb(90, 209, 54);
-}
-.drink {
-  background-color: transparent;
-  border: 10px solid rgba(207, 209, 54, 0.3);
-  box-shadow: 0 0 5px rgb(207, 209, 54);
-}
 
-#shopping-item-text {
-  padding: 3px 6px 3px 14px;
-  font-size: 24px;
-  cursor: pointer;
-  word-break: break-word;
-}
 .item-active {
   border: 1px solid rgb(255, 145, 0);
   box-shadow: 0 0 4px rgb(255, 145, 0);
@@ -188,5 +148,60 @@ export default {
   border: 1px solid rgb(172, 172, 172);
   box-shadow: 0 0 4px  rgb(172, 172, 172);
   color: rgb(172, 172, 172);
+}
+
+.none {
+  background-color: transparent;
+  border: 10px solid transparent;
+  box-shadow: 0 0 5px rgb(128, 128, 128);
+}
+
+.fruit {
+  background-color: transparent;
+  border: 10px solid rgba(255, 115, 0, 0.3);
+  box-shadow: 0 0 5px rgb(255, 115, 0);
+}
+
+.vegetable {
+  background-color: transparent;
+  border: 10px solid rgba(90, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(90, 209, 54);
+}
+
+.drink {
+  background-color: transparent;
+  border: 10px solid rgba(207, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(207, 209, 54);
+}
+
+#delete-icon {
+  color:rgb(185, 2, 2);
+}
+
+#edit-icon {
+  margin-right: 12px;
+  color:rgb(70, 70, 92);
+}
+
+#shopping-item {
+  display: flex;
+  align-items: center;
+  margin: 0px 2px 0px 3px;
+  margin-bottom: 7px;
+  border-radius: 20px;
+  text-align: left;
+}
+
+#category-indicator {
+  margin: 0px 9px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#shopping-item-text {
+  padding: 3px 6px 3px 14px;
+  font-size: 24px;
+  cursor: pointer;
+  word-break: break-word;
 }
 </style>

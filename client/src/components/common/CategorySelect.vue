@@ -1,116 +1,140 @@
 <template>
   <div class="selection-box">
-    <span id="selection-element" @click="setCategory">
-      <span class="icon" id="empty"></span>
-      <span class="text">Bula</span>
-    </span>
-    <span id="selection-element" @click="setCategory">
-      <span class="icon" id="orange"></span>
-      <span class="text">Bula</span>
-    </span>
-    <span id="selection-element" @click="setCategory">
-      <span class="icon" id="amber"></span>
-      <span class="text">Bula</span>
-    </span>    
-    <span id="selection-element" @click="setCategory">
-      <span class="icon" id="lime"></span>
-      <span class="text">Bula</span>
-    </span>    
-    <span id="selection-element" @click="setCategory">
-      <span class="icon" id="teal"></span>
-      <span class="text">Bula</span>
-    </span>    
-    <span id="selection-element" @click="setCategory">
-      <span class="icon" id="blue"></span>
-      <span class="text">Bula</span>
-    </span>    
-    <span id="selection-element" @click="setCategory">
-      <span class="icon" id="indigo"></span>
-      <span class="text">Bula</span>
-    </span>      
+    <div 
+      v-for="category in categories" 
+      :key="category"
+      @click="setCategory(category)"
+      class="selection-element"
+    >
+      <div class="icon" :id="category" />
+      <span class="text">
+        {{ category.charAt(0).toUpperCase() + category.slice(1).replace('-and-', '/').replace('-', ' ') }}
+      </span>
+    </div>
   </div> 
 </template>
 
 <script>
+import ItemService from '../../api-service/ItemService';
+
 export default {
   name: "CategorySelect",
+  props: { item: Object },
   data() {
     return {
-      tempVar: false
+      categories: ['none', 'fruit', 'vegetable', 'bread-and-bakery', 'meat', 'grains', 'dairy', 'drink', 'personal-care', 'household']
     }
   },
   methods: {
-    setCategory() {
-      this.$store.commit('setOpenCategoryMenuId', null);
+    async setCategory(category) {
+      console.log(this.item)
+      ItemService.bindCategory(
+        { category: category, items: this.item.name }, 
+        await this.$auth.getTokenSilently()
+        )
+          .then((res) => {
+            console.log(res)
+            this.$store.commit('setOpenCategoryMenuId', null);
+          });   
+      console.log(category);
     }
-  },
-  computed: {},
-  created() {}
+  }
 }
 </script>
 
-
 <style scoped>
-
 .selection-box {
   position: absolute;
+  top: 20vh;
+  /* left: 20vw; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 300px;
-  height: 500px;  
-  box-sizing: border-box;
   background: #ffffff;
-  border-radius: 11px;
+  border-radius: 17px;
   box-shadow: 0 0 5px #00000070;
+  padding: 10px;
+  padding-right: 18px;
 }
-#selection-element {
+
+.selection-element {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  transition: 250ms ease-in-out, transform 150ms ease;
 }
+
+.selection-element:hover {
+  transform: scale(1.05);
+}
+
+/* .selection-element:active {
+  background-color: blue;
+  transform: scale(1.1);
+} */
+
 .icon {
   border-radius: 20px;
   margin: 8px;
 }
 
 .text {
-  margin-left: 10px;
+  margin-left: 8px;
   color:rgb(83, 83, 83);
 }
 
-#empty {
-  border: 20px solid rgb(255, 255, 255);
-  box-shadow: 0 0 5px rgb(73, 73, 73);
+#none {
+  border: 12px solid rgb(202, 202, 202);
+  box-shadow: 0 0 5px rgb(128, 128, 128);
 }
 
-#orange {
-  border: 20px solid orange;
-  box-shadow: 0 0 5px orange;
-
+#fruit {
+  border: 12px solid rgba(255, 115, 0, 0.3);
+  box-shadow: 0 0 5px rgb(255, 115, 0);
 }
 
-#amber {
-  border: 20px solid orangered;
-  box-shadow: 0 0 5px orangered;
+#vegetable {
+  border: 12px solid rgba(90, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(90, 209, 54);
 }
 
-#lime {
-  border: 20px solid lime;
-  box-shadow: 0 0 5px lime;
+#drink {
+  border: 12px solid rgba(207, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(207, 209, 54);
 }
 
-#teal {
-  border: 20px solid teal;
-  box-shadow: 0 0 5px teal;
+#bread-and-bakery {
+  border: 12px solid rgb(93, 51, 25, 0.3);
+  box-shadow: 0 0 5px rgb(105, 89, 79);
 }
 
-#blue {
-  border: 20px solid blue;
-  box-shadow: 0 0 5px blue;
+#meat {
+  border: 12px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgb(255, 0, 0);
 }
 
-#indigo {
-  border: 20px solid rgb(95, 180, 166);
+#dairy {
+  border: 12px solid rgb(255, 255, 255);
+  box-shadow: 0 0 5px rgb(148, 148, 148);
+}
+
+#grains {
+  border: 12px solid rgba(255, 187, 0, 0.3);
+  box-shadow: 0 0 5px rgb(255, 187, 0);
+}
+
+#drink {
+  border: 12px solid rgba(207, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(207, 209, 54);
+}
+
+#personal-care {
+  border: 12px solid rgba(113, 94, 153, 0.3);
+  box-shadow: 0 0 5px rgb(122, 95, 180);
+}
+
+#household {
+  border: 12px solid rgba(71, 202, 180, 0.3);
   box-shadow: 0 0 5px rgb(95, 180, 166);
 }
 

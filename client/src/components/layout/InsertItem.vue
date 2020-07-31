@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import ItemService from '../../api-service/ItemService'
+import ItemService from '../../api-service/ItemService';
+
 export default {
   name: "InsertItem",
   data() {
@@ -54,14 +55,17 @@ export default {
   }
 }
 </script>
+
 <style scoped>
+.text-field {
+  width: 70%;
+  padding-top: 6px;
+}
+
 #insert-item {
   display: flex;
   align-items: center;
   margin: 0px 0px 7px 0px;
 }
-.text-field {
-  width: 70%;
-  padding-top: 6px;
-}
+
 </style>

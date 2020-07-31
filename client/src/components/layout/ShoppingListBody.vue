@@ -10,7 +10,7 @@
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </div>
     <div v-if="items.length === 0" class="empty-body-message">
-      Type item name and push plus button or hit enter</div>
+      Enter shopping item and push the green plus button or hit enter</div>
   </div>
 </template>
 
@@ -89,11 +89,13 @@ export default {
   padding: 50px 20px; 
   color: gray;
 }
+
 #shopping-list-items {
   padding-right: 20px;
   display: flex;
   flex-wrap: wrap;
 }
+
 #shopping-list-body {
   padding: 10px 8px 22px 8px;
 }

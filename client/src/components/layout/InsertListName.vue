@@ -71,26 +71,27 @@ export default {
     }
   },
   created() {
-    // this.$refs.nameField.focus();
     setTimeout(() => {
       this.$refs.nameField.focus();
     }, 0);
   }
 }
 </script>
+
 <style scoped>
-#insert-list-name {
-  margin: 0px;
-}
 .text-field {
   margin-left: 0px;
   width: 80%;
   height: 26px;
   font-size: 18px;
 }
+
 .custom-button {
   height: 26px;
   width: 26px;
 }
 
+#insert-list-name {
+  margin: 0px;
+}
 </style>

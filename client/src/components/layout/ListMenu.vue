@@ -35,7 +35,7 @@ export default {
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
             this.$store.commit('deleteList', this.list);
-            this.$store.commit('showAlert', { timeout: 1000, message: 'List Deleted', type: 'success' });
+            this.$store.commit('showAlert', { timeout: 1400, message: 'List Deleted', type: 'success' });
           } else {
             this.$store.commit('showGenericError');
           }
@@ -50,7 +50,7 @@ export default {
       dummy.select();
       document.execCommand("copy");
       document.body.removeChild(dummy);
-      this.$store.commit('showAlert', { timeout: 1000, message: 'List copied to Clipboard', type: 'success' });
+      this.$store.commit('showAlert', { timeout: 1400, message: 'List copied to Clipboard', type: 'success' });
     },
     editList() {
       this.$store.commit('setEditedListId', this.key);
@@ -73,7 +73,7 @@ export default {
   },
   created() {
     this.editList();
-    this.$store.commit('showAlert', { timeout: 1000, message: 'List Editing Mode Active', type: 'success' });
+    this.$store.commit('showAlert', { timeout: 1400, message: 'List Editing Mode Active', type: 'success' });
   },
   watch: {
     triggerListDelete() {
@@ -82,6 +82,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 #list-menu {
   height: 60px;
@@ -90,21 +91,25 @@ export default {
   align-items: center;
   background-color: rgb(213, 82, 68);
 }
+
 #delete-list {
   color: rgb(255, 255, 255);
   font-size: 36px;
   margin: 10px;
 }
+
 #copy-list {
   color: white;
   font-size: 30px;
   margin: 10px;
   margin-top: 14px;
 }
+
 #sort-list {
   color: white;
   font-size: 34px;
   margin: 10px;
   margin-top: 12px;
 }
+
 </style>

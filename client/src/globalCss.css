@@ -35,6 +35,15 @@
   border-color: white transparent white transparent;
 }
 
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
 .slide-enter-active {
   -moz-transition-duration: 0.8s;
   -webkit-transition-duration: 0.8s;
@@ -88,6 +97,9 @@
   box-shadow: none;
 }
 .material-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 28px;
 }
 

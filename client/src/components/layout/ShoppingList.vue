@@ -54,6 +54,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 #shopping-list {
   -webkit-tap-highlight-color: transparent;

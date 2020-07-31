@@ -121,11 +121,12 @@ export default {
 </script>
 
 <style scoped>
-#app-body {
-  width: 100vw;
-  max-width: 1000px;
-  overflow-y: auto;
+.sub-text {
+  margin: 0px 0px 8px 10px;
+  font-size: 18px;
+  font-weight: normal;
 }
+
 .welcome-message {
   display:flex; 
   flex-direction: column; 
@@ -134,20 +135,23 @@ export default {
   color: rgb(80, 80, 80);
   overflow: auto;
 }
-#welcome-message-item {
-  padding: 20px 0px;
-  font-weight: bold;
-  word-wrap: none;
-}
+
 .sub-heading {
   margin: 10px 0px 10px 0px;
   font-weight: normal;
   color: rgb(209, 80, 80);
 }
-.sub-text {
-  margin: 0px 0px 8px 10px;
-  font-size: 18px;
-  font-weight: normal;
+
+#app-body {
+  width: 100vw;
+  max-width: 1000px;
+  overflow-y: auto;
+}
+
+#welcome-message-item {
+  padding: 20px 0px;
+  font-weight: bold;
+  word-wrap: none;
 }
 
 </style>

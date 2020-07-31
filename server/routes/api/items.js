@@ -141,6 +141,9 @@ router.post('/category', checkJwt, async (req,res) => {
     }
     query = query.slice(0, query.length - 2);
     query = query.concat(` on conflict (item, user_id) do update set name = $1, created_on = now() returning *`);
+    console.log(query)
+    console.log(params)
+
 
     try {
       const res = await client.query(query, params);

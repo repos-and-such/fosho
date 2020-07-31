@@ -1,14 +1,13 @@
 <template>
   <div id="profile-page">
     <div class="profile-page-bar" id="profile-page-header">Profile and Settings</div>
-    <div class="profile-page-body">
+    <div id="profile-page-body">
       <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
       <div id="separator-line"/>
       <div id="profile-page-item">How to use</div>
       <div id="separator-line"/>
       <div id="profile-page-item">Settings</div>
       <div id="separator-line"/>
-      <div>{{ inner }}</div>
       <div id="profilte-page-item">
         <div>
           About this app
@@ -89,9 +88,6 @@ export default {
     return {
       category: '',
       items: '',
-      vh: '',
-      doc: '',
-      inner: 'notYetSet'
     }
   },
   methods: {
@@ -118,28 +114,16 @@ export default {
     }
   },
   mounted() {
-    this.inner = window.innerHeight;
-    document.documentElement.style.setProperty('--vh', `${this.inner}px`);
+    let inner = window.innerHeight;
+    document.documentElement.style.setProperty('--vh', `${inner}px`);
     window.addEventListener('resize', () => {
-      this.inner = window.innerHeight
-      document.documentElement.style.setProperty('--vh', `${this.inner}px`);
+      inner = window.innerHeight
+      document.documentElement.style.setProperty('--vh', `${inner}px`);
     });
   },
 };
 </script>
 <style scoped>
-#profile-page {
-  display:flex; 
-  flex-direction: column;
-  /* height: 94vh; */
-  height: calc(var(--vh, 1vh));
-  font-size: 20px;
-  max-width: 1000px;
-}
-#profile-page-item {
-  padding: 10px 0px;
-  font-weight: bold;
-}
 .profile-page-bar {
   display: flex;
   align-items: center;
@@ -149,34 +133,25 @@ export default {
   font-size: 28px;
   height: 7%;
 }
-#profile-page-header {
-  justify-content: center;
-  box-shadow: 10px 0px 20px rgb(146, 146, 146);
-}
-.profile-page-body {
-  padding: 0px 20px;
-  color: rgb(80, 80, 80);
-  overflow: auto;
-  height: 86%;
-}
-#profile-page-footer {
-  justify-content: space-between;
-}
+
 .profile-button {
   display: flex;
   align-items: center;
   cursor: pointer;
   padding: 20px;
 }
+
 .sub-heading {
   margin: 20px 0px 10px 0px;
   font-weight: normal;
 }
+
 .sub-text {
   margin: 0px 0px 20px 10px;
   font-size: 18px;
   font-weight: normal;
 }
+
 .text-field {
   width: 90%; 
   height: 60vh; 
@@ -185,10 +160,40 @@ export default {
   overflow: auto;
 }
 
+#profile-page {
+  display:flex; 
+  flex-direction: column;
+  height: var(--vh, 1vh);
+  font-size: 20px;
+  max-width: 1000px;
+}
+
+#profile-page-header {
+  justify-content: center;
+  box-shadow: 10px 0px 20px rgb(146, 146, 146);
+}
+
+#profile-page-body {
+  padding: 0px 20px;
+  color: rgb(80, 80, 80);
+  overflow: auto;
+  height: 86%;
+}
+
+#profile-page-footer {
+  justify-content: space-between;
+}
+
+#profile-page-item {
+  padding: 10px 0px;
+  font-weight: bold;
+}
+
 #category {
   height: 34px;
   border-radius: 30px;
 }
+
 #submit-button {
   width: 132px;
   height: 40px;
