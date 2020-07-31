@@ -94,7 +94,9 @@ export default {
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
-  padding: 0px 4px;
+  padding: 0px 4px 0px 0px;
+  -webkit-tap-highlight-color: transparent;
+  border-bottom: 3px solid white;
 }
 
 #header-icon {
@@ -135,6 +137,7 @@ export default {
   font-size: 48px;
   margin-top: 5px;
   margin-right: 4px;
+  margin-bottom: -20px;
 }
 
 #o {
