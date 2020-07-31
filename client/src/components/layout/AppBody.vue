@@ -1,9 +1,11 @@
 <template>
   <div id="app-body">
-    <shopping-list 
-      v-for="list in lists"
-      :key="list.id" 
-    />
+    <transition-group name="slide">
+      <shopping-list 
+        v-for="list in lists"
+        :key="list.id" 
+      />
+    </transition-group>
     <div class="welcome-message" v-if="this.lists.length === 0">
       <div id="welcome-message-item" style="flex-wrap: wrap; display: flex; justify-content: center; padding: 70px 0px 50px 0px;">
         Welcome to <span style="color: rgb(209, 80, 80); padding: 0px 7px;">fo sho</span> shopping list app!
@@ -21,7 +23,7 @@
 
       <div class="sub-heading">Add Shopping Items</div>
       <div class="sub-text">
-        Enter item name and push plus button or hit Enter. Fo Sho will attempt to assign a category
+        Enter shopping item and push the green plus-button or hit enter. Fo Sho will attempt to assign a category
         for handy grouping of items. To change the category, hit the button on the item.
       </div>
       <div class="sub-heading">Edit Shopping Items</div>

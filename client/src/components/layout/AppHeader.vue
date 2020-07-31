@@ -1,9 +1,6 @@
 <template>
   <div id="app-header">
-    <div style="display: flex; color: white">
-      <i class="material-icons" id="add-icon" @click="insertList">add</i>
-      <i class="material-icons" id="header-icon" @click="openHelp">help_outline</i>
-    </div>
+    <div class="plus-button" @click="insertList">+</div>
     <span style="display:flex;">
       <span id="f-bomb">
         f
@@ -15,9 +12,13 @@
         sho      
       </span>
     </span>
-    <router-link to="/profile" style="display:flex; background-color: w; text-decoration: none;">
+    <div style="display: flex; color: white">
+      <i class="material-icons" id="header-icon" @click="openHelp">help_outline</i>
+      <router-link to="/profile" style="display:flex; background-color: w; text-decoration: none;">
       <i class="material-icons" id="header-icon">person</i>
     </router-link>
+
+    </div>
   </div>
 </template>
 
@@ -49,12 +50,12 @@ export default {
         });
     },
     insertAnimation() {
-      document.documentElement.style.setProperty('--plusSize', "1.8");  
+      document.documentElement.style.setProperty('--plusSize', "1.4");  
       setTimeout(() => {
         document.documentElement.style.setProperty('--plusSize', "1");
       }, 250);
       setTimeout(() => {
-        document.documentElement.style.setProperty('--plusSize', "1.3");  
+        document.documentElement.style.setProperty('--plusSize', "1.2");  
       }, 400);
       setTimeout(() => {
         document.documentElement.style.setProperty('--plusSize', "1");
@@ -106,24 +107,6 @@ export default {
   cursor:pointer;
 }
 
-#add-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 7px;
-  color: white;
-  font-size: 46px;
-  font-weight: bold;
-
-  transition: 250ms ease-in-out, transform 150ms ease;
-  transform: scale(1);
-  transform: scale(var(--plusSize));
-  cursor:pointer;
-  animation-name: var(--plusSpin);
-  animation-duration: 600ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
 
 #profile-icon {
   border-radius: 50px;

@@ -127,7 +127,7 @@ export default {
 .profile-page-bar {
   display: flex;
   align-items: center;
-  background-color: rgb(209, 80, 80);
+  background-color: rgb(187, 57, 42);
   color: white;
   width: 100%;
   font-size: 28px;
@@ -170,7 +170,6 @@ export default {
 
 #profile-page-header {
   justify-content: center;
-  box-shadow: 10px 0px 20px rgb(146, 146, 146);
 }
 
 #profile-page-body {

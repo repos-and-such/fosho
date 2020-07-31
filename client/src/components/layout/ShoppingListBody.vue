@@ -10,7 +10,7 @@
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </div>
     <div v-if="items.length === 0" class="empty-body-message">
-      Enter shopping item and push the green plus button or hit enter</div>
+      Enter shopping item and push the green plus-button or hit enter</div>
   </div>
 </template>
 

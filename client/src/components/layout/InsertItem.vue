@@ -9,9 +9,7 @@
       @keydown.enter.prevent
       @keydown.enter="insertItem"
     />
-    <span class="custom-button" style="border: 2px solid">
-     <i class="material-icons" style="font-size: 32px;" @click="insertItem">add</i>
-    </span>
+    <div class="plus-button" style="color: rgb(105, 185, 98);">+</div>
   </div>
 </template>
 

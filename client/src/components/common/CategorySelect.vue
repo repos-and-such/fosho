@@ -22,21 +22,27 @@ export default {
   props: { item: Object },
   data() {
     return {
-      categories: ['none', 'fruit', 'vegetable', 'bread-and-bakery', 'meat', 'grains', 'dairy', 'drink', 'personal-care', 'household']
+      categories: ['none', 'fruit', 'vegetable', 'bread-and-bakery', 'meat', 'grains-and-dry', 'dairy', 'drink', 'personal-care', 'household']
     }
   },
   methods: {
     async setCategory(category) {
-      console.log(this.item)
       ItemService.bindCategory(
         { category: category, items: this.item.name }, 
         await this.$auth.getTokenSilently()
         )
           .then((res) => {
-            console.log(res)
             this.$store.commit('setOpenCategoryMenuId', null);
+            if (res.data[0] === 'SUCCESS') {
+              let originalItem = this.item;
+              let updatedItem = Object.assign({}, this.item);
+              updatedItem.category = res.data[1][0].name;
+              this.$store.commit('updateItem', { originalItem, updatedItem });
+            } else {
+              this.$store.commit('showGenericError');
+            }
+
           });   
-      console.log(category);
     }
   }
 }
@@ -44,9 +50,8 @@ export default {
 
 <style scoped>
 .selection-box {
-  position: absolute;
-  top: 20vh;
-  /* left: 20vw; */
+  position: -webkit-sticky;
+  position: sticky;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -68,11 +73,6 @@ export default {
   transform: scale(1.05);
 }
 
-/* .selection-element:active {
-  background-color: blue;
-  transform: scale(1.1);
-} */
-
 .icon {
   border-radius: 20px;
   margin: 8px;
@@ -84,8 +84,8 @@ export default {
 }
 
 #none {
-  border: 12px solid rgb(202, 202, 202);
-  box-shadow: 0 0 5px rgb(128, 128, 128);
+  border: 12px solid rgb(235, 235, 235);
+  box-shadow: 0 0 5px rgb(185, 183, 183);
 }
 
 #fruit {
@@ -104,8 +104,8 @@ export default {
 }
 
 #bread-and-bakery {
-  border: 12px solid rgb(93, 51, 25, 0.3);
-  box-shadow: 0 0 5px rgb(105, 89, 79);
+  border: 12px solid rgba(177, 78, 17, 0.3);
+  box-shadow: 0 0 5px rgb(196, 101, 42);
 }
 
 #meat {
@@ -115,10 +115,10 @@ export default {
 
 #dairy {
   border: 12px solid rgb(255, 255, 255);
-  box-shadow: 0 0 5px rgb(148, 148, 148);
+  box-shadow: 0 0 5px rgb(165, 164, 164);
 }
 
-#grains {
+#grains-and-dry {
   border: 12px solid rgba(255, 187, 0, 0.3);
   box-shadow: 0 0 5px rgb(255, 187, 0);
 }
@@ -129,8 +129,8 @@ export default {
 }
 
 #personal-care {
-  border: 12px solid rgba(113, 94, 153, 0.3);
-  box-shadow: 0 0 5px rgb(122, 95, 180);
+  border: 12px solid rgba(130, 105, 185, 0.3);
+  box-shadow: 0 0 5px rgb(140, 104, 218);
 }
 
 #household {

@@ -26,9 +26,13 @@ router.get('/:id', checkJwt, async (req,res) => {
         select id, name, list_id, user_id, bought, 
             (select distinct on (item) category.name from 
                 (select * from category order by global_category) 
-            as category where lower(category.item) = lower(i.name) and (user_id = 'admin' or user_id = '$1'))
+            as category where lower(category.item) = lower(i.name) and (user_id = 'admin' or user_id = $1))
         as category, created_on from item i where list_id = $2 and user_id = $1`, [req.user.sub.split('|')[1], req.params.id]
         )
+        console.log('tere')
+
+        console.log(res.rows)
+
         return ['SUCCESS', res.rows];
       } finally {
         client.release()
@@ -48,7 +52,7 @@ router.post('/', checkJwt, async (req,res) => {
       returning id, name, list_id, user_id, 
           (select distinct on (item) category.name from 
               (select * from category order by global_category) 
-          as category where lower(category.item) = lower(i.name) and (user_id = 'admin' or user_id = '$3')) 
+          as category where lower(category.item) = lower(i.name) and (user_id = 'admin' or user_id = $3)) 
       as category, bought, created_on`,
       [req.body.name, req.body.list_id, req.user.sub.split('|')[1], req.body.localTimeStamp]);
       return ['SUCCESS', res.rows[0]];
@@ -71,7 +75,7 @@ router.put('/', checkJwt, async (req,res) => {
       returning id, name, list_id, user_id, 
       (select distinct on (item) category.name from 
               (select * from category order by global_category) 
-          as category where lower(category.item) = lower(i.name) and (user_id = 'admin' or user_id = '$4')) 
+          as category where lower(category.item) = lower(i.name) and (user_id = 'admin' or user_id = $4)) 
       as category, bought, created_on`, [req.body.name, req.body.bought, req.body.id, req.user.sub.split('|')[1]]);
       return ['SUCCESS', res.rows[0]];
 

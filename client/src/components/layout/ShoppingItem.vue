@@ -10,7 +10,7 @@
           @click.self="toggleCategoryMenu"
           id="category-indicator"
           :class="{
-            'none': !item.category,
+            'none': item.category === 'none' || !item.category,
             'fruit': item.category === 'fruit',
             'vegetable': item.category === 'vegetable',
             'drink': item.category === 'drink',
@@ -151,27 +151,58 @@ export default {
 }
 
 .none {
-  background-color: transparent;
-  border: 10px solid transparent;
-  box-shadow: 0 0 5px rgb(128, 128, 128);
+  border: 12px solid rgb(235, 235, 235);
+  box-shadow: 0 0 5px rgb(185, 183, 183);
 }
 
 .fruit {
-  background-color: transparent;
-  border: 10px solid rgba(255, 115, 0, 0.3);
+  border: 12px solid rgba(255, 115, 0, 0.3);
   box-shadow: 0 0 5px rgb(255, 115, 0);
 }
 
 .vegetable {
-  background-color: transparent;
-  border: 10px solid rgba(90, 209, 54, 0.3);
+  border: 12px solid rgba(90, 209, 54, 0.3);
   box-shadow: 0 0 5px rgb(90, 209, 54);
 }
 
 .drink {
-  background-color: transparent;
-  border: 10px solid rgba(207, 209, 54, 0.3);
+  border: 12px solid rgba(207, 209, 54, 0.3);
   box-shadow: 0 0 5px rgb(207, 209, 54);
+}
+
+.bread-and-bakery {
+  border: 12px solid rgba(177, 78, 17, 0.3);
+  box-shadow: 0 0 5px rgb(196, 101, 42);
+}
+
+.meat {
+  border: 12px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgb(255, 0, 0);
+}
+
+.dairy {
+  border: 12px solid rgb(255, 255, 255);
+  box-shadow: 0 0 5px rgb(165, 164, 164);
+}
+
+.grains-and-dry {
+  border: 12px solid rgba(255, 187, 0, 0.3);
+  box-shadow: 0 0 5px rgb(255, 187, 0);
+}
+
+.drink {
+  border: 12px solid rgba(207, 209, 54, 0.3);
+  box-shadow: 0 0 5px rgb(207, 209, 54);
+}
+
+.personal-care {
+  border: 12px solid rgba(130, 105, 185, 0.3);
+  box-shadow: 0 0 5px rgb(140, 104, 218);
+}
+
+.household {
+  border: 12px solid rgba(71, 202, 180, 0.3);
+  box-shadow: 0 0 5px rgb(95, 180, 166);
 }
 
 #delete-icon {
