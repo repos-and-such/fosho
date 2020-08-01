@@ -219,7 +219,7 @@ export default {
   align-items: center;
   margin: 0px 2px 0px 3px;
   margin-bottom: 7px;
-  border-radius: 20px;
+  border-radius: 24px;
   text-align: left;
 }
 
