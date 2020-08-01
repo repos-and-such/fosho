@@ -15,7 +15,6 @@ const router = new Router({
       path: "/",
       name: "main",
       component: Main,
-      beforeEnter: authGuard
     },
     {
       path: "/profile",
