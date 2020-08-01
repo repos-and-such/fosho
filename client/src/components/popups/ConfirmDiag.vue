@@ -70,7 +70,7 @@ export default {
   position: absolute;
   left: 0px;
   background-color: black;
-  opacity: 0.7;
+  opacity: 0.4;
   width: 100vw;
   height: 100vh;
   justify-content: center;

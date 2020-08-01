@@ -7,7 +7,7 @@
         </span>
         <span 
           v-if="!menuIsOpen" 
-          @click.self="toggleCategoryMenu"
+          @click="toggleCategoryMenu"
           id="category-indicator"
           :class="{
             'none': item.category === 'none' || !item.category,
@@ -27,7 +27,7 @@
       </div>
     </transition>
     <category-select 
-      v-if="thisCategoryMenuIsOpen"
+      v-if="categoryMenuIsOpen"
       :item="item"
     />
   </div>
@@ -35,7 +35,7 @@
 
 <script>
 import ItemService from '../../api-service/ItemService'
-import CategorySelect from '../common/CategorySelect';
+import CategorySelect from '../popups/CategorySelect';
 
 export default {
   name: "ShoppingItem",
@@ -47,8 +47,6 @@ export default {
   },
   methods: {
     toggleBought() {
-      console.log(this.item)
-
       if (!this.menuIsOpen) {
         let updatedItem = Object.assign({}, this.item);
         updatedItem.bought = !updatedItem.bought;
@@ -58,10 +56,12 @@ export default {
       }
     },
     toggleCategoryMenu() {
-      if (this.thisCategoryMenuIsOpen) {
+      if (this.categoryMenuIsOpen) {
         this.$store.commit('setOpenCategoryMenuId', null);
       } else {
-        this.$store.commit('setOpenCategoryMenuId', this.key);
+        setTimeout(() => {
+          this.$store.commit('setOpenCategoryMenuId', this.key);          
+        }, 0);
       }
     },
     editItem() {
@@ -116,7 +116,7 @@ export default {
     editedItem() {
       return this.$store.state.editedItem;
     },
-    thisCategoryMenuIsOpen() {
+    categoryMenuIsOpen() {
       return this.key === this.$store.state.openCategoryMenuId;
     }
   },

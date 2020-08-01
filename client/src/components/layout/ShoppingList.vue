@@ -1,16 +1,12 @@
 <template>
   <div id="shopping-list">
     <shopping-list-header :key="key" />
-      <transition name="slide">
         <div v-if="menuIsOpen">
            <list-menu :key="key"/>
         </div>
-      </transition>
-      <transition name="slide">
         <div v-if="isOpen">
            <shopping-list-body :key="key" v-if="true"/>
         </div>
-      </transition>
     </div>
 </template>
 

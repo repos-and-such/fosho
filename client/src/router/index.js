@@ -1,8 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Main from "../views/Main.vue";
-import Profile from "../views/Profile.vue";
-import Feedback from "../views/Feedback.vue";
+import Help from "../views/Help.vue";
+import Settings from "../views/Settings.vue";
+import LeaveFeedback from "../views/LeaveFeedback.vue";
+import About from "../views/About.vue";
 import { authGuard } from "../auth";
 
 Vue.use(Router);
@@ -18,15 +20,24 @@ const router = new Router({
       beforeEnter: authGuard
     },
     {
-      path: "/profile",
-      name: "profile",
-      component: Profile,
-      beforeEnter: authGuard
+      path: "/help",
+      name: "Help",
+      component: Help
     },
     {
-      path: "/feedback",
-      name: "feedback",
-      component: Feedback,
+      path: "/settings",
+      name: "Settings",
+      component: Settings
+    },
+    {
+      path: "/leave-Feedback",
+      name: "Leave Feedback",
+      component: LeaveFeedback
+    },
+    {
+      path: "/about",
+      name: "About",
+      component: About
     }
   ]
 });

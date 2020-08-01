@@ -1,19 +1,10 @@
 <template>
-  <div id="profile-page">
-    <div class="profile-page-bar" id="profile-page-header">Profile and Settings</div>
+  <div id="about-page">
+    <div class="profile-page-bar" id="profile-page-header">About this App</div>
     <div id="profile-page-body">
-      <div id="profile-page-item">Logged in as {{ $auth.user.email }}</div>
-      <div id="separator-line"/>
-      <div id="profile-page-item">How to use</div>
-      <div id="separator-line"/>
-      <div id="profile-page-item">Settings</div>
-      <div id="separator-line"/>
       <div id="profilte-page-item">
         <div>
-          About this app
-        </div>
-        <div>
-          <div class="sub-heading">Why I made it</div>
+          <div class="sub-heading">Why I made this app</div>
           <div class="sub-text">Personal use, learning and showcasing what I have learned so far</div>
 
           <div class="sub-heading">Tools and Services used</div>
@@ -39,31 +30,6 @@
             Add multiple items</div>
         </div>
       </div>
-      <div id="admin-section" v-if="development">
-        <div id="separator-line"/>
-        <div id="profile-page-item">
-          admin
-        </div>
-        <div style="margin: 20px 0px">
-          Enter item-category bindings
-        </div>
-        <div style="margin: 20px 0px">
-          Category
-        </div>
-        <textarea class="text-field" id="category" v-model="category" />
-        <div>
-          Item(s)
-        </div>
-        <textarea 
-          class="text-field" 
-          v-model="items"
-          @keyup.enter="submit" 
-          />
-        <button 
-          class="custom-button"
-          id="submit-button"
-          @click="submit">Submit</button>
-      </div>
     </div>
     <div class="profile-page-bar" id="profile-page-footer">
       <span @click.prevent="back" class="profile-button">
@@ -76,29 +42,13 @@
   </div>
 </template>
 <script>
-import ItemService from '../api-service/ItemService';
 
 export default {
-  name: "Profile",
-  data() {
-    return {
-      category: '',
-      items: '',
-    }
-  },
+  name: "About",
   methods: {
     back() {
       this.$router.push('/');
     },
-    async submit() {
-      ItemService.bindCategory(
-        { category: this.category, items: this.items }, 
-        await this.$auth.getTokenSilently()
-        )
-          .then(() => {
-            this.items = '';
-          });        
-    }
   },
   computed: {
     development() {
@@ -144,15 +94,7 @@ export default {
   font-weight: normal;
 }
 
-.text-field {
-  width: 90%; 
-  height: 60vh; 
-  border-radius: 16px; 
-  word-wrap: break-word;
-  overflow: auto;
-}
-
-#profile-page {
+#about-page {
   display:flex; 
   flex-direction: column;
   height: var(--vh, 1vh);
@@ -190,4 +132,6 @@ export default {
   height: 40px;
   margin: 18px 0px;
 }
+
+
 </style>

@@ -12,25 +12,21 @@
         sho      
       </span>
     </span>
-    <div style="display: flex; color: white">
-      <i class="material-icons" id="header-icon" @click="openHelp">help_outline</i>
-      <router-link to="/profile" style="display:flex; background-color: w; text-decoration: none;">
-      <i class="material-icons" id="header-icon">person</i>
-    </router-link>
-
-    </div>
+    <i class="material-icons" id="header-icon" @click="toggleMainMenu">more_vert</i>
+    <main-menu v-if="mainMenuIsOpen" style="position:absolute;" />
   </div>
 </template>
 
 <script>
 import ListService from '../../api-service/ListService';
+import MainMenu from '../popups/MainMenu';
 
 export default {
+  components: { MainMenu },
   name: "AppHeader",
   methods: {
     async insertList() {
       this.loadingAnimationOn();
-
       ListService.insertList(await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
@@ -62,22 +58,28 @@ export default {
       }, 600);
     },
     loadingAnimationOn() {
-      console.log('on')
       document.documentElement.style.setProperty('--plusSpin', "spin");
     },
     loadingAnimationOff() {
-      console.log('off')
-
       document.documentElement.style.setProperty('--plusSpin', "none");
     },
-
-    openHelp() {
+    toggleMainMenu() {
+      if (this.mainMenuIsOpen) {
+        this.$store.commit('toggleMainMenu', false);
+      } else {
+        setTimeout(() => {
+          this.$store.commit('toggleMainMenu', true);          
+        }, 0);
+      }
     }
   },
   computed: {
     listsLength() {
       return this.$store.state.lists.length;
-    }    
+    },
+    mainMenuIsOpen() {
+      return this.$store.state.mainMenuIsOpen;
+    }
   },
   watch: {
     listsLength() {
@@ -106,7 +108,6 @@ export default {
   font-size: 40px;
   cursor:pointer;
 }
-
 
 #profile-icon {
   border-radius: 50px;

@@ -21,6 +21,7 @@ export default new Vuex.Store({
     editedItem: {},
     triggerConfirmUpdate: 0,
     openCategoryMenuId: null,
+    mainMenuIsOpen: false,
   },
   mutations: {
     setLoading(state, isLoading) {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
       state.diagOpen = params.open;
       state.diagMessage = params.message;
       state.diagType = params.type;
+    },
+    toggleMainMenu(state, isOpen) {
+      state.mainMenuIsOpen = isOpen;
     },
 
     // Items mutations
@@ -55,7 +59,6 @@ export default new Vuex.Store({
     },
     setOpenCategoryMenuId(state, id) {
       state.openCategoryMenuId = id;
-
     },
 
     // Lists mutations

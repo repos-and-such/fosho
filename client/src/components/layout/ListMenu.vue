@@ -20,12 +20,14 @@ export default {
   methods: {
     openDeleteConfirmation() {
       if (this.items.length !== 0) {
-        this.$store.commit('toggleConfirmDiag',
+        setTimeout(() => {
+          this.$store.commit('toggleConfirmDiag',
           {
             open: true, 
             message: 'This list contains items, are you sure you want to delete it?', 
             type: 'deleteListConfirm'
           });
+        }, 0);
       } else {
         this.deleteList();
       }

@@ -2,20 +2,28 @@
   <div style="display: flex; justify-content: center">
     <custom-alert />
     <confirm-diag />
-    <div class="app">
+    <div class="app" @click="closePopups">
       <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import CustomAlert from "./components/common/CustomAlert"
-import ConfirmDiag from "./components/common/ConfirmDiag"
+import CustomAlert from "./components/popups/CustomAlert"
+import ConfirmDiag from "./components/popups/ConfirmDiag"
 
 export default {
   components: {
     CustomAlert,
     ConfirmDiag
+  },
+  methods: {
+    closePopups() {
+      console.log('close popups')
+      this.$store.commit('toggleMainMenu', false);
+      this.$store.commit('toggleConfirmDiag', false);
+			this.$store.commit('setOpenCategoryMenuId', null);
+    }
   },
   computed: {
     msg() {
@@ -26,7 +34,6 @@ export default {
     msg() {
       if (this.msg) {
         this.$store.commit('showGenericError');
-        console.log(this.msg);
       }
     }
   }

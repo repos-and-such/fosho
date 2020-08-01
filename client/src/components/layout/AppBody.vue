@@ -1,11 +1,9 @@
 <template>
   <div id="app-body">
-    <transition-group name="slide">
       <shopping-list 
         v-for="list in lists"
         :key="list.id" 
       />
-    </transition-group>
     <div class="welcome-message" v-if="this.lists.length === 0">
       <div id="welcome-message-item" style="flex-wrap: wrap; display: flex; justify-content: center; padding: 70px 0px 50px 0px;">
         Welcome to <span style="color: rgb(209, 80, 80); padding: 0px 7px;">fo sho</span> shopping list app!
