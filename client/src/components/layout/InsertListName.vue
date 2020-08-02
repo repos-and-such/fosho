@@ -1,7 +1,8 @@
 
 // confida
 <template>
-  <div id="insert-list-name" style="display: flex; align-items: center; margin-right:20px; font-size: 14px">
+  <div id="insert-list-name" style="display: flex;
+display: -webkit -flex; align-items: center; margin-right:20px; font-size: 14px">
     <input 
       maxlength="20"
       ref="nameField"
@@ -11,13 +12,21 @@
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertListName"
+      @blur="closeNameField"
     />
-    <i class="material-icons" @click="insertListName" style="padding: 0px 10px;">check</i>
-    <i class="material-icons" @click="closeNameField">clear</i>
-
-    <span>
-    </span>
-
+    <button 
+      class="material-icons" 
+      @click="insertListName" 
+      style="padding: 0px 10px;"
+    >
+      check
+    </button>
+    <button 
+      class="material-icons" 
+      @click="closeNameField"
+    >
+      clear
+    </button>
   </div>
 </template>
 

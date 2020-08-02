@@ -9,8 +9,14 @@
       @keydown.enter.prevent
       @keydown.enter="insertItem"
     />
-    <button>
-      <div id="plus-button" style="color: rgb(105, 185, 98);" @click="insertItem">+</div>
+    <button
+      type="insert"
+      class="material-icons" 
+      id="check-button" 
+      style="color: rgb(105, 185, 98); font-size: 38px;" 
+      @click="insertItem"
+    >
+      check
     </button>
   </div>
 </template>
@@ -72,6 +78,7 @@ export default {
 
 #insert-item {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   margin: 0px 0px 7px 0px;
 }

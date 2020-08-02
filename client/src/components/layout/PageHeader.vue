@@ -28,6 +28,7 @@ export default {
 <style scoped>
 .header-button {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   cursor: pointer;
   padding: 20px;
@@ -40,6 +41,7 @@ export default {
 
 #page-header {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);

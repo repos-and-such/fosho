@@ -1,9 +1,15 @@
 <template>
   <div id="page-footer">
-    <span v-if="submitButton" @click.prevent="back" class="footer-button" id="submit-button">
+    <button 
+      type="submit"
+      v-if="submitButton" 
+      @click.prevent="back" 
+      class="footer-button" 
+      id="submit-button"
+    >
       <i class="material-icons" id="check-icon">done</i>
-      <span>Submit</span>
-    </span>
+      <span style="font-size: 28px; font-family: Montserrat;">Submit</span>
+    </button>
     <span class="desktop-hide">
       <span @click.prevent="back" class="footer-button" id="back-button">
         <i class="material-icons">arrow_back_ios</i>
@@ -30,6 +36,7 @@ export default {
 <style scoped>
 .footer-button {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   cursor: pointer;
   padding: 20px;
@@ -41,6 +48,7 @@ export default {
 
 #page-footer {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);

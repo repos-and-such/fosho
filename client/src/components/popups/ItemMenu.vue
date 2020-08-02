@@ -82,6 +82,7 @@ export default {
   position: -webkit-sticky;
   position: sticky;
   display: flex;
+display: -webkit -flex;
   flex-direction: column;
   justify-content: flex-start;
   background: #ffffff;
@@ -92,6 +93,7 @@ export default {
 
 .selection-element {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   cursor: pointer;
   transition: 250ms ease-in-out, transform 150ms ease;

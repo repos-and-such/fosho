@@ -8,7 +8,8 @@
       :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }"
       @click="setOpen"
     >
-      <span id="createdDate-time" style="margin-right: 12px; display: flex; white-space: nowrap; padding: 6px 0px;">
+      <span id="createdDate-time" style="margin-right: 12px; display: flex;
+display: -webkit -flex; white-space: nowrap; padding: 6px 0px;">
         {{ dateTimeDisplay }}
       </span>
       <span id="list-name" @dblclick="openNameField">
@@ -28,7 +29,7 @@
     <button 
       type="delete"
       name="delete-list"
-      v-else-if="isOpen && $store.getters.getListsLength > 1">
+      v-else-if="isOpen && (itemCount > 0 || $store.getters.getListsLength > 1)">
       <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
     </button>
   </div>
@@ -141,14 +142,12 @@ export default {
 }
 
 .list-closed {
-  margin-top: -1px; 
   background-color: white;
-  border-top: 1px solid rgb(230, 227, 227);
-  border-bottom: 1px solid rgb(230, 227, 227);
 }
 
 .list-open-text {
-  display: flex; 
+  display: flex;
+display: -webkit -flex; 
   align-items: center; 
   flex-wrap: wrap; 
   width: 82%;
@@ -156,7 +155,8 @@ export default {
 }
 
 .list-closed-text {
-  display: flex; 
+  display: flex;
+display: -webkit -flex; 
   align-items: center; 
   flex-wrap: wrap; 
   color: rgb(151, 151, 151);
@@ -174,6 +174,7 @@ export default {
 
 #list-header {
   display: flex;
+display: -webkit -flex;
   justify-content: space-between;
   align-items: center;
   padding: 7px 12px 7px 10px;
@@ -192,6 +193,7 @@ export default {
 
 #item-count {
   display: flex;
+display: -webkit -flex;
   justify-content: center;
   align-items: center;
   width: 22px;

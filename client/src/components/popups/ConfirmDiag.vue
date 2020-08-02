@@ -4,7 +4,8 @@
     <div class="background" v-if="$store.state.diagOpen" @click.self="closeDiag"></div>
     <div class="confirm-diag" v-if="$store.state.diagOpen">
       <div class="header-text">This list contains items. Are you sure you want to delete it?</div>
-      <div style="display: flex; margin-top: 10px;">
+      <div style="display: flex;
+display: -webkit -flex; margin-top: 10px;">
         <div class="custom-button" @click="deleteList">Delete</div>
         <div class="custom-button" id="cancel-button" @click="closeDiag">Cancel</div>
       </div>
@@ -80,6 +81,7 @@ export default {
 .confirm-diag {
   position: relative;
   display: flex;
+display: -webkit -flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -106,6 +108,7 @@ export default {
 
 .input-row {
   display: flex;
+display: -webkit -flex;
   justify-content: center;
   align-items: center;
 }

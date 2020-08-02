@@ -5,7 +5,9 @@
       name="insert-list"
       id="plus-button"
       @click="insertList"
-    >+</button>
+    >
+      +
+    </button>
     <span id="logo">
       <span id="f-bomb">
         f
@@ -20,8 +22,12 @@
     <button
       type="menu"
       name="insert-list"
-      id="menu-button">
-      <i class="material-icons" style="font-size: 38px" @click="toggleMainMenu">more_vert</i>
+      id="menu-button"
+      class="material-icons"
+      style="font-size: 38px"         
+      @click="toggleMainMenu"
+      >
+        more_vert
     </button>
     <main-menu v-if="mainMenuIsOpen" style="position:absolute;" />
   </div>
@@ -83,6 +89,7 @@ export default {
 <style scoped>
 #app-header {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
@@ -103,6 +110,7 @@ export default {
 
 #logo {
   display: flex;
+display: -webkit -flex;
 }
 
 #f-bomb {

@@ -1,5 +1,6 @@
 <template>
-  <div style="display: flex; justify-content: center">
+  <div style="display: flex;
+display: -webkit -flex; justify-content: center">
     <custom-alert />
     <confirm-diag />
     <div class="app" @click="closePopups">

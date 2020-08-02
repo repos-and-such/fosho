@@ -1,5 +1,6 @@
 .app {
   display: flex;
+display: -webkit -flex;
   position: absolute;
   justify-content: center;
   width: 100vw;
@@ -46,6 +47,7 @@ button {
   -webkit-appearance: none;
   -moz-appearance: none;
   display: flex;
+display: -webkit -flex;
   justify-content: center;
   align-items: center;
   color: white;
@@ -102,6 +104,7 @@ button:active {
 
 .custom-button {
   display: flex;
+display: -webkit -flex;
   justify-content: center;
   align-items: center;
   margin: 5px;
@@ -120,6 +123,7 @@ button:active {
 
 .material-icons {
   display: flex;
+display: -webkit -flex;
   justify-content: center;
   align-items: center;
   font-size: 28px;
@@ -162,6 +166,7 @@ select::-ms-expand {
   border:0!important;
   position: relative;
   display: flex;
+display: -webkit -flex;
   padding: 10px;
   margin: 10px;
   line-height: 3;

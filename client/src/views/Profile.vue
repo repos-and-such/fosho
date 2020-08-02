@@ -122,6 +122,7 @@ export default {
 <style scoped>
 .profile-page-bar {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   background-color: rgb(187, 57, 42);
   color: white;
@@ -132,6 +133,7 @@ export default {
 
 .profile-button {
   display: flex;
+display: -webkit -flex;
   align-items: center;
   cursor: pointer;
   padding: 20px;
