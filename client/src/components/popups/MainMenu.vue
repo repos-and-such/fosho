@@ -1,12 +1,12 @@
 <template>
   <div class="selection-box">
-    <div class="selection-element" @click="setRoute('help')">
-      <span class="material-icons" style="color: rgb(171, 82, 98);">help_outline</span>
-      <span class="text">Help</span>
-    </div>
     <div class="selection-element" @click="setRoute('settings')" >
       <span class="material-icons" style="color: rgb(83, 173, 169);">settings</span>
       <span class="text">Settings</span>
+    </div>
+    <div class="selection-element" @click="setRoute('help')">
+      <span class="material-icons" style="color: rgb(171, 82, 98);">help_outline</span>
+      <span class="text">Help</span>
     </div>
     <div class="selection-element" @click="setRoute('about')">
       <span class="material-icons" style="color: rgb(91, 181, 207);">info</span>

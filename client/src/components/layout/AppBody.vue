@@ -82,6 +82,9 @@ export default {
 }
 
 #app-body {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
   width: 100vw;
   max-width: 1000px;
   overflow-y: auto;
