@@ -22,17 +22,20 @@ const router = new Router({
     {
       path: "/help",
       name: "Help",
-      component: Help
+      component: Help,
     },
     {
       path: "/settings",
       name: "Settings",
-      component: Settings
+      component: Settings,
+      beforeEnter: authGuard
+
     },
     {
       path: "/leave-Feedback",
       name: "Leave Feedback",
-      component: LeaveFeedback
+      component: LeaveFeedback,
+      beforeEnter: authGuard
     },
     {
       path: "/about",

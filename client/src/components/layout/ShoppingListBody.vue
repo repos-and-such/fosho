@@ -43,19 +43,21 @@ export default {
      }
   },
   async created() {
-    this.$store.commit('setLoading', true);
-    ItemService.getItems(this.list.id, await this.$auth.getTokenSilently())
-      .then(res => {
-        if (res[0] === 'SUCCESS') {
-          var itemsFromApi = res[1];
-          this.$store.commit('setItems', itemsFromApi);
-          this.$store.commit('setLoading', false);
-        } else {
-          this.$store.commit('showGenericError');
-        }
-      }).catch(() => {
-        this.$store.commit('setLoading', false);
-      });
+    if (this.items.length === 0 || this.items[0].list_id !== this.list.id) {
+      this.$store.commit('setLoading', true);
+        ItemService.getItems(this.list.id, await this.$auth.getTokenSilently())
+          .then(res => {
+            if (res[0] === 'SUCCESS') {
+              var itemsFromApi = res[1];
+              this.$store.commit('setItems', itemsFromApi);
+              this.$store.commit('setLoading', false);
+            } else {
+              this.$store.commit('showGenericError');
+            }
+          }).catch(() => {
+            this.$store.commit('setLoading', false);
+          });
+    } else {console.log('on sama')}
   },
   computed: {
     list() {

@@ -1,6 +1,6 @@
 <template>
   <div id="about-page">
-    <div class="profile-page-bar" id="profile-page-header">About this App</div>
+    <page-header :title="'About this app'"/>
     <div id="profile-page-body">
       <div id="profilte-page-item">
         <div>
@@ -31,20 +31,19 @@
         </div>
       </div>
     </div>
-    <div class="profile-page-bar" id="profile-page-footer">
-      <span @click.prevent="back" class="profile-button">
-        <i class="material-icons">arrow_back_ios</i>
-        <span class="mobile-hide">Back</span>
-      </span>
-    </div>
+    <page-footer :submitButton="true"/>
     <div>
     </div>
   </div>
 </template>
+
 <script>
+import PageFooter from '../components/layout/PageFooter';
+import PageHeader from '../components/layout/PageHeader';
 
 export default {
   name: "About",
+  components: { PageFooter, PageHeader },
   methods: {
     back() {
       this.$router.push('/');
@@ -53,7 +52,12 @@ export default {
   computed: {
     development() {
       return process.env.NODE_ENV === 'development';
-    }
+    },
+        items() {
+      let unsortedItems = this.$store.state.items;
+      return unsortedItems.sort(this.compareItems);
+    },
+
   },
   mounted() {
     let inner = window.innerHeight;
@@ -66,23 +70,6 @@ export default {
 };
 </script>
 <style scoped>
-.profile-page-bar {
-  display: flex;
-  align-items: center;
-  background-color: rgb(187, 57, 42);
-  color: white;
-  width: 100%;
-  font-size: 28px;
-  height: 7%;
-}
-
-.profile-button {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 20px;
-}
-
 .sub-heading {
   margin: 20px 0px 10px 0px;
   font-weight: normal;
@@ -102,19 +89,11 @@ export default {
   max-width: 1000px;
 }
 
-#profile-page-header {
-  justify-content: center;
-}
-
 #profile-page-body {
   padding: 0px 20px;
   color: rgb(80, 80, 80);
   overflow: auto;
   height: 86%;
-}
-
-#profile-page-footer {
-  justify-content: space-between;
 }
 
 #profile-page-item {
@@ -126,12 +105,4 @@ export default {
   height: 34px;
   border-radius: 30px;
 }
-
-#submit-button {
-  width: 132px;
-  height: 40px;
-  margin: 18px 0px;
-}
-
-
 </style>

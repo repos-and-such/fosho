@@ -13,7 +13,7 @@
         {{ dateTimeDisplay }}
       </span>
 
-      <span id="list-name" style="display: flex; align-items: center; white-space: nowrap;">
+      <span id="list-name" style="display: flex; align-items: center; white-space: nowrap; font-weight: bold;">
         <span v-if="list.name && editedListId !== key">
           {{ list.name }}
         </span>

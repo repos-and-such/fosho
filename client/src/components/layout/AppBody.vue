@@ -98,18 +98,20 @@ export default {
     }
   },
   async created() {
-    ListService.getLists(await this.$auth.getTokenSilently())
-      .then(res => {
-        if (res[0] === 'SUCCESS') {
-          var listsFromApi = res[1];
-          this.$store.commit('setLists', listsFromApi);
+    if (this.lists[0] === -1) {
+      ListService.getLists(await this.$auth.getTokenSilently())
+        .then(res => {
+          if (res[0] === 'SUCCESS') {
+            var listsFromApi = res[1];
+            this.$store.commit('setLists', listsFromApi);
+            this.$store.commit('setLoading', false);
+          } else {
+            this.$store.commit('showGenericError');
+          }
+        }).catch(() => {
           this.$store.commit('setLoading', false);
-        } else {
-          this.$store.commit('showGenericError');
-        }
-      }).catch(() => {
-        this.$store.commit('setLoading', false);
-      });
+        });
+    }
   },
   computed: {
     lists() {

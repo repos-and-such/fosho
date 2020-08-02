@@ -5,6 +5,7 @@ export const authGuard = (to, from, next) => {
 
   const fn = () => {
     if (authService.isAuthenticated) {
+      console.log('isauth')
       return next();
     }
 

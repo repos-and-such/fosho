@@ -7,16 +7,19 @@
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
 }
+
 .lds-dual-ring {
   display: inline-block;
   width: 20px;
   height: 20px;
 }
+
 .lds-dual-ring-large {
   display: inline-block;
   width: 40px;
   height: 40px;
 }
+
 .lds-dual-ring:after, .lds-dual-ring-large:after {
   content: " ";
   display: block;
@@ -28,6 +31,7 @@
   border-color: white transparent white transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+
 .lds-dual-ring-large:after {
   display: inline-block;
   width: 20px;
@@ -68,26 +72,32 @@
   -webkit-transition-timing-function: linear;
   transition-timing-function: linear;
 }
+
 .slide-leave-active {
   -webkit-transition-duration: 2s;
   transition-duration: 2s;
   -webkit-transition-timing-function: linear;
   transition-timing-function: linear;
 }
+
 .slide-enter-to, .slide-leave {
   overflow: hidden;
   max-height: 1000px;
 }
+
 .slide-enter, .slide-leave-to {
   overflow: hidden;
   max-height: 0;
 }
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s;
 }
+
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
+
 .custom-button {
   display: flex;
   justify-content: center;
@@ -101,9 +111,11 @@
   font-size: 24px;
   border-radius: 30px;
 }
+
 .custom-button:active {
   box-shadow: none;
 }
+
 .material-icons {
   display: flex;
   justify-content: center;
@@ -126,6 +138,7 @@
   font-family: "Montserrat";
   overflow-y: hidden;
 }
+
 .text-field:focus {
   outline: none !important;
   border: 1px solid  rgba(213, 102, 68, 0.637);
@@ -140,6 +153,7 @@
 select::-ms-expand {
   display: none;
 }
+
 .select {
   cursor:pointer;
   outline:0;
@@ -164,6 +178,7 @@ select::-ms-expand {
     transform: rotate(360deg);
   }
 }
+
 #separator-line {
   border-bottom: 1px solid rgba(209, 80, 80, 0.418);
   margin: 6px 6px;
@@ -174,9 +189,16 @@ select::-ms-expand {
   width: 100vw;
   overflow: hidden;
 }
+}
+
 @media screen and (max-width: 600px){
 .mobile-hide {
   display: none;
 }
+}
+
+@media screen and (min-width: 600px){
+.desktop-hide {
+  display: none;
 }
 }

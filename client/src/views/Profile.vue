@@ -103,7 +103,11 @@ export default {
   computed: {
     development() {
       return process.env.NODE_ENV === 'development';
-    }
+    },
+    items() {
+      let unsortedItems = this.$store.state.items;
+      return unsortedItems.sort(this.compareItems);
+    },
   },
   mounted() {
     let inner = window.innerHeight;
