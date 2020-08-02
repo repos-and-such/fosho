@@ -9,7 +9,7 @@
       @click="setOpen"
     >
       <span id="createdDate-time" style="margin-right: 12px; display: flex;
-display: -webkit -flex; white-space: nowrap; padding: 6px 0px;">
+ display: -webkit-flex; white-space: nowrap; padding: 6px 0px;">
         {{ dateTimeDisplay }}
       </span>
       <span id="list-name" @dblclick="openNameField">
@@ -147,7 +147,7 @@ export default {
 
 .list-open-text {
   display: flex;
-display: -webkit -flex; 
+ display: -webkit-flex; 
   align-items: center; 
   flex-wrap: wrap; 
   width: 82%;
@@ -156,7 +156,7 @@ display: -webkit -flex;
 
 .list-closed-text {
   display: flex;
-display: -webkit -flex; 
+ display: -webkit-flex; 
   align-items: center; 
   flex-wrap: wrap; 
   color: rgb(151, 151, 151);
@@ -174,7 +174,7 @@ display: -webkit -flex;
 
 #list-header {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   justify-content: space-between;
   align-items: center;
   padding: 7px 12px 7px 10px;
@@ -193,7 +193,7 @@ display: -webkit -flex;
 
 #item-count {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   justify-content: center;
   align-items: center;
   width: 22px;

@@ -78,7 +78,7 @@ export default {
 
 #insert-item {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   align-items: center;
   margin: 0px 0px 7px 0px;
 }

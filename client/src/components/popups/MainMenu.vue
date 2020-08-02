@@ -44,7 +44,7 @@ export default {
   right: calc(((100% - 1000px)/2) + 1px);
   top: 61px;
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   flex-direction: column;
   justify-content: flex-start;
   background: #ffffff;
@@ -55,7 +55,7 @@ display: -webkit -flex;
 
 .selection-element {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   justify-self: start;
   align-items: center;
   padding: 10px 6px;

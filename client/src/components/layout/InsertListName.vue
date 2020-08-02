@@ -2,7 +2,7 @@
 // confida
 <template>
   <div id="insert-list-name" style="display: flex;
-display: -webkit -flex; align-items: center; margin-right:20px; font-size: 14px">
+ display: -webkit-flex; align-items: center; margin-right:20px; font-size: 14px">
     <input 
       maxlength="20"
       ref="nameField"

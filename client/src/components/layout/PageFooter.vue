@@ -36,7 +36,7 @@ export default {
 <style scoped>
 .footer-button {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   align-items: center;
   cursor: pointer;
   padding: 20px;
@@ -48,7 +48,7 @@ display: -webkit -flex;
 
 #page-footer {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);

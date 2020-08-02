@@ -89,7 +89,7 @@ export default {
 <style scoped>
 #app-header {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
@@ -110,7 +110,7 @@ display: -webkit -flex;
 
 #logo {
   display: flex;
-display: -webkit -flex;
+ display: -webkit-flex;
 }
 
 #f-bomb {
