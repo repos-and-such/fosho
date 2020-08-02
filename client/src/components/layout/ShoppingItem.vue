@@ -6,7 +6,6 @@
           {{ item.name }}
         </span>
         <span 
-          v-if="!menuIsOpen" 
           @click="toggleCategoryMenu"
           id="category-indicator"
           :class="{
@@ -22,11 +21,9 @@
             'household': item.category === 'household',
             }"
         />
-        <i v-if="menuIsOpen" class="material-icons" id="delete-icon" @click="deleteItem">delete_forever</i>
-        <i v-if="menuIsOpen" class="material-icons" id="edit-icon" @click="editItem">create</i>
       </div>
     </transition>
-    <category-select 
+    <item-menu
       v-if="categoryMenuIsOpen"
       :item="item"
     />
@@ -35,7 +32,7 @@
 
 <script>
 import ItemService from '../../api-service/ItemService'
-import CategorySelect from '../popups/CategorySelect';
+import ItemMenu from '../popups/ItemMenu';
 
 export default {
   name: "ShoppingItem",
@@ -43,7 +40,7 @@ export default {
     listKey: Number
   },
   components: {
-    CategorySelect
+    ItemMenu
   },
   methods: {
     toggleBought() {
@@ -64,15 +61,15 @@ export default {
         }, 0);
       }
     },
-    editItem() {
-      this.$store.commit('toggleConfirmDiag',
-        {
-          open: true, 
-          message: 'Edit item', 
-          type: 'editItem'
-        });
-        this.$store.commit('setEditedItem', this.item);
-    },
+    // editItem() {
+    //   this.$store.commit('toggleConfirmDiag',
+    //     {
+    //       open: true, 
+    //       message: 'Edit item', 
+    //       type: 'editItem'
+    //     });
+    //     this.$store.commit('setEditedItem', this.item);
+    // },
     async executeUpdate(item) {
       ItemService.updateItem(item, this.item, await this.$auth.getTokenSilently())
           .then(res => {
@@ -86,16 +83,6 @@ export default {
             }
           });        
     },
-    async deleteItem() {
-      ItemService.deleteItem(this.key, await this.$auth.getTokenSilently())
-        .then(res => {
-          if (res.data[0] === 'SUCCESS') {
-            this.$store.commit('deleteItem', this.item);
-          } else {
-            this.$store.commit('showGenericError');
-          }
-        });
-    }
   },
   computed: {
     item() {
@@ -203,10 +190,6 @@ export default {
 .household {
   border: 12px solid rgba(71, 202, 180, 0.3);
   box-shadow: 0 0 5px rgb(95, 180, 166);
-}
-
-#delete-icon {
-  color:rgb(185, 2, 2);
 }
 
 #edit-icon {

@@ -3,15 +3,9 @@
   <div class="dialog">
     <div class="background" v-if="$store.state.diagOpen" @click.self="closeDiag"></div>
     <div class="confirm-diag" v-if="$store.state.diagOpen">
-      <div class="header-text">{{ $store.state.diagMessage }}</div>
-      <div id="input-area" v-if="diagType === 'editItem'">
-        <div class="input-row" id="name-input">
-          <input class="text-field" v-model="currentName" spellcheck="false" />
-        </div>
-      </div>
+      <div class="header-text">This list contains items. Are you sure you want to delete it?</div>
       <div style="display: flex; margin-top: 10px;">
-        <div class="custom-button" v-if="diagType === 'deleteListConfirm'" @click="triggerListDelete">Delete</div>
-        <div class="custom-button" v-if="diagType === 'editItem'" @click="triggerConfirmUpdate" style="padding: 5px 12px;">Confirm</div>
+        <div class="custom-button" @click="deleteList">Delete</div>
         <div class="custom-button" id="cancel-button" @click="closeDiag">Cancel</div>
       </div>
     </div>
@@ -19,6 +13,8 @@
 </template>
 
 <script>
+import ListService from '../../api-service/ListService';
+
 export default {
   name: "ConfirmDiag",
   data() {
@@ -30,23 +26,27 @@ export default {
     closeDiag() {
       this.$store.commit('toggleConfirmDiag', false);
     },
-    triggerListDelete() {
-      this.$store.commit('triggerListDelete');
-      this.closeDiag();
-    },
-    triggerConfirmUpdate() {
-      let prepareEditedItem = Object.assign({}, this.$store.state.editedItem);
-      prepareEditedItem.name = this.currentName;
-      this.$store.commit('setEditedItem', prepareEditedItem);
-      this.$store.commit('triggerConfirmUpdate');
-    }
+    async deleteList() {  
+      ListService.deleteList(this.openListId, await this.$auth.getTokenSilently())
+        .then(res => {
+          if (res.data[0] === 'SUCCESS') {
+            this.$store.commit('deleteOpenList');
+            this.$store.commit('setItems', []);
+            this.$store.commit('showAlert', { timeout: 1400, message: 'List Deleted', type: 'success' });
+            this.closeDiag();
+          } else {
+            this.$store.commit('showGenericError');
+            this.closeDiag();
+          }
+        });
+    }    
   },
   computed: {
-    diagType() {
-      return this.$store.state.diagType;
-    },
     diagOpen() {
       return this.$store.state.diagOpen;
+    },
+    openListId() {
+      return this.$store.getters.getOpenListId;
     }
   },
   watch: {

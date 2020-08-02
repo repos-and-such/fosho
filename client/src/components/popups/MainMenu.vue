@@ -8,10 +8,6 @@
       <span class="material-icons" style="color: rgb(83, 173, 169);">settings</span>
       <span class="text">Settings</span>
     </div>
-    <div class="selection-element" @click="setRoute('leave-feedback')">
-      <span class="material-icons" style="color: rgb(207, 166, 78);">insert_comment</span>
-      <span class="text">Feedback</span>
-    </div>
     <div class="selection-element" @click="setRoute('about')">
       <span class="material-icons" style="color: rgb(91, 181, 207);">info</span>
       <span class="text">About</span>

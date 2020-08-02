@@ -44,6 +44,7 @@ export default {
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
   color: white;
+  height: 56px;
   width: 100%;
   font-size: 28px;
   height: 7%;

@@ -21,7 +21,8 @@ router.get(`/`, checkJwt, async (req,res) => {
     await (async () => {
       const client = await pool.connect()
       try {
-        const res = await client.query("select * from list where user_id = $1", [req.user.sub.split('|')[1]])
+        const res = await client.query("select id, name, user_id, created_on, (select count(*) from item where list_id = l.id) as item_count " + 
+          "from list l where user_id = $1", [req.user.sub.split('|')[1]])
         return ['SUCCESS', res.rows];
       } finally {
         client.release()

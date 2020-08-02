@@ -9,7 +9,9 @@
       @keydown.enter.prevent
       @keydown.enter="insertItem"
     />
-    <div class="plus-button" style="color: rgb(105, 185, 98);">+</div>
+    <button>
+      <div id="plus-button" style="color: rgb(105, 185, 98);" @click="insertItem">+</div>
+    </button>
   </div>
 </template>
 
@@ -26,7 +28,7 @@ export default {
   methods: {
     async insertItem() {
       if (this.entry) {
-        let entryInput = this.entry;
+        let entryInput = this.entry.trim();
         this.entry = '';
         ItemService.insertItem(
           { name: entryInput, list_id: this.key }, 
@@ -49,6 +51,14 @@ export default {
     },
     editedListId() {
       return this.$store.state.editedListId;
+    },
+    storeEntry() {
+      return this.$store.state.storeEntry;
+    }
+  },
+  watch: {
+    storeEntry() {
+      this.entry = this.storeEntry;
     }
   }
 }

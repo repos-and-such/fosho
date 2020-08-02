@@ -7,8 +7,7 @@
       ref="nameField"
       class="text-field"
       spellcheck="false" 
-      :placeholder="'insert list name'" 
-      id="text-area" 
+      :placeholder="'enter list name'" 
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertListName"
@@ -80,7 +79,7 @@ export default {
 
 <style scoped>
 .text-field {
-  margin-left: 0px;
+  margin: 0px;
   width: 80%;
   height: 26px;
   font-size: 18px;

@@ -1,5 +1,19 @@
 <template>
   <div class="selection-box">
+    <div class="selection-element" @click="editItemName">
+      <i class="material-icons" id="edit-icon">create</i>
+      <span class="text">
+        Edit Item
+      </span>
+    </div> 
+    <span class="separator-line"></span>
+    <div class="selection-element" @click="deleteItem">
+      <i class="material-icons" id="delete-icon">delete_forever</i>
+      <span class="text">
+        Delete Item
+      </span>
+    </div> 
+    <span class="separator-line"></span>
     <div 
       v-for="category in categories" 
       :key="category"
@@ -18,7 +32,7 @@
 import ItemService from '../../api-service/ItemService';
 
 export default {
-  name: "CategorySelect",
+  name: "ItemMenu",
   props: { item: Object },
   data() {
     return {
@@ -43,6 +57,21 @@ export default {
             }
 
           });   
+    },
+    async deleteItem() {
+      console.log(this.item)
+      ItemService.deleteItem(this.item.id, await this.$auth.getTokenSilently())
+        .then(res => {
+          if (res.data[0] === 'SUCCESS') {
+            this.$store.commit('deleteItem', this.item);
+          } else {
+            this.$store.commit('showGenericError');
+          }
+        });
+    },
+    editItemName() {
+      this.$store.commit('setStoreEntry', this.item.name)
+      this.deleteItem();
     }
   }
 }
@@ -137,4 +166,9 @@ export default {
   box-shadow: 0 0 5px rgb(95, 180, 166);
 }
 
+#edit-icon {
+  color: rgb(77, 77, 124);
+  margin-left: 8px;
+  font-size: 26px;
+}
 </style>

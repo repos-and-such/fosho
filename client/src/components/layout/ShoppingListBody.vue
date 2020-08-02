@@ -1,7 +1,7 @@
 <template>
-  <div v-if="!itemsLoading" id="shopping-list-body">
+  <div v-if="!isLoading" id="shopping-list-body">
     <insert-item :key="key"/>
-    <div id="shopping-list-items">
+    <div id="shopping-list-items" v-if="items[0] !== -1">
       <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
     </div>
     <div v-if="itemsBought.length !== 0" id="separator-line"/>
@@ -43,7 +43,7 @@ export default {
      }
   },
   async created() {
-    if (this.items.length === 0 || this.items[0].list_id !== this.list.id) {
+    if ((this.items.length === 0 || this.items[0].list_id !== this.list.id) && this.list.item_count !== 0) {
       this.$store.commit('setLoading', true);
         ItemService.getItems(this.list.id, await this.$auth.getTokenSilently())
           .then(res => {
@@ -57,7 +57,7 @@ export default {
           }).catch(() => {
             this.$store.commit('setLoading', false);
           });
-    } else {console.log('on sama')}
+    }
   },
   computed: {
     list() {
@@ -76,8 +76,8 @@ export default {
     key() {
       return this.$vnode.key;
     },
-    itemsLoading() {
-      return this.$store.state.itemsLoading;
+    isLoading() {
+      return this.$store.state.isLoading;
     }
   }
 }

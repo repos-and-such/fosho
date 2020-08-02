@@ -1,7 +1,12 @@
 <template>
   <div id="app-header">
-    <div class="plus-button" @click="insertList">+</div>
-    <span style="display:flex;">
+    <button
+      type="insert"
+      name="insert-list"
+      id="plus-button"
+      @click="insertList"
+    >+</button>
+    <span id="logo">
       <span id="f-bomb">
         f
       </span>
@@ -12,7 +17,12 @@
         sho      
       </span>
     </span>
-    <i class="material-icons" id="header-icon" @click="toggleMainMenu">more_vert</i>
+    <button
+      type="menu"
+      name="insert-list"
+      id="menu-button">
+      <i class="material-icons" style="font-size: 38px" @click="toggleMainMenu">more_vert</i>
+    </button>
     <main-menu v-if="mainMenuIsOpen" style="position:absolute;" />
   </div>
 </template>
@@ -26,42 +36,21 @@ export default {
   name: "AppHeader",
   methods: {
     async insertList() {
-      this.loadingAnimationOn();
       ListService.insertList(await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
+            this.$store.commit('setItems', [])
             let insertedList = Object.assign({}, res.data[1]);
+            insertedList.item_count = 0;
             this.$store.commit('insertList', insertedList);
             this.$store.commit('setEditedListId', insertedList.id);
             this.$store.commit('openTopList');
-            this.loadingAnimationOff();
-            this.insertAnimation();
           } else {
             this.$store.commit('showGenericError');
-            this.loadingAnimationOff();
           }
         }).catch(() => {
           this.$store.commit('showGenericError');
-          this.loadingAnimationOff();
         });
-    },
-    insertAnimation() {
-      document.documentElement.style.setProperty('--plusSize', "1.4");  
-      setTimeout(() => {
-        document.documentElement.style.setProperty('--plusSize', "1");
-      }, 250);
-      setTimeout(() => {
-        document.documentElement.style.setProperty('--plusSize', "1.2");  
-      }, 400);
-      setTimeout(() => {
-        document.documentElement.style.setProperty('--plusSize', "1");
-      }, 600);
-    },
-    loadingAnimationOn() {
-      document.documentElement.style.setProperty('--plusSpin', "spin");
-    },
-    loadingAnimationOff() {
-      document.documentElement.style.setProperty('--plusSpin', "none");
     },
     toggleMainMenu() {
       if (this.mainMenuIsOpen) {
@@ -102,18 +91,18 @@ export default {
   border-bottom: 3px solid white;
 }
 
-#header-icon {
-  padding: 10px;
-  color: white;
-  font-size: 40px;
-  cursor:pointer;
+#plus-button {
+  margin-left: 10px;
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
 }
 
-#profile-icon {
-  border-radius: 50px;
-  font-size: 40px;
-  margin-right: 5px;
-  box-shadow: 0 0 8px rgb(77, 23, 23);
+@keyframes spin { 100% { transform:rotate(360deg); } }
+
+#logo {
+  display: flex;
 }
 
 #f-bomb {
@@ -121,7 +110,7 @@ export default {
   font-size: 48px;
   margin-top: 5px;
   margin-right: 4px;
-  margin-bottom: -20px;
+  margin-bottom: -30px;
 }
 
 #o {

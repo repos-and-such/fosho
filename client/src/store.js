@@ -9,28 +9,23 @@ export default new Vuex.Store({
     items: [-1],
     openListIndex: 0,
     openMenuId: null,
-    itemsLoading: false,
+    isLoading: false,
     editedListId: null,
     alertOpen: false,
     alertMessage: '',
     alertType: '',
     diagOpen: false,
-    diagType: '',
-    diagMessage: 'tests',
-    triggerListDelete: 0,
     editedItem: {},
-    triggerConfirmUpdate: 0,
     openCategoryMenuId: null,
     mainMenuIsOpen: false,
+    storeEntry: ''
   },
   mutations: {
     setLoading(state, isLoading) {
-      state.itemsLoading = isLoading;
+      state.isLoading = isLoading;
     },
-    toggleConfirmDiag(state, params) {
-      state.diagOpen = params.open;
-      state.diagMessage = params.message;
-      state.diagType = params.type;
+    toggleConfirmDiag(state, isOpen) {
+      state.diagOpen = isOpen;
     },
     toggleMainMenu(state, isOpen) {
       state.mainMenuIsOpen = isOpen;
@@ -38,6 +33,7 @@ export default new Vuex.Store({
 
     // Items mutations
     setItems(state, itemsFromApi) {
+      console.log(itemsFromApi)
       state.items = itemsFromApi;
     },
     insertItem(state, insertedItem) {
@@ -50,15 +46,15 @@ export default new Vuex.Store({
     deleteItem(state, item) {
       let index = state.items.indexOf(item);
       state.items.splice(index, 1);
-    },    
-    triggerConfirmUpdate(state) {
-      state.triggerConfirmUpdate++;
     },
     setEditedItem(state, item) {
       state.editedItem = Object.assign({}, item);
     },
     setOpenCategoryMenuId(state, id) {
       state.openCategoryMenuId = id;
+    },
+    setStoreEntry(state, storeEntry) {
+      state.storeEntry = storeEntry;
     },
 
     // Lists mutations
@@ -72,22 +68,16 @@ export default new Vuex.Store({
       let index = state.lists.indexOf(originalList);
       state.lists.splice(index, 1, updatedList);
     },
-    deleteList(state, list) {
-      let index = state.lists.indexOf(list);
+    deleteOpenList(state) {
+      let index = state.openListIndex;
       state.lists.splice(index, 1);
     },
-    triggerListDelete(state) {
-      state.triggerListDelete++;
-    }, 
-    setOpen(state, id) {
+    setOpenList(state, id) {
       let index = state.lists.indexOf(state.lists.find(list => list.id === id))
       state.openListIndex = index;
     },
     openTopList(state) {
       state.openListIndex = 0;
-    },
-    setOpenListMenu(state, id) {
-      state.openMenuId = id;
     },
     setEditedListId(state, id) {
       state.editedListId = id;
@@ -121,6 +111,12 @@ export default new Vuex.Store({
     },
     getOpenMenuStatusById: state => id => {
       return state.openMenuId === id;
+    },
+    getOpenListId: state => {
+      return state.lists[state.openListIndex].id;
+    },
+    getListsLength: state => {
+      return state.lists.length;
     }
   }
 });

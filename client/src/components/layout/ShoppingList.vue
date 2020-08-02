@@ -13,13 +13,11 @@
 <script>
 import ShoppingListHeader from './ShoppingListHeader'
 import ShoppingListBody from './ShoppingListBody'
-import ListMenu from './ListMenu'
 
 export default {
   components: {
     ShoppingListHeader,
     ShoppingListBody,
-    ListMenu
   },
   name: "ShoppingList",
   data() {
@@ -43,11 +41,6 @@ export default {
       return this.$vnode.key;
     }
   },
-  watch: {
-    isOpen() {
-      this.$store.commit('setOpenListMenu', null);
-    }
-  }
 }
 </script>
 
