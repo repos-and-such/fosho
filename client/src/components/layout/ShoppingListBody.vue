@@ -4,7 +4,7 @@
     <div id="shopping-list-items" v-if="items[0] !== -1">
       <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
     </div>
-    <div v-if="itemsBought.length !== 0" id="separator-line"/>
+    <div v-if="itemsBought.length !== 0" class="separator-line"/>
     <div v-if="itemsBought.length !== 0" style="font-size: 15px; margin: 0px 0px 10px 5px; color: rgba(209, 80, 80, 0.718);">BOUGHT:</div>
     <div id="shopping-list-items">
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />

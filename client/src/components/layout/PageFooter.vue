@@ -10,6 +10,7 @@
       <i class="material-icons" id="check-icon">done</i>
       <span style="font-size: 28px; font-family: Montserrat;">Submit</span>
     </button>
+    <span v-else></span>
     <span class="desktop-hide">
       <span @click.prevent="back" class="footer-button" id="back-button">
         <i class="material-icons">arrow_back_ios</i>
@@ -37,6 +38,7 @@ export default {
 .footer-button {
   cursor: pointer;
   padding: 20px;
+  margin-right: 40px;
 }
 
 .material-icons {
@@ -64,6 +66,5 @@ export default {
   justify-content: center;
 }
 }
-
 
 </style>
