@@ -179,6 +179,7 @@ export default {
 #list-header {
   display: flex;
   display: -webkit-flex;
+  margin: auto;
   justify-content: space-between;
   align-items: center;
   min-height: 32px;

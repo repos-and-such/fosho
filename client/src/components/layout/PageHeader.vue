@@ -41,8 +41,9 @@ export default {
 
 #page-header {
   display: flex;
-display: -webkit -flex;
+  display: -webkit -flex;
   align-items: center;
+  margin:auto;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
   color: white;
