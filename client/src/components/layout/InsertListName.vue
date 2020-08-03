@@ -1,8 +1,7 @@
 
 // confida
 <template>
-  <div id="insert-list-name" style="display: flex;
- display: -webkit-flex; align-items: center; margin-right:20px; font-size: 14px">
+  <div id="insert-list-name">
     <input 
       maxlength="20"
       ref="nameField"
@@ -90,6 +89,8 @@ export default {
 .text-field {
   margin: 0px;
   width: 80%;
+  min-width: 150px;
+  max-width: 180px;
   height: 26px;
   font-size: 18px;
 }

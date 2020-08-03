@@ -67,7 +67,6 @@ export default {
 }
 
 .welcome-message {
-  display:flex; 
   flex-direction: column; 
   font-size: 20px;
   padding: 0px 20px;
@@ -82,9 +81,6 @@ export default {
 }
 
 #app-body {
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: column;
   width: 100vw;
   max-width: 1000px;
   overflow-y: auto;

@@ -1,6 +1,5 @@
 <template>
-  <div style="display: flex;
- display: -webkit-flex; flex-direction: column; height: 100vh;">
+  <div style="display: flex; display: -webkit-flex; flex-direction: column; height: 100vh;">
     <app-header />
     <app-body />
   </div>

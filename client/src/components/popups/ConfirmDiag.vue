@@ -80,10 +80,6 @@ export default {
 
 .confirm-diag {
   position: relative;
-  display: flex;
- display: -webkit-flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
   top: 20vh;
@@ -104,13 +100,6 @@ export default {
 
 .custom-button {
   width: 100px;
-}
-
-.input-row {
-  display: flex;
- display: -webkit-flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .text-field {

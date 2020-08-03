@@ -5,10 +5,8 @@ export const authGuard = (to, from, next) => {
 
   const fn = () => {
     if (authService.isAuthenticated) {
-      console.log('isauth')
       return next();
     }
-
     authService.loginWithRedirect({ appState: { targetUrl: to.fullPath } });
   };
 

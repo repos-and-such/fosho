@@ -15,7 +15,7 @@
             'drink': item.category === 'drink',
             'bread-and-bakery': item.category === 'bread-and-bakery',
             'dairy': item.category === 'dairy',
-            'grains': item.category === 'grains',
+            'grains-and-dry': item.category === 'grains-and-dry',
             'meat': item.category === 'meat',
             'personal-care': item.category === 'personal-care',
             'household': item.category === 'household',
@@ -121,10 +121,6 @@ export default {
 </script>
 
 <style scoped>
-.material-icons {
-  margin-left: 16px;
-}
-
 .item-active {
   border: 1px solid rgb(255, 145, 0);
   box-shadow: 0 0 4px rgb(255, 145, 0);
@@ -199,7 +195,7 @@ export default {
 
 #shopping-item {
   display: flex;
- display: -webkit-flex;
+  display: -webkit-flex;
   align-items: center;
   margin: 0px 2px 0px 3px;
   margin-bottom: 7px;

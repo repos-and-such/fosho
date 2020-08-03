@@ -43,10 +43,6 @@ export default {
   position: absolute;
   right: calc(((100% - 1000px)/2) + 1px);
   top: 61px;
-  display: flex;
- display: -webkit-flex;
-  flex-direction: column;
-  justify-content: flex-start;
   background: #ffffff;
   box-shadow: 0 0 5px #00000070;
   padding: 10px;
@@ -54,10 +50,6 @@ export default {
 }
 
 .selection-element {
-  display: flex;
- display: -webkit-flex;
-  justify-self: start;
-  align-items: center;
   padding: 10px 6px;
   cursor: pointer;
   transition: 250ms ease-in-out, transform 150ms ease;

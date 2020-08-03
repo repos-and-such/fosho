@@ -46,9 +46,6 @@ export default {
 
 <style scoped>
 #shopping-list {
-  display: flex;
-  flex-direction: column;
-  display: -webkit-flex;
   -webkit-tap-highlight-color: transparent;
 }
 </style>

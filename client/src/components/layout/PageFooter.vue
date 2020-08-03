@@ -35,9 +35,6 @@ export default {
 </script>
 <style scoped>
 .footer-button {
-  display: flex;
- display: -webkit-flex;
-  align-items: center;
   cursor: pointer;
   padding: 20px;
 }
@@ -48,7 +45,7 @@ export default {
 
 #page-footer {
   display: flex;
- display: -webkit-flex;
+  display: -webkit-flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);

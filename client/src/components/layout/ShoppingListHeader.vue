@@ -8,8 +8,7 @@
       :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }"
       @click="setOpen"
     >
-      <span id="createdDate-time" style="margin-right: 12px; display: flex;
- display: -webkit-flex; white-space: nowrap; padding: 6px 0px;">
+      <span id="createdDate-time" style="margin-right: 12px; white-space: nowrap; padding: 6px 0px;">
         {{ dateTimeDisplay }}
       </span>
       <span id="list-name" @dblclick="openNameField">
@@ -87,27 +86,31 @@ export default {
       return this.$store.getters.getListById(this.key);
     },
     dateTimeDisplay() {
-      console.log(this.list.created_on)
       if (this.list.created_on) {
-         let time = this.list.created_on.split('T')[1];
-      time = time.split('.')[0]
+        let time = this.list.created_on.split('T')[1];
+        time = time.split('.')[0]
 
-      let currentDate = moment().format('YYYY-MM-DD');
-      let yesterDaysDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
-      let createdDate = moment(this.list.created_on).format('YYYY-MM-DD');
+        let currentDate = moment().format('YYYY-MM-DD');
+        console.log(this.list.name);
+        console.log('current datetime: ' + moment().format());
+        console.log('current date: ' + currentDate);
+        let yesterDaysDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
+        console.log('yesterdays date: ' + yesterDaysDate);
 
-      if (createdDate === currentDate) {
-        return 'Today ' + time;
-      } else if (createdDate === yesterDaysDate) {
-        return 'Yesterday ' + time;
-      } else if (this.list.created_on) {
-        let createdDateArray = createdDate.split('-');
-        let createdDateReversed = createdDateArray.reverse().join('-');  
-        return createdDateReversed + ' ' + time;
-      } else {
-        return '';
-      }
+        let createdDate = moment(this.list.created_on).format('YYYY-MM-DD');
+        console.log('created date: ' + createdDate);
 
+        if (createdDate === currentDate) {
+          return 'Today ' + time;
+        } else if (createdDate === yesterDaysDate) {
+          return 'Yesterday ' + time;
+        } else if (this.list.created_on) {
+          let createdDateArray = createdDate.split('-');
+          let createdDateReversed = createdDateArray.reverse().join('-');  
+          return createdDateReversed + ' ' + time;
+        } else {
+          return '';
+        }
       } else return null; 
     },
     key() {
@@ -174,9 +177,10 @@ export default {
 
 #list-header {
   display: flex;
- display: -webkit-flex;
+  display: -webkit-flex;
   justify-content: space-between;
   align-items: center;
+  min-height: 32px;
   padding: 7px 12px 7px 10px;
   cursor: pointer;
 }
@@ -193,7 +197,7 @@ export default {
 
 #item-count {
   display: flex;
- display: -webkit-flex;
+  display: -webkit-flex;
   justify-content: center;
   align-items: center;
   width: 22px;
