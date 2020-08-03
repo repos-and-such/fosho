@@ -98,6 +98,7 @@ export default {
         console.log('yesterdays date: ' + yesterDaysDate);
 
         let createdDate = moment(this.list.created_on).format('YYYY-MM-DD');
+        console.log('db_created_on: ' + this.list.created_on);
         console.log('created date: ' + createdDate);
 
         if (createdDate === currentDate) {
