@@ -2,11 +2,11 @@
   <div id="about-page">
     <page-header :title="'About this app'"/>
     <div id="profile-page-body">
-      <div id="profilte-page-item">
+      <div id="profile-page-item">
         <div>
           <div class="sub-heading">Why I made this app</div>
           <div class="sub-text">Personal use, learning and showcasing what I have learned so far</div>
-
+          <span class="separator-line"></span>
           <div class="sub-heading">Tools and Services used</div>
           <div class="sub-text">Node, Express, Postgres, Vue, Auth0, Heroku</div>
           <div class="sub-heading">Disclaimer and Apologies</div>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </div>
-    <page-footer :submitButton="true"/>
+    <page-footer :submitButton="false"/>
     <div>
     </div>
   </div>

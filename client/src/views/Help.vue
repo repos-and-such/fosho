@@ -1,6 +1,7 @@
 <template>
-  <div class="welcome-message" v-if="this.lists.length === 0">
-    <div id="welcome-message-item" style="flex-wrap: wrap; display: flex; justify-content: center; padding: 70px 0px 50px 0px;">
+  <div id="getting-started">
+    <page-header :title="'Getting Started'"/>
+    <div id="profile-page-body">
       Welcome to <span style="color: rgb(209, 80, 80); padding: 0px 7px;">fo sho</span> shopping list app!
     </div>
     <div id="welcome-message-item">Getting Started</div>
@@ -58,5 +59,78 @@
           Add multiple items</div>
       </div>
     </div>
+    <page-footer :submitButton="false"/>
+    <div>
+    </div>
   </div>
 </template>
+
+<script>
+import PageFooter from '../components/layout/PageFooter';
+import PageHeader from '../components/layout/PageHeader';
+
+export default {
+  name: "Getting Started",
+  components: { PageFooter, PageHeader },
+  methods: {
+    back() {
+      this.$router.push('/');
+    },
+  },
+  computed: {
+    development() {
+      return process.env.NODE_ENV === 'development';
+    },
+        items() {
+      let unsortedItems = this.$store.state.items;
+      return unsortedItems.sort(this.compareItems);
+    },
+
+  },
+  mounted() {
+    let inner = window.innerHeight;
+    document.documentElement.style.setProperty('--vh', `${inner}px`);
+    window.addEventListener('resize', () => {
+      inner = window.innerHeight
+      document.documentElement.style.setProperty('--vh', `${inner}px`);
+    });
+  },
+};
+</script>
+<style scoped>
+.sub-heading {
+  margin: 20px 0px 10px 0px;
+  font-weight: normal;
+}
+
+.sub-text {
+  margin: 0px 0px 20px 10px;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+#getting-started {
+  display:flex; 
+  flex-direction: column;
+  height: var(--vh, 1vh);
+  font-size: 20px;
+  max-width: 1000px;
+}
+
+#profile-page-body {
+  padding: 0px 20px;
+  color: rgb(80, 80, 80);
+  overflow: auto;
+  height: 86%;
+}
+
+#profile-page-item {
+  padding: 10px 0px;
+  font-weight: bold;
+}
+
+#category {
+  height: 34px;
+  border-radius: 30px;
+}
+</style>
