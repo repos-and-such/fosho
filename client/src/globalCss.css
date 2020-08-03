@@ -46,6 +46,7 @@ button {
   transition: 250ms ease-in-out, transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
+  display: flex;
   display: -webkit-flex;
   justify-content: center;
   align-items: center;
@@ -102,6 +103,10 @@ button:active {
 }
 
 .custom-button {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
   margin: 5px;
   padding: 5px;
   height: 32px;
@@ -114,6 +119,14 @@ button:active {
 
 .custom-button:active {
   box-shadow: none;
+}
+
+.material-icons {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
 }
 
 .text-field {
@@ -152,6 +165,8 @@ select::-ms-expand {
   outline:0;
   border:0!important;
   position: relative;
+  display: flex;
+  display: -webkit-flex;
   padding: 10px;
   margin: 10px;
   line-height: 3;
@@ -160,6 +175,11 @@ select::-ms-expand {
   border-radius: 5px;
   color: white;
   font-size: 20px;
+}
+
+#delete-icon {
+  margin-left: 6px;
+  color: rgb(187, 57, 42)
 }
 
 @keyframes lds-dual-ring {

@@ -151,7 +151,7 @@ export default {
 
 .list-open-text {
   display: flex;
- display: -webkit-flex; 
+  display: -webkit-flex; 
   align-items: center; 
   flex-wrap: wrap; 
   width: 82%;
@@ -160,7 +160,7 @@ export default {
 
 .list-closed-text {
   display: flex;
- display: -webkit-flex; 
+  display: -webkit-flex; 
   align-items: center; 
   flex-wrap: wrap; 
   color: rgb(151, 151, 151);

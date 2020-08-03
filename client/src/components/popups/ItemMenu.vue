@@ -81,6 +81,10 @@ export default {
 .selection-box {
   position: -webkit-sticky;
   position: sticky;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  justify-content: flex-start;
   background: #ffffff;
   box-shadow: 0 0 5px #00000070;
   padding: 10px;
@@ -88,6 +92,9 @@ export default {
 }
 
 .selection-element {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
   cursor: pointer;
   transition: 250ms ease-in-out, transform 150ms ease;
 }
@@ -165,11 +172,5 @@ export default {
   color: rgb(77, 77, 124);
   margin-left: 8px;
   font-size: 26px;
-}
-
-
-#delete-icon {
-  margin-left: 6px;
-  color: rgb(187, 57, 42)
 }
 </style>

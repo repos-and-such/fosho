@@ -86,7 +86,7 @@ export default {
 <style scoped>
 .empty-body-message {
   display: flex;
- display: -webkit-flex;
+  display: -webkit-flex;
   align-items: center; 
   justify-content: center;
   padding: 50px 20px; 
@@ -96,7 +96,7 @@ export default {
 #shopping-list-items {
   padding-right: 20px;
   display: flex;
- display: -webkit-flex;
+  display: -webkit-flex;
   flex-wrap: wrap;
 }
 
