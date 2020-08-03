@@ -101,6 +101,8 @@ export default {
 }
 
 #insert-list-name {
+  display: flex;
+  display: -webkit-flex;
   margin: 0px;
 }
 </style>
