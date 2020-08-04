@@ -9,15 +9,16 @@
     <div id="shopping-list-items">
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </div>
-    <div v-if="items.length === 0" class="empty-body-message">
-      Enter shopping item and push the green plus-button or hit enter</div>
+    <div v-if="items.length === 0" class="empty-body-message"> 
+        <span class="desktop-hide">Enter shopping item and tap the green checkmark or Go on the keypad</span>
+        <span class="mobile-hide">Enter shopping item and click the green checkmark or hit Enter</span> 
+    </div>
   </div>
 </template>
 
 <script>
 import ShoppingItem from './ShoppingItem';
-import ItemService from '../../api-service/ItemService';
-import InsertItem from './/InsertItem';
+import InsertItem from './InsertItem';
 
 export default {
   components: {
@@ -26,7 +27,7 @@ export default {
   },
   name: "ShoppingListBody",
   methods: {
-     compareItems(a, b) {
+    compareItems(a, b) {
       let catA = a.category ? ('0' + a.category) : '1';
       let catB = b.category ? ('0' + b.category) : '1';
 
@@ -40,24 +41,7 @@ export default {
         comparison = 1;
       }
       return comparison;
-     }
-  },
-  async created() {
-    if ((this.items.length === 0 || this.items[0].list_id !== this.list.id) && this.list.item_count !== 0) {
-      this.$store.commit('setLoading', true);
-        ItemService.getItems(this.list.id, await this.$auth.getTokenSilently())
-          .then(res => {
-            if (res[0] === 'SUCCESS') {
-              var itemsFromApi = res[1];
-              this.$store.commit('setItems', itemsFromApi);
-              this.$store.commit('setLoading', false);
-            } else {
-              this.$store.commit('showGenericError');
-            }
-          }).catch(() => {
-            this.$store.commit('setLoading', false);
-          });
-    }
+    },
   },
   computed: {
     list() {
@@ -78,6 +62,9 @@ export default {
     },
     isLoading() {
       return this.$store.state.isLoading;
+    },
+    listLoaded() {
+      return this.$store.getters.getLoadedStatus(this.list);
     }
   }
 }
@@ -87,7 +74,8 @@ export default {
 .empty-body-message {
   display: flex;
   display: -webkit-flex;
-  align-items: center; 
+  align-items: center;
+  text-align: center;
   justify-content: center;
   padding: 50px 20px; 
   color: gray;
@@ -101,6 +89,7 @@ export default {
 }
 
 #shopping-list-body {
-  padding: 10px 8px 22px 8px;
+  min-height: 200px;
+  padding: 10px 8px 16px 8px;
 }
 </style>

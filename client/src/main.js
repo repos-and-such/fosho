@@ -4,6 +4,7 @@ import router from "./router";
 import { domain, clientId, audience } from "../auth_config.json";
 import { Auth0Plugin } from "./auth";
 import store from './store';
+import { VueHammer } from 'vue2-hammer';
 
 Vue.use(Auth0Plugin, {
   domain,
@@ -18,6 +19,7 @@ Vue.use(Auth0Plugin, {
   }
 });
 Vue.use(router);
+Vue.use(VueHammer);
 
 Vue.config.productionTip = false;
 

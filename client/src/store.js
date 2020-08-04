@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     lists: [-1],
-    items: [-1],
+    loadedLists: [],
+    items: [],
     openListIndex: 0,
     openMenuId: null,
     isLoading: false,
@@ -33,7 +34,6 @@ export default new Vuex.Store({
 
     // Items mutations
     setItems(state, itemsFromApi) {
-      console.log(itemsFromApi)
       state.items = itemsFromApi;
     },
     insertItem(state, insertedItem) {
@@ -63,6 +63,9 @@ export default new Vuex.Store({
     },
     insertList(state, insertedList) {
       state.lists.push(insertedList);
+    },
+    addLoadedList(state, list) {
+      state.loadedLists.push(list);
     },
     updateList(state, { originalList, updatedList }) {
       let index = state.lists.indexOf(originalList);
@@ -103,6 +106,9 @@ export default new Vuex.Store({
     getListById: state => id => {
       return state.lists.find(list => list.id === id);
     },
+    getLoadedListById: state => id => {
+      return state.loadedLists.find(list => list.id === id);
+    },
     getItemById: state => id => {
       return state.items.find(item => item.id === id);
     },
@@ -117,6 +123,9 @@ export default new Vuex.Store({
     },
     getListsLength: state => {
       return state.lists.length;
+    },
+    getLoadedStatus: state => list => {
+      return state.loadedLists.includes(list);
     }
   }
 });

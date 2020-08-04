@@ -19,7 +19,6 @@ export default {
   },
   methods: {
     closePopups() {
-      console.log('close popups')
       this.$store.commit('toggleMainMenu', false);
       this.$store.commit('toggleConfirmDiag', false);
 			this.$store.commit('setOpenCategoryMenuId', null);

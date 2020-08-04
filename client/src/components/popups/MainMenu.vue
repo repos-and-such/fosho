@@ -1,8 +1,8 @@
 <template>
   <div class="selection-box">
-    <div class="selection-element" @click="setRoute('settings')" >
+    <div class="selection-element" @click="setRoute('tools')" >
       <span class="material-icons" style="color: rgb(83, 173, 169);">settings</span>
-      <span class="text">Settings</span>
+      <span class="text">Tools</span>
     </div>
     <div class="selection-element" @click="setRoute('help')">
       <span class="material-icons" style="color: rgb(171, 82, 98);">help_outline</span>
@@ -31,7 +31,6 @@ export default {
       this.$store.commit('toggleMainMenu', false);
     },
     logout() {
-      this.$router.push('/');
       this.$auth.logout();
     },
   }

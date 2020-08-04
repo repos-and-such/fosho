@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Main from "../views/Main.vue";
 import Help from "../views/Help.vue";
-import Settings from "../views/Settings.vue";
+import Tools from "../views/Tools.vue";
 import About from "../views/About.vue";
 import { authGuard } from "../auth";
 
@@ -24,16 +24,11 @@ const router = new Router({
       component: Help,
     },
     {
-      path: "/settings",
-      name: "Settings",
-      component: Settings,
+      path: "/tools",
+      name: "Tools",
+      component: Tools,
       beforeEnter: authGuard
 
-    },
-    {
-      path: "/about",
-      name: "About",
-      component: About
     },
     {
       path: "/about",

@@ -24,7 +24,7 @@
       name="insert-list"
       id="menu-button"
       class="material-icons"
-      style="font-size: 38px"         
+      style="font-size: 38px; margin-right: 4px;"         
       @click="toggleMainMenu"
       >
         more_vert
@@ -92,6 +92,8 @@ export default {
   display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
+  width: 100vw;
+  max-width: 1000px;
   background-color: rgb(187, 57, 42);
   padding: 0px 4px 0px 0px;
   -webkit-tap-highlight-color: transparent;

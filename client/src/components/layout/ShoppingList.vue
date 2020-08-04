@@ -1,12 +1,13 @@
 <template>
   <div id="shopping-list">
     <shopping-list-header :key="key" />
-        <div v-if="menuIsOpen">
-           <list-menu :key="key"/>
-        </div>
-        <div v-if="isOpen">
-           <shopping-list-body :key="key" v-if="true"/>
-        </div>
+    <div v-if="menuIsOpen">
+       <list-menu :key="key"/>
+    </div>
+    <div v-if="isOpen">
+       <shopping-list-body :key="key" v-if="true"/>
+    </div>
+    <div v-if="isOpen" class="separator-line"/>
     </div>
 </template>
 
@@ -20,11 +21,6 @@ export default {
     ShoppingListBody,
   },
   name: "ShoppingList",
-  data() {
-    return {
-      closingTime: false
-    }
-  },
   methods: {
   },
   computed: {

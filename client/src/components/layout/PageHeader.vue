@@ -1,7 +1,8 @@
 <template>
   <div id="page-header">
     <span class="mobile-hide" style="width: 155px;"></span>
-    <div>{{ title }}</div>
+    <span></span>
+    <div>{{ text }}</div>
     <span class="mobile-hide">
       <span @click.prevent="back" class="header-button" id="back-button">
         <i class="material-icons">keyboard_backspace</i>
@@ -15,7 +16,8 @@
 
 export default {
   props: {
-    title: String
+    text: String,
+    icon: String
   },
   name: "PageHeader",
   methods: {

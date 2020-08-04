@@ -59,7 +59,6 @@ export default {
           });   
     },
     async deleteItem() {
-      console.log(this.item)
       ItemService.deleteItem(this.item.id, await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data[0] === 'SUCCESS') {

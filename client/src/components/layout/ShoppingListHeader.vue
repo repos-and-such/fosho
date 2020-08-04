@@ -3,6 +3,7 @@
     v-if="list"
     :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
     id="list-header"
+    v-hammer:swipe.horizontal="swiped"
   >
     <div 
       :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }"
@@ -28,9 +29,12 @@
     <button 
       type="delete"
       name="delete-list"
-      v-else-if="isOpen && (itemCount > 0 || $store.getters.getListsLength > 1)">
+      v-else-if="isOpen && (itemCount > 0 || $store.getters.getListsLength > 1)"
+      class="mobile-hide"
+    >
       <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
     </button>
+    <div class="separator-line"/>
   </div>
 </template>
 
@@ -47,6 +51,9 @@ export default {
     }
   },
   methods: {
+    swiped() {
+      console.log('swiped')
+    },
     setOpen() {
       this.$store.commit('setOpenList', this.key);
     },
@@ -172,14 +179,9 @@ export default {
   border: 1px solid rgb(151, 151, 151);
 }
 
-.list-open-count {
-  border: 1px solid white;
-}
-
 #list-header {
   display: flex;
   display: -webkit-flex;
-  margin: auto;
   justify-content: space-between;
   align-items: center;
   min-height: 32px;
