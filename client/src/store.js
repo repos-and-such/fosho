@@ -9,7 +9,6 @@ export default new Vuex.Store({
     loadedLists: [],
     items: [],
     openListIndex: 0,
-    openMenuId: null,
     isLoading: false,
     editedListId: null,
     alertOpen: false,
@@ -114,9 +113,6 @@ export default new Vuex.Store({
     },
     getOpenStatusById: state => id => {
       return state.openListIndex === state.lists.indexOf(state.lists.find(list => list.id === id));
-    },
-    getOpenMenuStatusById: state => id => {
-      return state.openMenuId === id;
     },
     getOpenListId: state => {
       return state.lists[state.openListIndex].id;

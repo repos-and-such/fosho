@@ -5,6 +5,7 @@ import { domain, clientId, audience } from "../auth_config.json";
 import { Auth0Plugin } from "./auth";
 import store from './store';
 import { VueHammer } from 'vue2-hammer';
+import SlideUpDown from 'vue-slide-up-down';
 
 Vue.use(Auth0Plugin, {
   domain,
@@ -20,6 +21,7 @@ Vue.use(Auth0Plugin, {
 });
 Vue.use(router);
 Vue.use(VueHammer);
+Vue.component('slide-up-down', SlideUpDown);
 
 Vue.config.productionTip = false;
 

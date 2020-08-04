@@ -1,12 +1,12 @@
 <template>
   <div id="shopping-list">
     <shopping-list-header :key="key" />
-    <div v-if="menuIsOpen">
-       <list-menu :key="key"/>
-    </div>
+    <slide-up-down :active="isOpen">
     <div v-if="isOpen">
        <shopping-list-body :key="key" v-if="true"/>
     </div>
+    </slide-up-down>
+
     <div v-if="isOpen" class="separator-line"/>
     </div>
 </template>
@@ -29,9 +29,6 @@ export default {
     },
     isOpen() {
       return this.$store.getters.getOpenStatusById(this.key);
-    },
-    menuIsOpen() {
-      return this.$store.getters.getOpenMenuStatusById(this.key);
     },
     key() {
       return this.$vnode.key;

@@ -58,8 +58,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-}
 button:focus {
   outline: none !important;
 }
@@ -70,29 +68,6 @@ button:active {
   box-shadow: none;
 }
 
-.slide-enter-active {
-  -webkit-transition-duration: 2s;
-  transition-duration: 2s;
-  -webkit-transition-timing-function: linear;
-  transition-timing-function: linear;
-}
-
-.slide-leave-active {
-  -webkit-transition-duration: 2s;
-  transition-duration: 2s;
-  -webkit-transition-timing-function: linear;
-  transition-timing-function: linear;
-}
-
-.slide-enter-to, .slide-leave {
-  overflow: hidden;
-  max-height: 1000px;
-}
-
-.slide-enter, .slide-leave-to {
-  overflow: hidden;
-  max-height: 0;
-}
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.3s;

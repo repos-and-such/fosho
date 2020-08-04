@@ -91,9 +91,6 @@ export default {
     key() {
       return this.$vnode.key;
     },
-    menuIsOpen() {
-      return this.$store.getters.getOpenMenuStatusById(this.listKey);
-    },
     list() {
       return this.$store.getters.getListById(this.listKey);
     },
