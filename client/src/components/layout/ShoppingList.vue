@@ -38,5 +38,6 @@ export default {
 <style scoped>
 #shopping-list {
   -webkit-tap-highlight-color: transparent;
+  background-color: white;
 }
 </style>

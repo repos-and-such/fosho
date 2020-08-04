@@ -54,6 +54,7 @@ export default {
   },
   methods: {
     swiped() {
+      alert('yup');
     },
     async setOpen() {
       if (this.isLoaded) {
@@ -122,7 +123,7 @@ export default {
         let yesterDaysDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
         console.log('yesterdays date: ' + yesterDaysDate);
 
-        let createdDate = moment(this.list.created_on).format('YYYY-MM-DD');
+        let createdDate = moment.utc(this.list.created_on).format('YYYY-MM-DD');
         console.log('db_created_on: ' + this.list.created_on);
         console.log('created date: ' + createdDate);
 

@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; display: -webkit-flex; flex-direction: column; height: 100vh;">
+  <div id="main-view">
     <app-header />
     <app-body v-if="listsLoaded"/>
   </div>
@@ -78,4 +78,11 @@ export default {
 };
 </script>
 <style scoped>
+#main-view {
+  display: flex; 
+  display: -webkit-flex; 
+  flex-direction: column; 
+  height: 100vh; 
+  box-shadow: 0px 0px 6px rgb(172, 172, 172);
+}
 </style>

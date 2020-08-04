@@ -7,6 +7,7 @@
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
+  background-color: rgb(255, 250, 245);
 }
 
 .lds-dual-ring {
@@ -114,7 +115,7 @@ button:active {
   border-radius:50px;
   resize: none;
   border: 1px solid rgb(184, 184, 184);
-  box-shadow: 0 0 5px rgb(184, 184, 184);
+  box-shadow: 0 0 4px rgb(211, 210, 210);
   color: gray;
   font-family: "Montserrat";
   overflow-y: hidden;

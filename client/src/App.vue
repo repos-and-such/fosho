@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class=".app">
     <custom-alert />
     <confirm-diag />
     <div class="app" @click="closePopups">
