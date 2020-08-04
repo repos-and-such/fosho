@@ -22,12 +22,13 @@ router.get('/:id', checkJwt, async (req,res) => {
     await (async () => {
       const client = await pool.connect()
       try {
+        console.log(req.params.id)
         const res = await client.query(`
         select id, name, list_id, user_id, bought, 
             (select distinct on (item) category.name from 
                 (select * from category order by global_category) 
             as category where lower(category.item) = lower(i.name) and (user_id = 'admin' or user_id = $1))
-        as category, created_on from item i where list_id = $2 and user_id = $1`, [req.user.sub.split('|')[1], req.params.id]
+        as category, created_on from item i where list_id = any ($2) and user_id = $1`, [req.user.sub.split('|')[1], `{${req.params.id}}`]
         )
         console.log('tere')
 

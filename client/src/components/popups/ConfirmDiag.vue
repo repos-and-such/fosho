@@ -31,7 +31,6 @@ export default {
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
             this.$store.commit('deleteOpenList');
-            this.$store.commit('setItems', []);
             this.$store.commit('showAlert', { timeout: 1400, message: 'List Deleted', type: 'success' });
             this.closeDiag();
           } else {

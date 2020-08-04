@@ -31,6 +31,7 @@
       name="delete-list"
       v-else-if="isOpen && (itemCount > 0 || $store.getters.getListsLength > 1)"
       class="mobile-hide"
+      style="justify-self: end;"
     >
       <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
     </button>
@@ -41,6 +42,7 @@
 <script>
 import InsertListName from './InsertListName';
 import ListService from '../../api-service/ListService';
+import ItemService from '../../api-service/ItemService';
 import moment from 'moment';
 
 export default {
@@ -52,10 +54,26 @@ export default {
   },
   methods: {
     swiped() {
-      console.log('swiped')
     },
-    setOpen() {
-      this.$store.commit('setOpenList', this.key);
+    async setOpen() {
+      if (this.isLoaded) {
+        this.$store.commit('setopenListId', this.key);
+      } else {
+        this.$store.commit('setLoading', true);
+        ItemService.getItems( [this.list.id], await this.$auth.getTokenSilently())
+          .then(res => {
+            if (res[0] === 'SUCCESS') {
+              var itemsFromApi = res[1];
+              this.$store.commit('addItems', itemsFromApi);
+              this.$store.commit('setLoading', false);
+              this.$store.commit('addLoadedListId', this.key)
+            } else {
+              this.$store.commit('showGenericError');
+            }
+          }).catch(() => {
+            this.$store.commit('setLoading', false);
+          });
+      }
     },
     openNameField() {
       this.$store.commit('setEditedListId', this.key);
@@ -130,6 +148,10 @@ export default {
     isLoading() {
       return this.$store.state.isLoading;
     },
+    isLoaded() {
+      return this.$store.getters.getLoadedStatus(this.key);
+
+    },
     editedListId() {
       return this.$store.state.editedListId;
     },
@@ -161,7 +183,7 @@ export default {
   display: -webkit-flex; 
   align-items: center; 
   flex-wrap: wrap; 
-  width: 82%;
+  width: 95%;
   color: white;
 }
 

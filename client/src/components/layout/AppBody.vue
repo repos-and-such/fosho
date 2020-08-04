@@ -9,7 +9,6 @@
 
 <script>
 import ShoppingList from './ShoppingList'
-import ListService from '../../api-service/ListService';
 
 export default {
   components: {
@@ -35,20 +34,7 @@ export default {
     }
   },
   async created() {
-    if (this.lists[0] === -1) {
-      ListService.getLists(await this.$auth.getTokenSilently())
-        .then(res => {
-          if (res[0] === 'SUCCESS') {
-            var listsFromApi = res[1];
-            this.$store.commit('setLists', listsFromApi);
-            this.$store.commit('setLoading', false);
-          } else {
-            this.$store.commit('showGenericError');
-          }
-        }).catch(() => {
-          this.$store.commit('setLoading', false);
-        });
-    }
+  
   },
   computed: {
     lists() {

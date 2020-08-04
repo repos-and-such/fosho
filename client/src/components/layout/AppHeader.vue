@@ -45,9 +45,9 @@ export default {
       ListService.insertList(await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
-            this.$store.commit('setItems', [])
             let insertedList = Object.assign({}, res.data[1]);
             insertedList.item_count = 0;
+            this.$store.commit('addLoadedListId', insertedList.id);
             this.$store.commit('insertList', insertedList);
             this.$store.commit('setEditedListId', insertedList.id);
             this.$store.commit('openTopList');

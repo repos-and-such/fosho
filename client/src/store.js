@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     lists: [-1],
-    loadedLists: [],
+    loadedListIds: [],
     items: [],
     openListIndex: 0,
     isLoading: false,
@@ -32,8 +32,10 @@ export default new Vuex.Store({
     },
 
     // Items mutations
-    setItems(state, itemsFromApi) {
-      state.items = itemsFromApi;
+    addItems(state, itemsFromApi) {
+      state.items = state.items.concat(itemsFromApi.filter(item => 
+        !state.items.some(stateItem => 
+          stateItem.id === item.id)));
     },
     insertItem(state, insertedItem) {
       state.items.push(insertedItem);
@@ -63,8 +65,9 @@ export default new Vuex.Store({
     insertList(state, insertedList) {
       state.lists.push(insertedList);
     },
-    addLoadedList(state, list) {
-      state.loadedLists.push(list);
+    addLoadedListId(state, id) {
+      state.loadedListIds = state.loadedListIds.concat(id);
+      console.log(state.loadedListIds);
     },
     updateList(state, { originalList, updatedList }) {
       let index = state.lists.indexOf(originalList);
@@ -74,7 +77,7 @@ export default new Vuex.Store({
       let index = state.openListIndex;
       state.lists.splice(index, 1);
     },
-    setOpenList(state, id) {
+    setopenListId(state, id) {
       let index = state.lists.indexOf(state.lists.find(list => list.id === id))
       state.openListIndex = index;
     },
@@ -105,23 +108,21 @@ export default new Vuex.Store({
     getListById: state => id => {
       return state.lists.find(list => list.id === id);
     },
-    getLoadedListById: state => id => {
-      return state.loadedLists.find(list => list.id === id);
-    },
     getItemById: state => id => {
       return state.items.find(item => item.id === id);
     },
     getOpenStatusById: state => id => {
       return state.openListIndex === state.lists.indexOf(state.lists.find(list => list.id === id));
     },
-    getOpenListId: state => {
+    getopenListId: state => {
       return state.lists[state.openListIndex].id;
     },
     getListsLength: state => {
       return state.lists.length;
     },
-    getLoadedStatus: state => list => {
-      return state.loadedLists.includes(list);
+    getLoadedStatus: state => id => {
+      console.log(state.loadedListIds)
+      return state.loadedListIds.includes(id);
     }
   }
 });

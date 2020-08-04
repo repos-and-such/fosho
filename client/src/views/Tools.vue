@@ -80,5 +80,13 @@ export default {
   border-radius: 0px;
   word-wrap: break-word;
   overflow: auto;
+/* 
+  height: 60px;
+  border-radius: 0px;
+  padding: 16px;
+  word-wrap: break-word;
+  text-justify: flex-start;
+  overflow: auto; */
+
 }
 </style>

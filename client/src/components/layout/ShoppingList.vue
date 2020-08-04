@@ -2,13 +2,11 @@
   <div id="shopping-list">
     <shopping-list-header :key="key" />
     <slide-up-down :active="isOpen">
-    <div v-if="isOpen">
-       <shopping-list-body :key="key" v-if="true"/>
-    </div>
+      <div v-if="isOpen">
+         <shopping-list-body :key="key" />
+      </div>
     </slide-up-down>
-
-    <div v-if="isOpen" class="separator-line"/>
-    </div>
+  </div>
 </template>
 
 <script>

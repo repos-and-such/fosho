@@ -52,19 +52,16 @@ export default {
       return unsortedItems.sort(this.compareItems);
     },
     itemsBought() {
-      return this.items.filter(item => item.bought)
+      return this.items.filter(item => item.bought && item.list_id === this.key);
     },
     itemsToBuy() {
-      return this.items.filter(item => !item.bought)
+      return this.items.filter(item => !item.bought && item.list_id === this.key);
     },
     key() {
       return this.$vnode.key;
     },
     isLoading() {
       return this.$store.state.isLoading;
-    },
-    listLoaded() {
-      return this.$store.getters.getLoadedStatus(this.list);
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <div id="insert-item">
-    <input
+    <textarea
       maxlength="500"
       ref="insertItem"
-      spellcheck="false" 
+      spellcheck="false"
       class="text-field" 
       v-model="entry" 
       @keydown.enter.prevent
@@ -72,7 +72,7 @@ export default {
 
 <style scoped>
 .text-field {
-  width: 70%;
+  width: 90%;
   padding-top: 6px;
 }
 
@@ -80,7 +80,24 @@ export default {
   display: flex;
   display: -webkit-flex;
   align-items: center;
+  justify-content: flex-start;
   margin: 0px 0px 7px 0px;
+}
+
+@media screen and (min-width: 600px) {
+.text-field {
+  height: 60px;
+  border-radius: 0px;
+  padding: 16px;
+  word-wrap: break-word;
+  text-justify: flex-start;
+  overflow: auto;
+}
+
+#insert-item {
+  justify-content: center;
+  margin: 10px 0px 16px 0px;
+}
 }
 
 </style>
