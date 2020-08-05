@@ -7,6 +7,16 @@ import store from './store';
 import { VueHammer } from 'vue2-hammer';
 import SlideUpDown from 'vue-slide-up-down';
 
+
+VueHammer.config = {
+  pinch: { enable: true },
+  swipe: { enable: true, touchAction: 'pan-y' },
+};
+
+
+
+console.log(VueHammer)
+
 Vue.use(Auth0Plugin, {
   domain,
   clientId,

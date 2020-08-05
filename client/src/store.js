@@ -67,7 +67,6 @@ export default new Vuex.Store({
     },
     addLoadedListId(state, id) {
       state.loadedListIds = state.loadedListIds.concat(id);
-      console.log(state.loadedListIds);
     },
     updateList(state, { originalList, updatedList }) {
       let index = state.lists.indexOf(originalList);
@@ -121,7 +120,6 @@ export default new Vuex.Store({
       return state.lists.length;
     },
     getLoadedStatus: state => id => {
-      console.log(state.loadedListIds)
       return state.loadedListIds.includes(id);
     }
   }

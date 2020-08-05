@@ -3,7 +3,8 @@
     v-if="list"
     :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
     id="list-header"
-    v-hammer:swipe.horizontal="swiped"
+    v-hammer:swipe.horizontal="swipedHoriz"
+
   >
     <div 
       :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }"
@@ -53,8 +54,8 @@ export default {
     }
   },
   methods: {
-    swiped() {
-      alert('yup');
+    swipedHoriz() {
+      alert('swipedHoriz')
     },
     async setOpen() {
       if (this.isLoaded) {
@@ -117,15 +118,9 @@ export default {
         time = time.split('.')[0]
 
         let currentDate = moment().format('YYYY-MM-DD');
-        console.log(this.list.name);
-        console.log('current datetime: ' + moment().format());
-        console.log('current date: ' + currentDate);
         let yesterDaysDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
-        console.log('yesterdays date: ' + yesterDaysDate);
 
         let createdDate = moment.utc(this.list.created_on).format('YYYY-MM-DD');
-        console.log('db_created_on: ' + this.list.created_on);
-        console.log('created date: ' + createdDate);
 
         if (createdDate === currentDate) {
           return 'Today ' + time;
@@ -203,6 +198,7 @@ export default {
 }
 
 #list-header {
+  touch-action: pan-y !important;
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;
