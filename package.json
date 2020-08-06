@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "shopping list",
   "engines": {
-    "node": "12.16"
+    "node": "11.x"
   },
   "main": "index.js",
   "scripts": {
