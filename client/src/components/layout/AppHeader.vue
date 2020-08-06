@@ -6,7 +6,7 @@
       id="plus-button"
       @click="insertList"
     >
-      +
+      <i class="material-icons" id="plus-button">add</i>
     </button>
     <span id="logo">
       <span id="f-bomb">
@@ -46,7 +46,6 @@ export default {
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
             let insertedList = Object.assign({}, res.data[1]);
-            insertedList.item_count = 0;
             this.$store.commit('addLoadedListId', insertedList.id);
             this.$store.commit('insertList', insertedList);
             this.$store.commit('setEditedListId', insertedList.id);
@@ -95,13 +94,13 @@ export default {
   width: 100vw;
   max-width: 1000px;
   background-color: rgb(187, 57, 42);
-  padding: 0px 4px 0px 0px;
   -webkit-tap-highlight-color: transparent;
-  border-bottom: 3px solid white;
+  border-bottom: 2px solid white;
 }
 
 #plus-button {
-  margin-left: 10px;
+  font-size: 42px;
+  padding: 3px 5px;
   animation-name: spin;
   animation-duration: 2000ms;
   animation-iteration-count: 1;
@@ -112,13 +111,13 @@ export default {
 
 #logo {
   display: flex;
-display: -webkit -flex;
+  display: -webkit -flex;
 }
 
 #f-bomb {
   color: white;
   font-size: 48px;
-  margin: 5px 4px -30px 0px;
+  margin: 5px 4px -17px 0px;
 }
 
 #o {

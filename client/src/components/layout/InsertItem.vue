@@ -36,6 +36,7 @@ export default {
       if (this.entry) {
         let entryInput = this.entry.trim();
         this.entry = '';
+        
         ItemService.insertItem(
           { name: entryInput, list_id: this.key }, 
           await this.$auth.getTokenSilently()

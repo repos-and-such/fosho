@@ -1,18 +1,21 @@
 <template>
   <div v-if="!isLoading" id="shopping-list-body">
     <insert-item :key="key"/>
-    <div id="shopping-list-items" v-if="items[0] !== -1">
+    <transition-group name="bounce" id="shopping-list-items" v-if="items[0] !== -1">
       <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
-    </div>
+    </transition-group>
     <div v-if="itemsBought.length !== 0" class="separator-line"/>
     <div v-if="itemsBought.length !== 0" style="font-size: 15px; margin: 0px 0px 10px 5px; color: rgba(209, 80, 80, 0.718);">BOUGHT:</div>
-    <div id="shopping-list-items">
+    <transition-group name="bounce" id="shopping-list-items">
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
-    </div>
+    </transition-group>
     <div v-if="items.length === 0" class="empty-body-message"> 
         <span class="desktop-hide">Enter shopping item and tap the green checkmark or Go on the keypad</span>
         <span class="mobile-hide">Enter shopping item and click the green checkmark or hit Enter</span> 
     </div>
+    <div class="separator-line" id="bottom-line" />
+    <div style="font-size: 15px; margin: 32px 0px 10px 5px; color: gray;">OLDER LISTS:</div>
+
   </div>
 </template>
 
@@ -48,7 +51,7 @@ export default {
       return this.$store.getters.getListById(this.key);
     },
     items() {
-      let unsortedItems = this.$store.state.items;
+      let unsortedItems = this.$store.getters.getItemsByListId(this.key);
       return unsortedItems.sort(this.compareItems);
     },
     itemsBought() {
@@ -78,15 +81,20 @@ export default {
   color: gray;
 }
 
+#shopping-list-body {
+  min-height: 200px;
+  padding: 10px 8px 8px 8px;
+}
+
+#bottom-line {
+  border-bottom: 3px solid rgba(209, 80, 80, 0.418);
+  margin: 8px 0px;
+}
+
 #shopping-list-items {
   padding-right: 20px;
   display: flex;
   display: -webkit-flex;
   flex-wrap: wrap;
-}
-
-#shopping-list-body {
-  min-height: 200px;
-  padding: 10px 8px 16px 8px;
 }
 </style>

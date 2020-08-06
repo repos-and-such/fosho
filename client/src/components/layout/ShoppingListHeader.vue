@@ -1,42 +1,47 @@
 <template>
-  <div
-    v-if="list"
-    :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
-    id="list-header"
-    v-hammer:swipe.horizontal="swipedHoriz"
-
-  >
-    <div 
-      :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }"
-      @click="setOpen"
+  <div>
+    <div
+      v-if="list && !deleting"
+      :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
+      id="list-header"
+      v-hammer:swipe.horizontal="openDeleteConfirmation"
     >
-      <span id="createdDate-time" style="margin-right: 12px; white-space: nowrap; padding: 6px 0px;">
-        {{ dateTimeDisplay }}
-      </span>
-      <span id="list-name" @dblclick="openNameField">
-        <span v-if="key !== editedListId && list.name">
-          {{ list.name }}
+      <div 
+        :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }"
+        @click="setOpen"
+      >
+        <span id="createdDate-time" style="margin-right: 12px; white-space: nowrap; padding: 6px 0px;">
+          {{ dateTimeDisplay }}
         </span>
-        <button :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }" v-if="!list.name && isOpen && key !== editedListId">
-          <i class="material-icons" @click="openNameField">create</i>
-        </button>
-        <insert-list-name v-if="key === editedListId" :key="this.key"/>
-      </span>
+        <span id="list-name" @dblclick="openNameField">
+          <span v-if="key !== editedListId && list.name">
+            {{ list.name }}
+          </span>
+          <button :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }" v-if="!list.name && isOpen && key !== editedListId">
+            <i class="material-icons" @click="openNameField">create</i>
+          </button>
+          <insert-list-name v-if="key === editedListId" :key="this.key"/>
+        </span>
+      </div>
+      <button 
+        type="delete"
+        name="delete-list"
+        v-if="isOpen && (itemCount > 0 || $store.getters.getListsLength > 1)"
+        class="mobile-hide"
+        style="justify-self: end;"
+      >
+        <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
+      </button>
+      <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" id="item-count">
+        {{ itemCount }}
+       </span>
+      <span v-if="isLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>      
+      <div class="separator-line"/>
     </div>
-    <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" id="item-count">
-      {{ itemCount }}
-     </span>
-    <span v-if="isLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>
-    <button 
-      type="delete"
-      name="delete-list"
-      v-else-if="isOpen && (itemCount > 0 || $store.getters.getListsLength > 1)"
-      class="mobile-hide"
-      style="justify-self: end;"
-    >
-      <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
-    </button>
-    <div class="separator-line"/>
+    <div v-else class="delete-confirmation">
+      <button class="button" @click="deleteList">Delete</button>
+      <button class="button" @click="deleting = false" >Cancel</button>
+    </div>
   </div>
 </template>
 
@@ -51,12 +56,10 @@ export default {
   components: { InsertListName },
   data() {
     return {
+      deleting: false
     }
   },
   methods: {
-    swipedHoriz() {
-      alert('swipedHoriz')
-    },
     async setOpen() {
       if (this.isLoaded) {
         this.$store.commit('setopenListId', this.key);
@@ -81,17 +84,7 @@ export default {
       this.$store.commit('setEditedListId', this.key);
     },
     openDeleteConfirmation() {
-      if (this.items.length !== 0) {
-        setTimeout(() => {
-          this.$store.commit('toggleConfirmDiag',
-          {
-            open: true, 
-            message: 'This list contains items, are you sure you want to delete it?' 
-          });
-        }, 0);
-      } else {
-        this.deleteList();
-      }
+      this.deleting = true;
     },
     async deleteList() {  
       this.$store.commit('setLoading', true);
@@ -152,14 +145,10 @@ export default {
       return this.$store.state.editedListId;
     },
     itemCount() {
-      if (this.items.length > 0 && this.items[0].list_id == this.key) {
-        return this.items.length;
-      } else {
-        return this.list.item_count;
-      }
+      return this.items.length > 0 ? this.items.length : '';
     },
     items() {
-      return this.$store.state.items;
+      return this.$store.getters.getItemsByListId(this.key);
     }
   }
 }
@@ -172,6 +161,7 @@ export default {
 
 .list-closed {
   background-color: white;
+  margin: 3px 0px 3px 0px;
 }
 
 .list-open-text {
@@ -195,6 +185,18 @@ export default {
 .list-closed-count {
   color: rgb(151, 151, 151);
   border: 1px solid rgb(151, 151, 151);
+}
+
+.delete-confirmation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: red;
+  min-height: 44px;
+}
+
+.button {
+  font-size: 26px;
 }
 
 #list-header {
@@ -225,7 +227,7 @@ export default {
   align-items: center;
   width: 22px;
   height: 22px;
-  border-radius: 20px;
+  border-radius: 30px;
   box-shadow: 0px 0px 3px white;
   font-size: 14px;
 }

@@ -67,9 +67,8 @@ export default {
 }
 
 #app-body {
-  width: 100vw;
-  max-width: 1000px;
   overflow-y: auto;
+  max-width: 1000px;
 }
 
 #welcome-message-item {

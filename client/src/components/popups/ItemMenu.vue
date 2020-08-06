@@ -49,9 +49,9 @@ export default {
             this.$store.commit('setOpenCategoryMenuId', null);
             if (res.data[0] === 'SUCCESS') {
               let originalItem = this.item;
-              let updatedItem = Object.assign({}, this.item);
-              updatedItem.category = res.data[1][0].name;
-              this.$store.commit('updateItem', { originalItem, updatedItem });
+              let freshItem = Object.assign({}, this.item);
+              freshItem.category = res.data[1][0].name;
+              this.$store.commit('updateItem', { originalItem, freshItem });
             } else {
               this.$store.commit('showGenericError');
             }

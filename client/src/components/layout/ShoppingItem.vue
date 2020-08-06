@@ -1,29 +1,27 @@
 <template>
   <div>
-    <transition name="fade">
-      <div id="shopping-item" :class="{ 'item-bought': item.bought, 'item-active': !item.bought }" style="display: flex">
-        <span id="shopping-item-text" @click="toggleBought">
-          {{ item.name }}
-        </span>
-        <span 
-          @click="toggleCategoryMenu"
-          id="category-indicator"
-          :class="{
-            'none': item.category === 'none' || !item.category,
-            'fruit': item.category === 'fruit',
-            'vegetable': item.category === 'vegetable',
-            'drink': item.category === 'drink',
-            'bread-and-bakery': item.category === 'bread-and-bakery',
-            'dairy': item.category === 'dairy',
-            'grains-and-dry': item.category === 'grains-and-dry',
-            'meat': item.category === 'meat',
-            'personal-care': item.category === 'personal-care',
-            'household': item.category === 'household',
-            }"
-        />
-      </div>
-    </transition>
-    <item-menu
+    <div id="shopping-item" :class="{ 'item-bought': item.bought, 'item-active': !item.bought }" style="display: flex">
+      <span id="shopping-item-text" @click="toggleBought">
+        {{ item.name }}
+      </span>
+      <span 
+        @click="toggleCategoryMenu"
+        id="category-indicator"
+        :class="{
+          'none': item.category === 'none' || !item.category,
+          'fruit': item.category === 'fruit',
+          'vegetable': item.category === 'vegetable',
+          'drink': item.category === 'drink',
+          'bread-and-bakery': item.category === 'bread-and-bakery',
+          'dairy': item.category === 'dairy',
+          'grains-and-dry': item.category === 'grains-and-dry',
+          'meat': item.category === 'meat',
+          'personal-care': item.category === 'personal-care',
+          'household': item.category === 'household',
+          }"
+      />
+    </div>
+  <item-menu
       v-if="categoryMenuIsOpen"
       :item="item"
     />
@@ -44,13 +42,9 @@ export default {
   },
   methods: {
     toggleBought() {
-      if (!this.menuIsOpen) {
-        let updatedItem = Object.assign({}, this.item);
-        updatedItem.bought = !updatedItem.bought;
-        this.executeUpdate(updatedItem);
-      } else {
-        this.$store.commit('showAlert', { timeout: 1400, message: 'Edit mode Active', type: 'success' });
-      }
+      let freshItem = Object.assign({}, this.item);
+      freshItem.bought = !freshItem.bought;
+      this.executeUpdate(freshItem);
     },
     toggleCategoryMenu() {
       if (this.categoryMenuIsOpen) {
@@ -61,25 +55,18 @@ export default {
         }, 0);
       }
     },
-    // editItem() {
-    //   this.$store.commit('toggleConfirmDiag',
-    //     {
-    //       open: true, 
-    //       message: 'Edit item', 
-    //       type: 'editItem'
-    //     });
-    //     this.$store.commit('setEditedItem', this.item);
-    // },
-    async executeUpdate(item) {
-      ItemService.updateItem(item, this.item, await this.$auth.getTokenSilently())
+    async executeUpdate(freshItem) {
+      let originalItem = Object.assign({}, this.item);
+      let originalItemBackup = Object.assign({}, this.item);
+      this.$store.commit('updateItem', { originalItem, freshItem });
+
+      ItemService.updateItem(freshItem, this.item, await this.$auth.getTokenSilently())
           .then(res => {
-            if (res.data[0] === 'SUCCESS') {
-              let originalItem = this.item;
-              let updatedItem = Object.assign({}, res.data[1]);
-              this.$store.commit('updateItem', { originalItem, updatedItem });
-              this.$store.commit('toggleConfirmDiag', false);
-            } else {
+            if (res.data[0] !== 'SUCCESS') {
               this.$store.commit('showGenericError');
+              originalItem = Object.assign({}, freshItem);
+              freshItem = originalItemBackup;
+              this.$store.commit('updateItem', { originalItem, freshItem });
             }
           });        
     },

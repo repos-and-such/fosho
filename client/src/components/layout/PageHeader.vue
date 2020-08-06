@@ -1,7 +1,7 @@
 <template>
   <div id="page-header">
     <span class="mobile-hide" style="width: 155px;"></span>
-    <span></span>
+    <span class="desktop-hide"></span>
     <div>{{ text }}</div>
     <span class="mobile-hide">
       <span @click.prevent="back" class="header-button" id="back-button">
@@ -45,14 +45,12 @@ export default {
   display: flex;
   display: -webkit -flex;
   align-items: center;
-  margin:auto;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
   color: white;
-  height: 56px;
   width: 100%;
   font-size: 28px;
-  height: 7%;
+  height: 52px;
 }
 
 @media screen and (max-width: 600px){

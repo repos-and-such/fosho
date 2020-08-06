@@ -38,33 +38,21 @@
         Add multiple items
       </div>
     </div>
-    <page-footer :submitButton="false"/>
-    <div>
-    </div>
+    <back-button class="desktop-hide" />
   </div>
 </template>
 
 <script>
-import PageFooter from '../components/layout/PageFooter';
+import BackButton from '../components/layout/BackButton';
 import PageHeader from '../components/layout/PageHeader';
 
 export default {
   name: "About",
-  components: { PageFooter, PageHeader },
+  components: { PageHeader, BackButton },
   methods: {
     back() {
       this.$router.push('/');
     },
-  },
-  computed: {
-    development() {
-      return process.env.NODE_ENV === 'development';
-    },
-        items() {
-      let unsortedItems = this.$store.state.items;
-      return unsortedItems.sort(this.compareItems);
-    },
-
   },
   mounted() {
     let inner = window.innerHeight;

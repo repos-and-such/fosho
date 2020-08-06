@@ -24,9 +24,6 @@ export default new Vuex.Store({
     setLoading(state, isLoading) {
       state.isLoading = isLoading;
     },
-    toggleConfirmDiag(state, isOpen) {
-      state.diagOpen = isOpen;
-    },
     toggleMainMenu(state, isOpen) {
       state.mainMenuIsOpen = isOpen;
     },
@@ -40,9 +37,9 @@ export default new Vuex.Store({
     insertItem(state, insertedItem) {
       state.items.push(insertedItem);
     },
-    updateItem(state, { originalItem, updatedItem }) {
-      let index = state.items.indexOf(originalItem);
-      state.items.splice(index, 1, updatedItem);
+    updateItem(state, objects) {
+      let index = state.items.indexOf(state.items.find(item => item.id === objects.originalItem.id));
+      state.items.splice(index, 1, objects.freshItem);
     },
     deleteItem(state, item) {
       let index = state.items.indexOf(item);
@@ -107,20 +104,21 @@ export default new Vuex.Store({
     getListById: state => id => {
       return state.lists.find(list => list.id === id);
     },
-    getItemById: state => id => {
-      return state.items.find(item => item.id === id);
-    },
     getOpenStatusById: state => id => {
       return state.openListIndex === state.lists.indexOf(state.lists.find(list => list.id === id));
-    },
-    getopenListId: state => {
-      return state.lists[state.openListIndex].id;
     },
     getListsLength: state => {
       return state.lists.length;
     },
     getLoadedStatus: state => id => {
       return state.loadedListIds.includes(id);
-    }
+    },
+    getItemById: state => id => {
+      return state.items.find(item => item.id === id);
+    },
+    getItemsByListId: state => id => {
+      console.log()
+      return state.items.filter(item => item.list_id === id);
+    },
   }
 });

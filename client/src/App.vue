@@ -1,7 +1,6 @@
 <template>
   <div class=".app">
     <custom-alert />
-    <confirm-diag />
     <div class="app" @click="closePopups">
       <router-view />
     </div>
@@ -10,17 +9,14 @@
 
 <script>
 import CustomAlert from "./components/popups/CustomAlert"
-import ConfirmDiag from "./components/popups/ConfirmDiag"
 
 export default {
   components: {
-    CustomAlert,
-    ConfirmDiag
+    CustomAlert
   },
   methods: {
     closePopups() {
       this.$store.commit('toggleMainMenu', false);
-      this.$store.commit('toggleConfirmDiag', false);
 			this.$store.commit('setOpenCategoryMenuId', null);
     }
   },

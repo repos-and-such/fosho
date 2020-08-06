@@ -1,7 +1,9 @@
 <template>
   <div id="main-view">
-    <app-header />
-    <app-body v-if="listsLoaded"/>
+    <div style="box-shadow: 0px 0px 7px rgb(177, 177, 177)">
+      <app-header />
+      <app-body v-if="listsLoaded"/>
+    </div>
   </div>
 </template>
 
@@ -69,11 +71,8 @@ export default {
           }
         }).catch(() => {
           this.$store.commit('setLoading', false);
-        });
-
-        
+        });   
     }
-
   }
 };
 </script>
@@ -81,8 +80,6 @@ export default {
 #main-view {
   display: flex; 
   display: -webkit-flex; 
-  flex-direction: column; 
-  height: 100vh; 
-  box-shadow: 0px 0px 6px rgb(172, 172, 172);
+  flex-direction: column;
 }
 </style>

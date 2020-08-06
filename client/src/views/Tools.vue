@@ -17,7 +17,7 @@
       </div>
       <div class="separator-line"></div>
     </div>
-    <page-footer :submitButton="false"/>
+    <back-button class="desktop-hide" />
     <div>
     </div>
   </div>
@@ -25,12 +25,12 @@
 
 <script>
 import ItemService from '../api-service/ItemService';
-import PageFooter from '../components/layout/PageFooter';
 import PageHeader from '../components/layout/PageHeader';
+import BackButton from '../components/layout/BackButton';
 
 export default {
   name: "Tools",
-  components: { PageFooter, PageHeader },
+  components: { PageHeader, BackButton },
   data() {
     return {
       category: '',
@@ -74,19 +74,10 @@ export default {
 }
 .text-field {
   align-self: center;
-  width: 86%;
   padding: 10px 5vw;
   height: 30vh; 
   border-radius: 0px;
   word-wrap: break-word;
   overflow: auto;
-/* 
-  height: 60px;
-  border-radius: 0px;
-  padding: 16px;
-  word-wrap: break-word;
-  text-justify: flex-start;
-  overflow: auto; */
-
 }
 </style>
