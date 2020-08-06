@@ -18,7 +18,8 @@ export default new Vuex.Store({
     editedItem: {},
     openCategoryMenuId: null,
     mainMenuIsOpen: false,
-    storeEntry: ''
+    storeEntry: '',
+    deleteConfirmationId: null
   },
   mutations: {
     setLoading(state, isLoading) {
@@ -69,8 +70,9 @@ export default new Vuex.Store({
       let index = state.lists.indexOf(originalList);
       state.lists.splice(index, 1, updatedList);
     },
-    deleteOpenList(state) {
-      let index = state.openListIndex;
+    deleteList(state, id) {
+      //refaktoorida indexi leidmine
+      let index = state.lists.indexOf(state.lists.find(list => list.id === id));
       state.lists.splice(index, 1);
     },
     setopenListId(state, id) {
@@ -98,6 +100,9 @@ export default new Vuex.Store({
       setTimeout(() => {
         state.alertOpen = false;
       }, 2000);
+    },
+    setDeleteConfirmationId(state, id) {
+      state.deleteConfirmationId = id;
     }
   },
   getters: {

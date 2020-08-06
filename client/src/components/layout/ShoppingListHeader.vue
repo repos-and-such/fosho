@@ -26,9 +26,9 @@
       <button 
         type="delete"
         name="delete-list"
-        v-if="isOpen && (itemCount > 0 || $store.getters.getListsLength > 1)"
         class="mobile-hide"
-        style="justify-self: end;"
+        style="position: relative; right: 10px;"
+        id="delete-list"
       >
         <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
       </button>
@@ -38,9 +38,9 @@
       <span v-if="isLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>      
       <div class="separator-line"/>
     </div>
-    <div v-else class="delete-confirmation">
+    <div v-else-if="deleting" class="delete-confirmation">
       <button class="button" @click="deleteList">Delete</button>
-      <button class="button" @click="deleting = false" >Cancel</button>
+      <button class="button" @click="closeDeleteConfirmation" >Cancel</button>
     </div>
   </div>
 </template>
@@ -56,7 +56,6 @@ export default {
   components: { InsertListName },
   data() {
     return {
-      deleting: false
     }
   },
   methods: {
@@ -84,14 +83,17 @@ export default {
       this.$store.commit('setEditedListId', this.key);
     },
     openDeleteConfirmation() {
-      this.deleting = true;
+      this.$store.commit('setDeleteConfirmationId', this.key);
+    },
+    closeDeleteConfirmation() {
+      this.$store.commit('setDeleteConfirmationId', null);
     },
     async deleteList() {  
       this.$store.commit('setLoading', true);
       ListService.deleteList(this.key, await this.$auth.getTokenSilently())        
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
-            this.$store.commit('deleteOpenList');
+            this.$store.commit('deleteList', this.key);
             this.$store.commit('showAlert', { timeout: 1400, message: 'List Deleted', type: 'success' });
             this.$store.commit('setLoading', false);
           } else {
@@ -108,7 +110,7 @@ export default {
     dateTimeDisplay() {
       if (this.list.created_on) {
         let time = this.list.created_on.split('T')[1];
-        time = time.split('.')[0]
+        time = time.slice(0,5);
 
         let currentDate = moment().format('YYYY-MM-DD');
         let yesterDaysDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
@@ -149,6 +151,9 @@ export default {
     },
     items() {
       return this.$store.getters.getItemsByListId(this.key);
+    },
+    deleting() {
+      return this.$store.state.deleteConfirmationId === this.key;
     }
   }
 }
@@ -160,8 +165,8 @@ export default {
 }
 
 .list-closed {
+  color: rgb(151, 151, 151);
   background-color: white;
-  margin: 3px 0px 3px 0px;
 }
 
 .list-open-text {
@@ -170,7 +175,6 @@ export default {
   align-items: center; 
   flex-wrap: wrap; 
   width: 95%;
-  color: white;
 }
 
 .list-closed-text {
@@ -178,7 +182,6 @@ export default {
   display: -webkit-flex; 
   align-items: center; 
   flex-wrap: wrap; 
-  color: rgb(151, 151, 151);
   width: 92%;
 }
 

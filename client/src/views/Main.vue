@@ -1,9 +1,7 @@
 <template>
   <div id="main-view">
-    <div style="box-shadow: 0px 0px 7px rgb(177, 177, 177)">
-      <app-header />
-      <app-body v-if="listsLoaded"/>
-    </div>
+    <app-header />
+    <app-body v-if="listsLoaded"/>
   </div>
 </template>
 

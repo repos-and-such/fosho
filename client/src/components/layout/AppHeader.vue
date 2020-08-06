@@ -92,10 +92,9 @@ export default {
   align-items: center;
   justify-content: space-between;
   width: 100vw;
-  max-width: 1000px;
+  max-width: 988px;
   background-color: rgb(187, 57, 42);
   -webkit-tap-highlight-color: transparent;
-  border-bottom: 2px solid white;
 }
 
 #plus-button {
@@ -134,5 +133,12 @@ export default {
   color: white;
   font-size: 30px;
   font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+  #app-header {
+    box-shadow: 0px -5px 5px rgb(171, 171, 171);
+    margin: 0px 6px;
+  }
 }
 </style>

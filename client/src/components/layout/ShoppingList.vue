@@ -39,5 +39,14 @@ export default {
 #shopping-list {
   -webkit-tap-highlight-color: transparent;
   background-color: white;
+  box-shadow: 0px 0px 3px rgb(171, 171, 171);
+  margin: 8px 6px;
+}
+
+@media screen and (max-width: 600px) {
+  #shopping-list {
+    box-shadow: 0px 0px 2px rgb(171, 171, 171);
+    margin: 6px 0px;
+  }
 }
 </style>

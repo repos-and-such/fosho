@@ -13,7 +13,6 @@
       type="insert"
       class="material-icons" 
       id="check-button" 
-      style="color: rgb(105, 185, 98); font-size: 38px;" 
       @click="insertItem"
     >
       check
@@ -77,6 +76,11 @@ export default {
   padding-top: 6px;
 }
 
+.material-icons {
+  color: rgb(65, 156, 92); 
+  font-size: 38px;
+}
+
 #insert-item {
   display: flex;
   display: -webkit-flex;
@@ -99,6 +103,11 @@ export default {
   justify-content: center;
   margin: 10px 0px 16px 0px;
 }
+
+.material-icons {
+  font-size: 48px;
+}
+
 }
 
 </style>

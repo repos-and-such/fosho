@@ -4,6 +4,7 @@ import Main from "../views/Main.vue";
 import Help from "../views/Help.vue";
 import Tools from "../views/Tools.vue";
 import About from "../views/About.vue";
+import TestPage from "../views/TestPage.vue";
 import { authGuard } from "../auth";
 
 Vue.use(Router);
@@ -28,7 +29,12 @@ const router = new Router({
       name: "Tools",
       component: Tools,
       beforeEnter: authGuard
+    },
 
+    {
+      path: "/testpage",
+      name: "TestPage",
+      component: TestPage,
     },
     {
       path: "/about",

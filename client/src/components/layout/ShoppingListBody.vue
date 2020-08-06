@@ -13,9 +13,6 @@
         <span class="desktop-hide">Enter shopping item and tap the green checkmark or Go on the keypad</span>
         <span class="mobile-hide">Enter shopping item and click the green checkmark or hit Enter</span> 
     </div>
-    <div class="separator-line" id="bottom-line" />
-    <div style="font-size: 15px; margin: 32px 0px 10px 5px; color: gray;">OLDER LISTS:</div>
-
   </div>
 </template>
 
@@ -84,11 +81,6 @@ export default {
 #shopping-list-body {
   min-height: 200px;
   padding: 10px 8px 8px 8px;
-}
-
-#bottom-line {
-  border-bottom: 3px solid rgba(209, 80, 80, 0.418);
-  margin: 8px 0px;
 }
 
 #shopping-list-items {
