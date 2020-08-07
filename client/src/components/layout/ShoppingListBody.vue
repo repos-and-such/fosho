@@ -1,17 +1,24 @@
 <template>
   <div v-if="!isLoading" id="shopping-list-body">
     <insert-item :key="key"/>
-    <transition-group name="bounce" id="shopping-list-items" v-if="items[0] !== -1">
-      <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
+    <transition-group 
+      name="bounce"
+      id="shopping-list-items" 
+      v-if="items[0] !== -1">
+        <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
     </transition-group>
+
+
     <div v-if="itemsBought.length !== 0" class="separator-line"/>
     <div v-if="itemsBought.length !== 0" style="font-size: 15px; margin: 0px 0px 10px 5px; color: rgba(209, 80, 80, 0.718);">BOUGHT:</div>
-    <transition-group name="bounce" id="shopping-list-items">
+    <transition-group 
+      name="bounce" 
+      id="shopping-list-items">
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </transition-group>
-    <div v-if="items.length === 0" class="empty-body-message"> 
-        <span class="desktop-hide">Enter shopping item and tap the green checkmark or Go on the keypad</span>
-        <span class="mobile-hide">Enter shopping item and click the green checkmark or hit Enter</span> 
+    <div v-if="items.length === 0 && !afterRefresh" class="empty-body-message"> 
+      <span class="desktop-hide">Enter shopping item and tap the green checkmark or Go on the keypad</span>
+      <span class="mobile-hide">Enter shopping item and click the green checkmark or hit Enter</span> 
     </div>
   </div>
 </template>
@@ -26,6 +33,11 @@ export default {
     InsertItem
   },
   name: "ShoppingListBody",
+  data() {
+    return {
+      afterRefresh: true
+    }
+  },
   methods: {
     compareItems(a, b) {
       let catA = a.category ? ('0' + a.category) : '1';
@@ -63,6 +75,11 @@ export default {
     isLoading() {
       return this.$store.state.isLoading;
     }
+  },
+  created() {
+    setTimeout(() => {
+      this.afterRefresh = false;
+    }, 300);
   }
 }
 </script>
@@ -74,12 +91,12 @@ export default {
   align-items: center;
   text-align: center;
   justify-content: center;
-  padding: 50px 20px; 
+  padding: 50px 20px 58px 20px; 
   color: gray;
 }
 
 #shopping-list-body {
-  min-height: 200px;
+  min-height: 180px;
   padding: 10px 8px 8px 8px;
 }
 

@@ -1,9 +1,11 @@
 <template>
   <div id="app-body">
+    <transition-group name="bounce">
       <shopping-list 
         v-for="list in lists"
-        :key="list.id" 
+        :key="list.id"
       />
+    </transition-group>
   </div>
 </template>
 
@@ -65,9 +67,15 @@ export default {
   font-weight: normal;
   color: rgb(209, 80, 80);
 }
+.bounce {
+  transition: transform 1s;
+}
 
 #app-body {
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
+  padding: 0px;
   max-width: 1000px;
 }
 

@@ -95,11 +95,6 @@ export default {
   font-size: 18px;
 }
 
-.custom-button {
-  height: 26px;
-  width: 26px;
-}
-
 #insert-list-name {
   display: flex;
   display: -webkit-flex;

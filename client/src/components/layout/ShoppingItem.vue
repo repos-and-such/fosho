@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="shopping-item" :class="{ 'item-bought': item.bought, 'item-active': !item.bought }" style="display: flex">
-      <span id="shopping-item-text" @click="toggleBought">
+      <span class="button" @click="toggleBought">
         {{ item.name }}
       </span>
       <span 
@@ -117,6 +117,13 @@ export default {
   color: rgb(172, 172, 172);
 }
 
+.button {
+  padding: 3px 6px 3px 14px;
+  font-size: 24px;
+  cursor: pointer;
+  word-break: break-word;
+}
+
 .none {
   border: 12px solid rgb(235, 235, 235);
   box-shadow: 0 0 5px rgb(185, 183, 183);
@@ -185,18 +192,12 @@ export default {
   margin-bottom: 7px;
   border-radius: 24px;
   text-align: left;
+  background-color: white;
 }
 
 #category-indicator {
   margin: 0px 9px;
   border-radius: 20px;
   cursor: pointer;
-}
-
-#shopping-item-text {
-  padding: 3px 6px 3px 14px;
-  font-size: 24px;
-  cursor: pointer;
-  word-break: break-word;
 }
 </style>

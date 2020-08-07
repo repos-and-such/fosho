@@ -1,5 +1,5 @@
 <template>
-  <div class="selection-box">
+  <div class="item-menu">
     <div class="selection-element" @click="editItemName">
       <i class="material-icons" id="edit-icon">create</i>
       <span class="text">
@@ -77,8 +77,7 @@ export default {
 </script>
 
 <style scoped>
-.selection-box {
-  position: -webkit-sticky;
+.item-menu {
   position: sticky;
   display: flex;
   display: -webkit-flex;
@@ -87,7 +86,9 @@ export default {
   background: #ffffff;
   box-shadow: 0 0 5px #00000070;
   padding: 10px;
+  margin: 0px 10px 6px 12px;
   padding-right: 18px;
+  max-width: 200px;
 }
 
 .selection-element {

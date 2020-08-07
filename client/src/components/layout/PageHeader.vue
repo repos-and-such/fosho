@@ -3,12 +3,12 @@
     <span class="mobile-hide" style="width: 155px;"></span>
     <span class="desktop-hide"></span>
     <div>{{ text }}</div>
-    <span class="mobile-hide">
+    <button class="mobile-hide">
       <span @click.prevent="back" class="header-button" id="back-button">
         <i class="material-icons">keyboard_backspace</i>
-        <span class="mobile-hide">Back</span>
+        <span style="font-size: 24px; font-family: Montserrat;">BACK</span>
       </span>
-    </span>
+    </button>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   display: -webkit -flex;
   align-items: center;
   cursor: pointer;
-  padding: 20px;
+  margin-right: 12px;
 }
 
 .material-icons {

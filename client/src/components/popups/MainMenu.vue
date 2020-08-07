@@ -1,25 +1,25 @@
 <template>
   <div class="selection-box">
-    <div class="selection-element" @click="setRoute('tools')" >
+    <button class="button" name="selection-element" @click="setRoute('tools')" >
       <span class="material-icons" style="color: rgb(83, 173, 169);">settings</span>
       <span class="text">Tools</span>
-    </div>
-    <div class="selection-element" @click="setRoute('help')">
+    </button>
+    <button class="button" name="selection-element" @click="setRoute('help')">
       <span class="material-icons" style="color: rgb(171, 82, 98);">help_outline</span>
       <span class="text">Help</span>
-    </div>
-    <div class="selection-element" @click="setRoute('about')">
+    </button>
+    <button class="button" name="selection-element" @click="setRoute('about')">
       <span class="material-icons" style="color: rgb(91, 181, 207);">info</span>
       <span class="text">About</span>
-    </div>
-    <div class="selection-element" @click="setRoute('testPage')">
+    </button>
+    <button class="button" name="selection-element" @click="setRoute('testPage')">
       <span class="material-icons" style="color: rgb(91, 181, 207);">info</span>
       <span class="text">TestPage</span>
-    </div>
-    <div class="selection-element" @click="logout">
+    </button>
+    <button class="button" name="selection-element" @click="logout">
       <span class="material-icons" style="color: rgb(148, 71, 71);">exit_to_app</span>
       <span class="text">Log out</span>
-    </div>
+    </button>
   </div> 
 </template>
 
@@ -56,8 +56,9 @@ export default {
   padding-right: 18px;
 }
 
-.selection-element {
+.button {
   display: flex;
+  justify-content: flex-start;
   display: -webkit-flex;
   justify-self: start;
   align-items: center;

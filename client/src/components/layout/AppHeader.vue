@@ -91,8 +91,6 @@ export default {
   display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
-  width: 100vw;
-  max-width: 988px;
   background-color: rgb(187, 57, 42);
   -webkit-tap-highlight-color: transparent;
 }
@@ -138,7 +136,7 @@ export default {
 @media screen and (min-width: 600px) {
   #app-header {
     box-shadow: 0px -5px 5px rgb(171, 171, 171);
-    margin: 0px 6px;
+    margin: 0px 6px 6px 6px;
   }
 }
 </style>

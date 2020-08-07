@@ -4,7 +4,7 @@
       maxlength="500"
       ref="insertItem"
       spellcheck="false"
-      class="text-field" 
+      class="text-field"
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertItem"
@@ -74,6 +74,8 @@ export default {
 .text-field {
   width: 90%;
   padding-top: 6px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .material-icons {
@@ -94,7 +96,7 @@ export default {
   height: 60px;
   border-radius: 0px;
   padding: 16px;
-  word-wrap: break-word;
+  white-space: pre-wrap;
   text-justify: flex-start;
   overflow: auto;
 }

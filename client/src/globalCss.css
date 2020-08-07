@@ -54,9 +54,6 @@ button {
   align-items: center;
   color: white;
   background: transparent;
-  border-radius: 30px;
-  font-size: 52px;
-  border-radius: 50px;
   cursor: pointer;
 }
 
@@ -80,10 +77,10 @@ button:active {
 }
 
 .bounce-enter-active {
-  animation: bounce-in .2s;
+  animation: bounce-in .5s;
 }
 .bounce-leave-active {
-  animation: bounce-in .2s reverse;
+  animation: bounce-in .5s reverse;
 }
 @keyframes bounce-in {
   0% {
@@ -95,25 +92,6 @@ button:active {
   100% {
     transform: scale(1);
   }
-}
-
-.custom-button {
-  display: flex;
-  display: -webkit-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
-  padding: 5px;
-  height: 32px;
-  width: 32px;
-  color:rgb(105, 185, 98);
-  cursor:pointer;
-  font-size: 24px;
-  border-radius: 30px;
-}
-
-.custom-button:active {
-  box-shadow: none;
 }
 
 .material-icons {
@@ -175,9 +153,10 @@ select::-ms-expand {
 .router-sub-page {
   display:flex; 
   flex-direction: column;
-  height: var(--vh, 1vh);
+  height: calc(var(--vh, 1vh) + 48px);
   font-size: 20px;
   max-width: 1000px;
+  background: white;
 }
 
 .page-body {

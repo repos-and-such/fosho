@@ -12,10 +12,10 @@
     </button>
     <span v-else></span>
     <span class="desktop-hide">
-      <span @click.prevent="back" class="footer-button" id="back-button">
+      <button @click.prevent="back" class="footer-button" id="back-button">
         <i class="material-icons">arrow_back_ios</i>
         <span class="mobile-hide">Back</span>
-      </span>
+      </button>
     </span>
   </div>
 </template>

@@ -6,18 +6,15 @@
       id="list-header"
       v-hammer:swipe.horizontal="openDeleteConfirmation"
     >
-      <div 
-        :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }"
-        @click="setOpen"
-      >
+      <div class="list-text" @click="setOpen">
         <span id="createdDate-time" style="margin-right: 12px; white-space: nowrap; padding: 6px 0px;">
           {{ dateTimeDisplay }}
         </span>
-        <span id="list-name" @dblclick="openNameField">
+        <span :class="{'list-name': key !== editedListId && list.name, 'list-name-icon': !list.name && isOpen && key !== editedListId}" @dblclick="openNameField">
           <span v-if="key !== editedListId && list.name">
             {{ list.name }}
           </span>
-          <button :class="{ 'list-open-text': isOpen, 'list-closed-text': !isOpen }" v-if="!list.name && isOpen && key !== editedListId">
+          <button v-if="!list.name && isOpen && key !== editedListId">
             <i class="material-icons" @click="openNameField">create</i>
           </button>
           <insert-list-name v-if="key === editedListId" :key="this.key"/>
@@ -29,18 +26,25 @@
         class="mobile-hide"
         style="position: relative; right: 10px;"
         id="delete-list"
+        v-if=" isOpen && !mainMenuIsOpen"
       >
         <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
       </button>
-      <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" id="item-count">
+      <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" class="item-count">
         {{ itemCount }}
        </span>
-      <span v-if="isLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>      
-      <div class="separator-line"/>
+      <!-- <span v-if="isLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>       -->
     </div>
     <div v-else-if="deleting" class="delete-confirmation">
-      <button class="button" @click="deleteList">Delete</button>
-      <button class="button" @click="closeDeleteConfirmation" >Cancel</button>
+      <span class="mobile-hide" style="width: 50%"></span>
+      <button class="button" @click="closeDeleteConfirmation" >
+        <i class="material-icons">clear</i>
+        <span style="font-family: Montserrat;">Cancel</span>
+      </button>
+      <button class="button" @click="deleteList">
+        <i class="material-icons">delete_forever</i>
+        <span style="font-family: Montserrat;">Delete</span>
+      </button>
     </div>
   </div>
 </template>
@@ -63,19 +67,20 @@ export default {
       if (this.isLoaded) {
         this.$store.commit('setopenListId', this.key);
       } else {
-        this.$store.commit('setLoading', true);
+        // this.$store.commit('setLoading', true);
         ItemService.getItems( [this.list.id], await this.$auth.getTokenSilently())
           .then(res => {
             if (res[0] === 'SUCCESS') {
               var itemsFromApi = res[1];
               this.$store.commit('addItems', itemsFromApi);
-              this.$store.commit('setLoading', false);
+              // this.$store.commit('setLoading', false);
               this.$store.commit('addLoadedListId', this.key)
             } else {
               this.$store.commit('showGenericError');
             }
           }).catch(() => {
-            this.$store.commit('setLoading', false);
+            // this.$store.commit('setLoading', false);
+            this.$store.commit('showGenericError');
           });
       }
     },
@@ -83,12 +88,14 @@ export default {
       this.$store.commit('setEditedListId', this.key);
     },
     openDeleteConfirmation() {
-      this.$store.commit('setDeleteConfirmationId', this.key);
+      setTimeout(() => {
+        this.$store.commit('setDeleteConfirmationId', this.key);        
+      }, 0);
     },
     closeDeleteConfirmation() {
       this.$store.commit('setDeleteConfirmationId', null);
     },
-    async deleteList() {  
+    async deleteList() {
       this.$store.commit('setLoading', true);
       ListService.deleteList(this.key, await this.$auth.getTokenSilently())        
         .then(res => {
@@ -154,6 +161,9 @@ export default {
     },
     deleting() {
       return this.$store.state.deleteConfirmationId === this.key;
+    },
+    mainMenuIsOpen() {
+      return this.$store.state.mainMenuIsOpen;
     }
   }
 }
@@ -169,20 +179,46 @@ export default {
   background-color: white;
 }
 
-.list-open-text {
+.list-text {
   display: flex;
   display: -webkit-flex; 
   align-items: center; 
-  flex-wrap: wrap; 
-  width: 95%;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 4px 12px;
 }
 
-.list-closed-text {
+.list-name {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80vw;
+  max-width: 340px;
+}
+
+.list-name-icon {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80vw;
+  max-width: 340px;
+  width: 32px;
+}
+
+.item-count {
   display: flex;
-  display: -webkit-flex; 
-  align-items: center; 
-  flex-wrap: wrap; 
-  width: 92%;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 3px white;
+  font-size: 14px;
+  margin: 4px 16px 4px 0px;
 }
 
 .list-closed-count {
@@ -194,45 +230,27 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: red;
+  padding: 0px 50px;
+  background-color: rgb(116, 13, 2);
   min-height: 44px;
+  font-family: Montserrat;
 }
 
 .button {
-  font-size: 26px;
+  font-size: 22px;
+}
+
+.material-icons {
+  padding-right: 6px;
 }
 
 #list-header {
-  touch-action: pan-y !important;
   display: flex;
   display: -webkit-flex;
   justify-content: space-between;
   align-items: center;
+  touch-action: pan-y !important;
   min-height: 32px;
-  padding: 7px 12px 7px 10px;
   cursor: pointer;
 }
-
-#list-name {
-  display: inline-block;
-  align-items: center; 
-  white-space: nowrap; 
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden !important;
-  text-overflow: ellipsis;
-}
-
-#item-count {
-  display: flex;
-  display: -webkit-flex;
-  justify-content: center;
-  align-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 30px;
-  box-shadow: 0px 0px 3px white;
-  font-size: 14px;
-}
-
 </style>

@@ -77,7 +77,9 @@ export default {
 <style scoped>
 #main-view {
   display: flex; 
-  display: -webkit-flex; 
+  display: -webkit-flex;
   flex-direction: column;
+  width: 100vw;
+  max-width: 1000px;
 }
 </style>

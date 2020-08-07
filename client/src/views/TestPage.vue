@@ -7,6 +7,12 @@
 <script>
 
 export default {
-  name: "TestPage"
+  name: "TestPage",
+  created() {
+    alert('created')
+  },
+  mounted() {
+    alert('mounted')
+  }
   }
 </script>
