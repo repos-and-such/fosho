@@ -7,7 +7,7 @@
       ref="nameField"
       class="text-field"
       spellcheck="false" 
-      :placeholder="'enter list name'" 
+      :placeholder="'list name (optional)'" 
       v-model="entry" 
       @keydown.enter.prevent
       @keydown.enter="insertListName"

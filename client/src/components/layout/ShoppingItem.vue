@@ -3,21 +3,40 @@
     <div id="shopping-item" :class="{ 'item-bought': item.bought, 'item-active': !item.bought }" style="display: flex">
       <span 
         v-if="!editMode" 
-        class="button" 
+        class="button"
+        ref="itemName"
         @click="toggleBought"
         v-hammer:press="openEditMode"
       >
         {{ item.name }}
       </span>
-      <span v-else>
-        <input 
-          v-model="item.name" 
-          @blur="cancelEdit"
+      <span v-else style="display: flex; align-items: center;">
+          <textarea 
+          v-model="item.name"
+          class="text-field"
+          ref="itemNameField"
+          spellcheck="false"
           @keydown.esc="cancelEdit"
           @keydown.enter="commitEdit" 
         />
+        <span class="icon-container">
+          <i 
+            class="material-icons" 
+            @click="commitEdit" 
+            style="margin-right: 16px; color: rgb(65, 156, 92);"
+          >
+            check
+          </i>
+          <i 
+            class="material-icons"
+            @click="deleteItem"
+            style="margin-right: 16px; color: rgb(180, 3, 3);">
+            delete_forever
+          </i>
+        </span>
       </span>
       <span 
+        v-if="!editMode"
         @click="toggleCategoryMenu"
         id="category-indicator"
         :class="{
@@ -63,15 +82,26 @@ export default {
   },
   methods: {
     openEditMode() {
+      let editedNameHeight = this.$refs.itemName.clientHeight;
+      let editedNameWidth = this.$refs.itemName.clientWidth;
+      document.documentElement.style.setProperty('--nameHeight', `${editedNameHeight}px`);
+      document.documentElement.style.setProperty('--nameWidth', `${editedNameWidth}px`);
+
+
+
       this.rollBackValue = this.item.name;
       this.editMode = true;
+      setTimeout(() => {
+        this.$refs.itemNameField.focus();
+      }, 0);
     },
     cancelEdit() {
       this.item.name = this.rollBackValue;
       this.editMode = false;
     },
     commitEdit() {
-      this.executeUpdate(this.item);
+      let freshItem = Object.assign({}, this.item);
+      this.executeUpdate(freshItem);
       this.editMode = false;
     },
     toggleBought() {
@@ -91,8 +121,9 @@ export default {
     async executeUpdate(freshItem) {
       let originalItem = Object.assign({}, this.item);
       let originalItemBackup = Object.assign({}, this.item);
-      this.$store.commit('updateItem', { originalItem, freshItem });
-
+      if (!this.editMode) {
+        this.$store.commit('updateItem', { originalItem, freshItem });
+      }
       ItemService.updateItem(freshItem, this.item, await this.$auth.getTokenSilently())
           .then(res => {
             if (res.data[0] !== 'SUCCESS') {
@@ -100,9 +131,22 @@ export default {
               originalItem = Object.assign({}, freshItem);
               freshItem = originalItemBackup;
               this.$store.commit('updateItem', { originalItem, freshItem });
+            } else if (this.rollBackValue) {
+              this.$store.commit('updateItem', { originalItem, freshItem });
+              this.rollBackValue = '';
             }
           });        
     },
+    async deleteItem() {
+      ItemService.deleteItem(this.item.id, await this.$auth.getTokenSilently())
+        .then(res => {
+          if (res.data[0] === 'SUCCESS') {
+            this.$store.commit('deleteItem', this.item);
+          } else {
+            this.$store.commit('showGenericError');
+          }
+        });
+    }
   },
   computed: {
     item() {
@@ -155,6 +199,28 @@ export default {
   font-size: 24px;
   cursor: pointer;
   word-break: break-word;
+}
+
+.text-field {
+  border: none;
+  box-shadow: none;
+  padding: px 0px 2px 14px;
+  background-color: transparent;
+  border-radius: 0px;
+  margin: 0px;
+  width: calc(var(--nameWidth)*0.80);
+  height: (--nameHeight);
+  min-height: 80px;
+  color: rgb(219, 92, 41);
+}
+
+.icon-container {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+  height: calc(var(--nameHeight)*1);
+  padding: 6px 0px;
+  min-height: 70px;
 }
 
 .none {

@@ -67,26 +67,23 @@ button:active {
   box-shadow: none;
 }
 
-
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 3s;
+  transition: opacity 1s;
 }
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
-.slide-enter-active {
+.fade-expand-enter-active {
   transition: all 0.3s ease;
 }
-.slide-leave-active {
+.fade-expand-leave-active {
   transition: all 0.3s ease;
 }
-.slide-enter, .slide-leave-to
+.fade-expand-enter, .fade-expand-leave-to
 {
   transform: scale(0.95);
-
-  /* transform: translateY(-10px); */
   opacity: 0;
 }
 

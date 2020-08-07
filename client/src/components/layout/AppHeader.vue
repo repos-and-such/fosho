@@ -29,7 +29,7 @@
       >
         more_vert
     </button>
-    <transition name="slide">
+    <transition name="fade-expand">
     <main-menu v-if="mainMenuIsOpen" style="position:absolute;" />
     </transition>
   </div>

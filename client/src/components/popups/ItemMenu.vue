@@ -11,13 +11,6 @@
         {{ category.charAt(0).toUpperCase() + category.slice(1).replace('-and-', '/').replace('-', ' ') }}
       </span>
     </div>
-    <span class="separator-line"></span>
-    <div class="selection-element" @click="deleteItem">
-      <i class="material-icons" id="delete-icon">delete_forever</i>
-      <span class="text">
-        Delete Item
-      </span>
-    </div> 
   </div> 
 </template>
 
@@ -51,16 +44,6 @@ export default {
 
           });   
     },
-    async deleteItem() {
-      ItemService.deleteItem(this.item.id, await this.$auth.getTokenSilently())
-        .then(res => {
-          if (res.data[0] === 'SUCCESS') {
-            this.$store.commit('deleteItem', this.item);
-          } else {
-            this.$store.commit('showGenericError');
-          }
-        });
-    }
   }
 }
 </script>
