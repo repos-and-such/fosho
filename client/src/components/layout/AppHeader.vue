@@ -29,7 +29,9 @@
       >
         more_vert
     </button>
+    <transition name="slide">
     <main-menu v-if="mainMenuIsOpen" style="position:absolute;" />
+    </transition>
   </div>
 </template>
 
@@ -97,7 +99,7 @@ export default {
 
 #plus-button {
   font-size: 42px;
-  padding: 3px 5px;
+  padding: 1px 4px;
   animation-name: spin;
   animation-duration: 2000ms;
   animation-iteration-count: 1;

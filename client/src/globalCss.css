@@ -69,10 +69,24 @@ button:active {
 
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s;
+  transition: opacity 3s;
 }
 
 .fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-enter, .slide-leave-to
+{
+  transform: scale(0.95);
+
+  /* transform: translateY(-10px); */
   opacity: 0;
 }
 
@@ -151,19 +165,22 @@ select::-ms-expand {
 }
 
 .router-sub-page {
-  display:flex; 
+  display:flex;
   flex-direction: column;
-  height: calc(var(--vh, 1vh) + 48px);
+  align-items: center;
+  height: var(--vh, 1vh);
   font-size: 20px;
-  max-width: 1000px;
+  max-width: 988px;
   background: white;
+  box-shadow: 0px 0px 4px rgb(171, 171, 171);
+
 }
 
 .page-body {
   padding: 0px 20px;
   color: rgb(80, 80, 80);
   overflow: auto;
-  height: 86%;
+  height: 100vh;
 }
 
 .sub-heading {

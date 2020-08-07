@@ -28,8 +28,8 @@ export default {
 @media screen and (max-width: 600px) {
 #back-button {
   position: absolute;
-  bottom: 44px;
-  right: 44px;
+  top: calc(var(--vh, 1vh) - 90px);
+  right: 40px;
   display: flex;
   justify-content: center;
   align-items: center;

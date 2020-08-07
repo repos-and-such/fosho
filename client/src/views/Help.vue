@@ -1,4 +1,3 @@
-// Üle vaadata
 <template>
   <div class="router-sub-page">
     <page-header :text="'Getting Started'" />

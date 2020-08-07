@@ -7,8 +7,6 @@
       v-if="items[0] !== -1">
         <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
     </transition-group>
-
-
     <div v-if="itemsBought.length !== 0" class="separator-line"/>
     <div v-if="itemsBought.length !== 0" style="font-size: 15px; margin: 0px 0px 10px 5px; color: rgba(209, 80, 80, 0.718);">BOUGHT:</div>
     <transition-group 
@@ -101,7 +99,7 @@ export default {
 }
 
 #shopping-list-items {
-  padding-right: 20px;
+  padding-bottom: 10px;
   display: flex;
   display: -webkit-flex;
   flex-wrap: wrap;

@@ -109,7 +109,7 @@ router.delete('/:id', checkJwt, async (req, res) => {
 router.post('/category', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect();
-    let rawItemsArray = req.body.items.split(/\r?\n/);
+    let rawItemsArray = req.body.items.split(/\r?,/);
     let itemsArray = [];
     rawItemsArray.forEach(item => {
       if (item.length > 1) {

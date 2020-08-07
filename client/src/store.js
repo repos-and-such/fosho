@@ -18,7 +18,6 @@ export default new Vuex.Store({
     editedItem: {},
     openCategoryMenuId: null,
     mainMenuIsOpen: false,
-    storeEntry: '',
     deleteConfirmationId: null
   },
   mutations: {
@@ -51,9 +50,6 @@ export default new Vuex.Store({
     },
     setOpenCategoryMenuId(state, id) {
       state.openCategoryMenuId = id;
-    },
-    setStoreEntry(state, storeEntry) {
-      state.storeEntry = storeEntry;
     },
 
     // Lists mutations

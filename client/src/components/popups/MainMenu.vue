@@ -44,16 +44,17 @@ export default {
 <style scoped>
 .selection-box {
   position: absolute;
-  right: calc(((100% - 1000px)/2) + 1px);
-  top: 61px;
+  right: calc(((100% - 1000px)/2) + 6px);
+  top: 50px;
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: #ffffff;
+  background: white;
   box-shadow: 0 0 5px #00000070;
   padding: 10px;
   padding-right: 18px;
+  z-index: 9999;
 }
 
 .button {

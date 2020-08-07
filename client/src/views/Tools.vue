@@ -1,5 +1,5 @@
 <template>
-  <div class="router-sub-page">
+  <div class="router-sub-page" style="width: 100%;">
     <page-header :icon="'settings'" :text="'Tools'" />
     <div class="page-body">
       <div class="note">
@@ -12,10 +12,10 @@
       <div class="sub-text"></div>
     <div class="separator-line"></div>
     <div class="sub-heading">Bulk add item categories</div>
-      <div style="display: flex; flex-direction: column; align-items: flex-start;">
-        <textarea class="text-field" id="category" v-model="category" />
-      </div>
-      <div class="separator-line"></div>
+    <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <textarea class="text-field" v-model="category" />
+    </div>
+    <div class="separator-line"></div>
     </div>
     <back-button class="desktop-hide" />
     <div>
@@ -75,7 +75,9 @@ export default {
 .text-field {
   align-self: center;
   padding: 10px 5vw;
-  height: 30vh; 
+  height: 30vh;
+  width: 80%;
+  max-width: 900px;
   border-radius: 0px;
   word-wrap: break-word;
   overflow: auto;

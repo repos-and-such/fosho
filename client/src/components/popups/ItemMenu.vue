@@ -1,21 +1,7 @@
 <template>
   <div class="item-menu">
-    <div class="selection-element" @click="editItemName">
-      <i class="material-icons" id="edit-icon">create</i>
-      <span class="text">
-        Edit Item
-      </span>
-    </div> 
-    <span class="separator-line"></span>
-    <div class="selection-element" @click="deleteItem">
-      <i class="material-icons" id="delete-icon">delete_forever</i>
-      <span class="text">
-        Delete Item
-      </span>
-    </div> 
-    <span class="separator-line"></span>
     <div 
-      v-for="category in categories" 
+      v-for="category in categories.sort()" 
       :key="category"
       @click="setCategory(category)"
       class="selection-element"
@@ -25,6 +11,13 @@
         {{ category.charAt(0).toUpperCase() + category.slice(1).replace('-and-', '/').replace('-', ' ') }}
       </span>
     </div>
+    <span class="separator-line"></span>
+    <div class="selection-element" @click="deleteItem">
+      <i class="material-icons" id="delete-icon">delete_forever</i>
+      <span class="text">
+        Delete Item
+      </span>
+    </div> 
   </div> 
 </template>
 
@@ -67,10 +60,6 @@ export default {
             this.$store.commit('showGenericError');
           }
         });
-    },
-    editItemName() {
-      this.$store.commit('setStoreEntry', this.item.name)
-      this.deleteItem();
     }
   }
 }
@@ -83,10 +72,10 @@ export default {
   display: -webkit-flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: #ffffff;
+  background: white;
   box-shadow: 0 0 5px #00000070;
   padding: 10px;
-  margin: 0px 10px 6px 12px;
+  margin: 4px 10px 6px 12px;
   padding-right: 18px;
   max-width: 200px;
 }
@@ -166,11 +155,5 @@ export default {
 #household {
   border: 12px solid rgba(71, 202, 180, 0.3);
   box-shadow: 0 0 5px rgb(95, 180, 166);
-}
-
-#edit-icon {
-  color: rgb(77, 77, 124);
-  margin-left: 8px;
-  font-size: 26px;
 }
 </style>

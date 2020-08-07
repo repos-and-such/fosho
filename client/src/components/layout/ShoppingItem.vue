@@ -1,8 +1,21 @@
 <template>
   <div>
     <div id="shopping-item" :class="{ 'item-bought': item.bought, 'item-active': !item.bought }" style="display: flex">
-      <span class="button" @click="toggleBought">
+      <span 
+        v-if="!editMode" 
+        class="button" 
+        @click="toggleBought"
+        v-hammer:press="openEditMode"
+      >
         {{ item.name }}
+      </span>
+      <span v-else>
+        <input 
+          v-model="item.name" 
+          @blur="cancelEdit"
+          @keydown.esc="cancelEdit"
+          @keydown.enter="commitEdit" 
+        />
       </span>
       <span 
         @click="toggleCategoryMenu"
@@ -21,10 +34,12 @@
           }"
       />
     </div>
-  <item-menu
-      v-if="categoryMenuIsOpen"
-      :item="item"
-    />
+    <slide-up-down :active="categoryMenuIsOpen">
+      <item-menu
+        v-if="categoryMenuIsOpen"
+        :item="item"
+      />
+    </slide-up-down>
   </div>
 </template>
 
@@ -40,7 +55,25 @@ export default {
   components: {
     ItemMenu
   },
+  data() {
+    return {
+      editMode: false,
+      rollBackValue: ''
+    }
+  },
   methods: {
+    openEditMode() {
+      this.rollBackValue = this.item.name;
+      this.editMode = true;
+    },
+    cancelEdit() {
+      this.item.name = this.rollBackValue;
+      this.editMode = false;
+    },
+    commitEdit() {
+      this.executeUpdate(this.item);
+      this.editMode = false;
+    },
     toggleBought() {
       let freshItem = Object.assign({}, this.item);
       freshItem.bought = !freshItem.bought;
@@ -189,7 +222,7 @@ export default {
   display: -webkit-flex;
   align-items: center;
   margin: 0px 2px 0px 3px;
-  margin-bottom: 7px;
+  margin-top: 7px;
   border-radius: 24px;
   text-align: left;
   background-color: white;

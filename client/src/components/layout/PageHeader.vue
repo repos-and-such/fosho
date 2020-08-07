@@ -50,7 +50,8 @@ export default {
   color: white;
   width: 100%;
   font-size: 28px;
-  height: 52px;
+  height: 48px;
+  margin: 0px 6px;
 }
 
 @media screen and (max-width: 600px){
