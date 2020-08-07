@@ -83,8 +83,6 @@ export default {
     items() {
       this.listBodyTip = null;
       setTimeout(() => {
-        console.log(this.items.length === 0)
-        console.log(this.key !== this.editedListId)
         if (this.items.length === 0 && this.key !== this.editedListId) {
           this.listBodyTip = 'Push Enter or green check-mark to submit';  
         } else if (this.items.length === 1) {

@@ -93,7 +93,7 @@ export default {
   display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(187, 57, 42);
+  background-color: rgb(63, 7, 136);
   -webkit-tap-highlight-color: transparent;
 }
 
