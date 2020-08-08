@@ -103,7 +103,7 @@ export default {
 
 }
 
-@media screen and (max-height: 700px) {
+@media screen and (max-width: 330px) {
 .text-field {
   zoom: 0.85;
 } 

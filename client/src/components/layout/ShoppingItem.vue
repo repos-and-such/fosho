@@ -113,9 +113,13 @@ export default {
     },
     commitEdit() {
       this.blurLock = true;
-      let freshItem = Object.assign({}, this.item);
-      this.executeUpdate(freshItem);
-      this.$store.commit('setEditedItemId', null);
+      if (this.item.name.length > 0) {
+        let freshItem = Object.assign({}, this.item);
+        this.executeUpdate(freshItem);
+        this.$store.commit('setEditedItemId', null);
+      } else {
+        this.cancelEdit();
+      }
     },
     toggleBought() {
       let freshItem = Object.assign({}, this.item);
