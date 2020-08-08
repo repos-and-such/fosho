@@ -68,10 +68,13 @@ button:active {
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 1s;
+  transition: opacity 2s;
+}
+.fade-quick-enter-active, .fade-quick-leave-active {
+  transition: opacity 0.3s;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter, .fade-leave-to, .fade-quick-enter, .fade-quick-leave-to {
   opacity: 0;
 }
 
@@ -131,8 +134,8 @@ button:active {
 
 .text-field:focus {
   outline: none !important;
-  border: 1px solid  rgba(213, 102, 68, 0.637);
-  box-shadow: 0 0 5px rgba(213, 102, 68, 0.637);
+  border: 1px solid rgba(223, 73, 98, 0.5);
+  box-shadow: 0 0 4px  rgba(223, 73, 98, 0.6);
   color: rgb(71, 7, 0);
 }
 

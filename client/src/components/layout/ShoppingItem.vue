@@ -183,8 +183,8 @@ export default {
 
 <style scoped>
 .item-active {
-  border: 1px solid rgb(246, 186, 240);
-  box-shadow: 0 0 4px rgb(246, 186, 240);
+  border: 1px solid rgba(223, 73, 98, 0.5);
+  box-shadow: 0 0 4px  rgba(223, 73, 98, 0.6);
   color: rgb(98, 85, 85);
 }
   

@@ -171,7 +171,7 @@ export default {
 <style scoped>
 .list-open {
   color: white;
-  background-color: rgb(218, 98, 84);
+  /* background-color: rgb(218, 98, 84); */
   background-image: linear-gradient(160deg, rgb(134, 63, 130), rgb(96, 86, 141));
 
 }
@@ -234,6 +234,7 @@ export default {
   justify-content: space-around;
   padding: 0px 50px;
   background-color: rgb(116, 13, 2);
+  background-image: linear-gradient(160deg, rgb(85, 85, 85), rgb(144, 16, 2));
   min-height: 44px;
   font-family: Montserrat;
 }

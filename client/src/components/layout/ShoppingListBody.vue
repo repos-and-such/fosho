@@ -1,41 +1,45 @@
 <template>
   <div v-if="!isLoading" id="shopping-list-body">
     <insert-item :key="key"/>
-    <transition-group 
-      :name="animationName"
-      id="shopping-list-items" 
-      v-if="items[0] !== -1">
+    <div>
+      <transition-group 
+        :name="animationName"
+        id="shopping-list-items" 
+        v-if="items[0] !== -1"
+      >
         <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
-    </transition-group>
+      </transition-group>
+      <slide-up-down :active="!!listBodyTip">
+        <user-tip :text="listBodyTip"/>
+      </slide-up-down>    
+    </div>
     <div v-if="itemsBought.length !== 0" class="separator-line"/>
     <div v-if="itemsBought.length !== 0" style="font-size: 15px; margin: 0px 0px 10px 5px; color: rgba(209, 80, 80, 0.718);">BOUGHT:</div>
     <transition-group 
       :name="animationName"
-      id="shopping-list-items">
+      id="shopping-list-items"
+    >
       <shopping-item v-for="item in itemsBought" :key="item.id" :listKey="key" />
     </transition-group>
-    <transition name="fade">
-      <div v-if="listBodyTip">
-        {{ listBodyTip }}
-      </div>
-    </transition>
   </div>
 </template>
 
 <script>
 import ShoppingItem from './ShoppingItem';
 import InsertItem from './InsertItem';
+import UserTip from '../popups/UserTip'
 
 export default {
   components: {
     ShoppingItem,
-    InsertItem
+    InsertItem,
+    UserTip
   },
   name: "ShoppingListBody",
   data() {
     return {
       animationName: '',
-      listBodyTip: ''
+      listBodyTip: null
     }
   },
   methods: {
@@ -59,6 +63,9 @@ export default {
     list() {
       return this.$store.getters.getListById(this.key);
     },
+    listsLength() {
+      return this.$store.getters.getListsLength;
+    },
     items() {
       let unsortedItems = this.$store.getters.getItemsByListId(this.key);
       return unsortedItems.sort(this.compareItems);
@@ -75,57 +82,58 @@ export default {
     editedListId() {
       return this.$store.state.editedListId;
     },
+    listNameFieldOpen() {
+      return this.editedListId === this.key;
+    },
     isLoading() {
       return this.$store.state.isLoading;
     }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.animationName = 'bounce';
+    }, 1000);
+
   },
   watch: {
     items() {
       this.listBodyTip = null;
       setTimeout(() => {
-        if (this.items.length === 0 && this.key !== this.editedListId) {
-          this.listBodyTip = 'Push Enter or green check-mark to submit';  
-        } else if (this.items.length === 1) {
-          this.listBodyTip = 'Push the circle next to item name to change category';
-        } else if (this.items.length === 2) {
-          this.listBodyTip = 'Long press item name to edit or delete';
-        } else if (this.items.length === 3) {
-          this.listBodyTip = 'Vertical swipe list header to delete a list';
+        if (this.itemsBought.length === 0) {
+          if (this.items.length === 1) {
+            if (this.listsLength === 1) {
+              this.listBodyTip = 'Push the circle next to item name to change category';
+            } else {
+              this.listBodyTip = 'To delete a list, swipe list header left or right';
+            }
+          } else if (this.items.length === 2) {
+            this.listBodyTip = 'Long press item name to edit or delete';
+          }
         }
-      }, 1000);
+      }, 600);
+    }, 
+    listNameFieldOpen() {
+      setTimeout(() => {
+        if (this.items.length === 0 && !this.listNameFieldOpen) {
+          this.listBodyTip = 'Push Enter or green check-mark to submit an item'; 
+        } 
+
+      }, 600);
+    },
+    itemsBought() {
+      setTimeout(() => {
+        if (this.itemsToBuy.length === 0 && this.itemsBought.length > 0) {
+          this.listBodyTip = 'Done! Click the plus button in top-left to create a new list';
+        }
+      }, 600);
     }
   }
 }
 </script>
 
-
-    <!-- <transition-group name="fade">
-      <div :key="0" v-if="items.length === 0 && key !== editedListId" class="list-body-tip"> 
-        {{ listBodyTip }}
-      </div>
-      <div :key="1" v-if="items.length === 1" class="list-body-tip"> 
-        Long press item name to edit or delete
-      </div>
-      <div key="2" v-if="items.length === 2" class="list-body-tip">
-          Push the circle next to item name to change category
-      </div>
-    </transition-group> -->
-
-
 <style scoped>
-.list-body-tip {
-  display: flex;
-  display: -webkit-flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  padding: 50px 20px 20px 20px; 
-  color: gray;
-}
-
 #shopping-list-body {
-  min-height: 180px;
+  min-height: 220px;
   padding: 10px 8px 8px 8px;
 }
 
