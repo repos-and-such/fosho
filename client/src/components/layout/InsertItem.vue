@@ -73,7 +73,7 @@ export default {
 <style scoped>
 .text-field {
   width: 90%;
-  padding-top: 6px;
+  padding-top: 7px;
   white-space: nowrap;
   overflow: hidden;
 }

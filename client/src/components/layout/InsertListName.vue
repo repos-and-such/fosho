@@ -81,6 +81,7 @@ export default {
     setTimeout(() => {
       this.$refs.nameField.focus();
     }, 0);
+    this.entry = this.listBeforeUpdate.name;
   }
 }
 </script>
@@ -95,7 +96,16 @@ export default {
   font-size: 18px;
   box-shadow: none;
   border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgb(255, 255, 255);
+  
 }
+
+::placeholder {
+  color: rgb(255, 253, 252);
+  opacity: 1;
+}
+
 
 #insert-list-name {
   display: flex;

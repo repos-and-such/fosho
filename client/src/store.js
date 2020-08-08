@@ -15,7 +15,7 @@ export default new Vuex.Store({
     alertMessage: '',
     alertType: '',
     diagOpen: false,
-    editedItem: {},
+    editedItemId: null,
     openCategoryMenuId: null,
     mainMenuIsOpen: false,
     deleteConfirmationId: null
@@ -45,8 +45,10 @@ export default new Vuex.Store({
       let index = state.items.indexOf(item);
       state.items.splice(index, 1);
     },
-    setEditedItem(state, item) {
-      state.editedItem = Object.assign({}, item);
+    setEditedItemId(state, id) {
+      console.log(id)
+      state.editedItemId = id;
+      console.log(state.editedItemId)
     },
     setOpenCategoryMenuId(state, id) {
       state.openCategoryMenuId = id;

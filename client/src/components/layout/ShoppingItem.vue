@@ -17,13 +17,14 @@
           ref="itemNameField"
           spellcheck="false"
           @keydown.esc="cancelEdit"
-          @keydown.enter="commitEdit" 
+          @keydown.enter="commitEdit"
+          @blur="cancelEdit"
         />
         <span class="icon-container">
           <i 
             class="material-icons" 
             @click="commitEdit" 
-            style="margin-right: 16px; color: rgb(65, 156, 92);"
+            style="margin-right: 16px; color: rgb(65, 148, 156);"
           >
             check
           </i>
@@ -76,33 +77,29 @@ export default {
   },
   data() {
     return {
-      editMode: false,
       rollBackValue: ''
     }
   },
   methods: {
     openEditMode() {
+      this.$store.commit('setEditedItemId', this.key);
       let editedNameHeight = this.$refs.itemName.clientHeight;
       let editedNameWidth = this.$refs.itemName.clientWidth;
       document.documentElement.style.setProperty('--nameHeight', `${editedNameHeight}px`);
       document.documentElement.style.setProperty('--nameWidth', `${editedNameWidth}px`);
-
-
-
       this.rollBackValue = this.item.name;
-      this.editMode = true;
       setTimeout(() => {
         this.$refs.itemNameField.focus();
       }, 0);
     },
     cancelEdit() {
       this.item.name = this.rollBackValue;
-      this.editMode = false;
+      this.$store.commit('setEditedItemId', null);
     },
     commitEdit() {
       let freshItem = Object.assign({}, this.item);
       this.executeUpdate(freshItem);
-      this.editMode = false;
+      this.$store.commit('setEditedItemId', null);
     },
     toggleBought() {
       let freshItem = Object.assign({}, this.item);
@@ -158,24 +155,11 @@ export default {
     list() {
       return this.$store.getters.getListById(this.listKey);
     },
-    triggerConfirmUpdate() {
-      return this.$store.state.triggerConfirmUpdate;
-    },
-    editedItem() {
-      return this.$store.state.editedItem;
-    },
     categoryMenuIsOpen() {
       return this.key === this.$store.state.openCategoryMenuId;
-    }
-  },
-  watch: {
-    triggerConfirmUpdate() {
-      setTimeout(() => {
-        if (this.key === this.editedItem.id) {
-          this.executeUpdate(this.editedItem);
-        } // siia erinevuse check ka?
-      }, 0);
-     
+    },
+    editMode() {
+      return this.$store.state.editedItemId === this.key;
     }
   }
 }
@@ -204,23 +188,23 @@ export default {
 .text-field {
   border: none;
   box-shadow: none;
-  padding: px 0px 2px 14px;
   background-color: transparent;
   border-radius: 0px;
-  margin: 0px;
-  width: calc(var(--nameWidth)*0.80);
-  height: (--nameHeight);
-  min-height: 80px;
-  color: rgb(219, 92, 41);
+  padding: 0px 0px 0px 14px;
+  margin: -1px 0px 0px 0px;
+  width: calc(var(--nameWidth)*0.95);
+  height: calc(var(--nameHeight)*0.8);
+  max-width: 60vw;
+}
+
+.text-field:focus {
+  color: rgb(170, 120, 87);
 }
 
 .icon-container {
   display: flex; 
-  flex-direction: column; 
   justify-content: space-between; 
-  height: calc(var(--nameHeight)*1);
-  padding: 6px 0px;
-  min-height: 70px;
+  height: var(--nameHeight);
 }
 
 .none {

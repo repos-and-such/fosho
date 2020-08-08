@@ -117,7 +117,7 @@ export default {
 #f-bomb {
   color: rgb(255, 253, 252);
   font-size: 48px;
-  margin: 5px 4px -17px 0px;
+  margin: 1px 4px -17px 0px;
 }
 
 #o {

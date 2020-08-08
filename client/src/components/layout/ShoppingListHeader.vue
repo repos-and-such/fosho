@@ -9,7 +9,11 @@
         <span id="createdDate-time" style="margin-right: 12px; white-space: nowrap; padding: 6px 0px;">
           {{ dateTimeDisplay }}
         </span>
-        <span :class="{'list-name': key !== editedListId && list.name, 'list-name-icon': !list.name && isOpen && key !== editedListId}" @dblclick="openNameField">
+        <span 
+          :class="{'list-name': key !== editedListId && list.name, 'list-name-icon': !list.name && isOpen && key !== editedListId}"
+          v-hammer:press="openNameField" 
+          @dblclick="openNameField"
+        >
           <span v-if="key !== editedListId && list.name">
             {{ list.name }}
           </span>

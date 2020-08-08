@@ -9,7 +9,7 @@
       >
         <shopping-item v-for="item in itemsToBuy" :key="item.id" :listKey="key" />
       </transition-group>
-      <slide-up-down :active="!!listBodyTip">
+      <slide-up-down :active="!!listBodyTip" :duration="slideDuration">
         <user-tip :text="listBodyTip"/>
       </slide-up-down>    
     </div>
@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       animationName: '',
-      listBodyTip: null
+      listBodyTip: '',
+      slideDuration: 0
     }
   },
   methods: {
@@ -87,6 +88,15 @@ export default {
     },
     isLoading() {
       return this.$store.state.isLoading;
+    },
+    isMobile() {
+      return 'ontouchstart' in document.documentElement;
+    },
+    tapOrClick() {
+      return this.isMobile ? 'Tap' : 'Click';
+    },
+    iconOrSwipe() {
+      return this.isMobile ? 'swipe list header left or right' : 'click delete icon the on list header';
     }
   },
   mounted() {
@@ -97,35 +107,40 @@ export default {
   },
   watch: {
     items() {
-      this.listBodyTip = null;
+      this.listBodyTip = '';
+      this.slideDuration = 0;
       setTimeout(() => {
         if (this.itemsBought.length === 0) {
           if (this.items.length === 1) {
-            if (this.listsLength === 1) {
-              this.listBodyTip = 'Push the circle next to item name to change category';
+            if (this.listsLength < 4) {
+              this.listBodyTip = `${this.tapOrClick} the circle next to item name to change category`;
             } else {
-              this.listBodyTip = 'To delete a list, swipe list header left or right';
+              this.listBodyTip = `To delete a list, ${this.iconOrSwipe}`;
             }
           } else if (this.items.length === 2) {
-            this.listBodyTip = 'Long press item name to edit or delete';
+            this.listBodyTip = `${this.tapOrClick} item name to mark as bought`;
+          } else if (this.items.length === 3) {
+            this.listBodyTip = `${this.tapOrClick} and hold item name to edit or delete?`;
           }
         }
-      }, 600);
+      }, 400);
     }, 
     listNameFieldOpen() {
+      this.slideDuration = 0;
       setTimeout(() => {
         if (this.items.length === 0 && !this.listNameFieldOpen) {
-          this.listBodyTip = 'Push Enter or green check-mark to submit an item'; 
+          this.listBodyTip = `${this.tapOrClick} check-mark or hit Enter to to submit an item`; 
         } 
 
-      }, 600);
+      }, 400);
     },
     itemsBought() {
       setTimeout(() => {
         if (this.itemsToBuy.length === 0 && this.itemsBought.length > 0) {
-          this.listBodyTip = 'Done! Click the plus button in top-left to create a new list';
+          this.slideDuration = 500;
+          this.listBodyTip = `Need a new list? ${this.tapOrClick} + in the top-left corner!`;
         }
-      }, 600);
+      }, 400);
     }
   }
 }

@@ -24,13 +24,15 @@ export default {
   cursor: default;
 }
 #user-tip {
+  position: static;
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   justify-content: center;
-  padding: 30px 20px; 
+  justify-self: flex-end;
+  padding: 40px 20px 30px 20px; 
   color: gray;
 }
 
