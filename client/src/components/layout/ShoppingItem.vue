@@ -183,8 +183,8 @@ export default {
 
 <style scoped>
 .item-active {
-  border: 1px solid rgba(223, 73, 98, 0.5);
-  box-shadow: 0 0 4px  rgba(223, 73, 98, 0.6);
+  border: 1px solid rgb(226, 193, 174);
+  box-shadow: 0 0 4px 1px rgb(226, 193, 174);
   color: rgb(98, 85, 85);
 }
   
@@ -291,12 +291,18 @@ export default {
   margin-top: 7px;
   border-radius: 24px;
   text-align: left;
-  background-color: white;
+  background-color: rgb(255, 253, 252);
 }
 
 #category-indicator {
   margin: 0px 9px;
   border-radius: 20px;
   cursor: pointer;
+}
+
+@media screen and (max-height: 700px) {
+#shopping-item {
+  zoom: 0.85;
+} 
 }
 </style>

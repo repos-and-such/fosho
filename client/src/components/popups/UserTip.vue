@@ -34,7 +34,7 @@ export default {
   color: gray;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
 .material-icons {
   font-size: 20px;
 }

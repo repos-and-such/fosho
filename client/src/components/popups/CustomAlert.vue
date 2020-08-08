@@ -15,7 +15,7 @@ export default {
 <style scoped>
 .error {
   background-color: rgb(116, 13, 2);
-  color: white;
+  color: rgb(255, 253, 252);
   font-weight: bold;
 }
 

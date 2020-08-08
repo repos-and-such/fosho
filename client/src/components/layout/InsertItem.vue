@@ -88,28 +88,25 @@ export default {
   display: -webkit-flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 0px 0px 7px 0px;
+  margin: 0px 0px 4px 0px;
 }
 
-@media screen and (min-width: 600px) {
-.text-field {
-  height: 60px;
-  border-radius: 0px;
-  padding: 16px;
-  white-space: pre-wrap;
-  text-justify: flex-start;
-  overflow: auto;
-}
-
+@media screen and (min-width: 800px) {
 #insert-item {
   justify-content: center;
-  margin: 10px 0px 16px 0px;
+  margin: 7px 0px 10px 0px;
 }
 
 .material-icons {
-  font-size: 48px;
+  font-size: 44px;
 }
 
+}
+
+@media screen and (max-height: 700px) {
+.text-field {
+  zoom: 0.85;
+} 
 }
 
 </style>

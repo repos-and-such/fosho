@@ -46,16 +46,15 @@ export default {
   display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
-  /* background-color: rgb(187, 57, 42); */
   background-image: linear-gradient(160deg, rgb(72, 0, 90), rgb(0, 77, 90));
-  color: white;
+  color: rgb(255, 253, 252);
   width: 100%;
   font-size: 28px;
   height: 48px;
   margin: 0px 6px;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 800px){
 #page-header {
   justify-content: center;
 }

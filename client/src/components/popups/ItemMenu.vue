@@ -55,7 +55,7 @@ export default {
   display: -webkit-flex;
   flex-direction: column;
   justify-content: flex-start;
-  background: white;
+  background: rgb(255, 253, 252);
   box-shadow: 0 0 5px #00000070;
   padding: 10px;
   margin: 4px 10px 6px 12px;

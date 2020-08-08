@@ -93,9 +93,9 @@ export default {
   display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
-  /* background-color: rgb(175, 22, 42); */
-  background-image: linear-gradient(160deg, rgb(72, 0, 90), rgb(0, 77, 90));
+  background-image: linear-gradient(177deg, rgb(72, 0, 90), rgb(0, 69, 90));
   -webkit-tap-highlight-color: transparent;
+  border-bottom: 3px solid rgb(255, 253, 252);
 }
 
 #plus-button {
@@ -115,7 +115,7 @@ export default {
 }
 
 #f-bomb {
-  color: white;
+  color: rgb(255, 253, 252);
   font-size: 48px;
   margin: 5px 4px -17px 0px;
 }
@@ -123,7 +123,7 @@ export default {
 #o {
   margin-top: 4px;
   margin-right: 20px;
-  color: white;
+  color: rgb(255, 253, 252);
   font-size: 30px;
   font-weight: bold;
 }
@@ -131,12 +131,12 @@ export default {
 #osho {
   margin-top: 4px;
   margin-right: 1vw;
-  color: white;
+  color: rgb(255, 253, 252);
   font-size: 30px;
   font-weight: bold;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   #app-header {
     box-shadow: 0px -5px 5px rgb(171, 171, 171);
     margin: 0px 6px 6px 6px;

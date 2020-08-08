@@ -38,15 +38,15 @@ export default {
 <style scoped>
 #shopping-list {
   -webkit-tap-highlight-color: transparent;
-  background-color: white;
-  box-shadow: 0px 0px 4px rgb(171, 171, 171);
-  margin: 6px;
+  background-color: transparent;
+  margin: 3px 6px 6px 6px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   #shopping-list {
     box-shadow: 0px 0px 3px rgb(171, 171, 171);
-    margin: 4px 0px 6px 0px;
+    margin: 0px 0px 6px 0px;
+    background-color: rgb(255, 253, 252);
   }
 }
 </style>

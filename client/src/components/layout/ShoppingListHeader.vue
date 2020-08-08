@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div
       v-if="list && !deleting"
       :class="{ 'list-open': isOpen, 'list-closed': !isOpen }"
@@ -30,7 +29,7 @@
       >
         <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
       </button>
-      <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" class="item-count">
+      <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" id="item-count">
         {{ itemCount }}
        </span>
       <!-- <span v-if="isLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>       -->
@@ -46,7 +45,6 @@
         <span style="font-family: Montserrat;">Delete</span>
       </button>
     </div>
-  </div>
 </template>
 
 <script>
@@ -170,15 +168,18 @@ export default {
 </script>
 <style scoped>
 .list-open {
-  color: white;
-  /* background-color: rgb(218, 98, 84); */
-  background-image: linear-gradient(160deg, rgb(134, 63, 130), rgb(96, 86, 141));
-
+  color: rgb(255, 253, 252);
+  background-image: linear-gradient(170deg, rgb(134, 63, 130), rgb(86, 99, 141));
+  transform: skew(5deg);
+  -webkit-transform: skew(5deg);
+  -moz-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  margin-right: 2px;
 }
 
 .list-closed {
   color: rgb(151, 151, 151);
-  background-color: white;
+  background-color: rgb(255, 253, 252);
 }
 
 .list-text {
@@ -192,11 +193,8 @@ export default {
 
 .list-name {
   font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 80vw;
   max-width: 340px;
+  word-break: break-word;
 }
 
 .list-name-icon {
@@ -209,23 +207,12 @@ export default {
   width: 32px;
 }
 
-.item-count {
-  display: flex;
-  display: -webkit-flex;
-  justify-content: center;
-  align-items: center;
-  width: 22px !important;
-  min-width: 22px !important;
-  height: 22px;
-  border-radius: 30px;
-  box-shadow: 0px 0px 3px white;
-  font-size: 14px;
-  margin: 4px 16px 4px 0px;
+.list-open-count {
+  border: 1px solid white;
 }
 
 .list-closed-count {
-  color: rgb(151, 151, 151);
-  border: 1px solid rgb(151, 151, 151);
+  border: 1px solid rgb(149, 149, 149);
 }
 
 .delete-confirmation {
@@ -233,8 +220,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   padding: 0px 50px;
-  background-color: rgb(116, 13, 2);
-  background-image: linear-gradient(160deg, rgb(85, 85, 85), rgb(144, 16, 2));
+  background-image: linear-gradient(140deg, rgb(85, 85, 85), rgb(144, 16, 2));
   min-height: 44px;
   font-family: Montserrat;
 }
@@ -255,5 +241,31 @@ export default {
   touch-action: pan-y !important;
   min-height: 32px;
   cursor: pointer;
+  box-shadow: 0px 0px 3px rgb(141, 134, 155);
+}
+
+
+#item-count {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  width: 22px !important;
+  min-width: 22px !important;
+  height: 22px;
+  border-radius: 30px;
+  font-size: 14px;
+  margin: 4px 16px 4px 0px;
+}
+
+@media screen and (max-width: 800px) {
+  #list-header {
+  transform: none;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -o-transform: none;
+  margin: 0px;
+  box-shadow: none;
+  }
 }
 </style>

@@ -51,7 +51,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   background-color: rgb(187, 57, 42);
-  color: white;
+  color: rgb(255, 253, 252);
   width: 100%;
   font-size: 28px;
   height: 7%;
@@ -61,7 +61,7 @@ export default {
   font-size: 38px;
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 800px){
 #page-footer {
   justify-content: center;
 }

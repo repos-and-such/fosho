@@ -135,6 +135,7 @@ export default {
 #shopping-list-body {
   min-height: 220px;
   padding: 10px 8px 8px 8px;
+  background-color: rgb(255, 253, 252);
 }
 
 #shopping-list-items {
@@ -142,5 +143,12 @@ export default {
   display: flex;
   display: -webkit-flex;
   flex-wrap: wrap;
+}
+
+@media screen and (min-width: 800px){
+#shopping-list-body {
+  margin-left: 2px;
+  box-shadow: 0px 0px 3px gray;
+}
 }
 </style>
