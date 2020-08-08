@@ -5,7 +5,7 @@
       id="list-header"
       v-hammer:swipe.horizontal="openDeleteConfirmation"
     >
-      <div class="list-text" @click="setOpen">
+      <div :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }" id="list-text" @click="setOpen">
         <span id="createdDate-time" style="margin-right: 12px; white-space: nowrap; padding: 6px 0px;">
           {{ dateTimeDisplay }}
         </span>
@@ -31,12 +31,13 @@
         id="delete-list"
         v-if=" isOpen && !mainMenuIsOpen"
       >
+      <span :class="{ 'list-text-open': isOpen, 'list-text-closed': !isOpen }">
         <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
+      </span>
       </button>
       <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" id="item-count">
         {{ itemCount }}
        </span>
-      <!-- <span v-if="isLoading && isOpen" class="lds-dual-ring" style="margin-right: 4px"></span>       -->
     </div>
     <div v-else-if="deleting" class="delete-confirmation">
       <span class="mobile-hide" style="width: 50%"></span>
@@ -69,19 +70,16 @@ export default {
       if (this.isLoaded) {
         this.$store.commit('setopenListId', this.key);
       } else {
-        // this.$store.commit('setLoading', true);
         ItemService.getItems( [this.list.id], await this.$auth.getTokenSilently())
           .then(res => {
             if (res[0] === 'SUCCESS') {
               var itemsFromApi = res[1];
               this.$store.commit('addItems', itemsFromApi);
-              // this.$store.commit('setLoading', false);
               this.$store.commit('addLoadedListId', this.key)
             } else {
               this.$store.commit('showGenericError');
             }
           }).catch(() => {
-            // this.$store.commit('setLoading', false);
             this.$store.commit('showGenericError');
           });
       }
@@ -176,8 +174,8 @@ export default {
   background-image: linear-gradient(170deg, rgb(134, 63, 130), rgb(86, 99, 141));
   transform: skew(5deg);
   -webkit-transform: skew(5deg);
-  -moz-transform: skew(20deg);
-  -o-transform: skew(20deg);
+  -moz-transform: skew(5deg);
+  -o-transform: skew(5deg);
   margin-right: 2px;
 }
 
@@ -186,13 +184,11 @@ export default {
   background-color: rgb(255, 253, 252);
 }
 
-.list-text {
-  display: flex;
-  display: -webkit-flex; 
-  align-items: center; 
-  flex-wrap: wrap;
-  width: 100%;
-  margin: 4px 12px;
+.list-text-open {
+  transform: skew(-5deg);
+  -webkit-transform: skew(-5deg);
+  -moz-transform: skew(-5deg);
+  -o-transform: skew(-5deg);
 }
 
 .list-name {
@@ -248,6 +244,14 @@ export default {
   box-shadow: 0px 0px 3px rgb(141, 134, 155);
 }
 
+#list-text {
+  display: flex;
+  display: -webkit-flex; 
+  align-items: center; 
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 4px 12px;
+}
 
 #item-count {
   display: flex;

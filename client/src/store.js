@@ -46,9 +46,7 @@ export default new Vuex.Store({
       state.items.splice(index, 1);
     },
     setEditedItemId(state, id) {
-      console.log(id)
       state.editedItemId = id;
-      console.log(state.editedItemId)
     },
     setOpenCategoryMenuId(state, id) {
       state.openCategoryMenuId = id;
@@ -70,7 +68,6 @@ export default new Vuex.Store({
     },
     deleteList(state, id) {
       //refaktoorida indexi leidmine
-      console.log(id)
       let index = state.lists.indexOf(state.lists.find(list => list.id === id));
       state.lists.splice(index, 1);
     },
@@ -121,7 +118,6 @@ export default new Vuex.Store({
       return state.items.find(item => item.id === id);
     },
     getItemsByListId: state => id => {
-      console.log()
       return state.items.filter(item => item.list_id === id);
     },
   }

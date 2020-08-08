@@ -18,7 +18,7 @@
           spellcheck="false"
           @keydown.esc="cancelEdit"
           @keydown.enter="commitEdit"
-          @blur="cancelEdit"
+          @blur="handleBlur"
         />
         <span class="icon-container">
           <i 
@@ -77,11 +77,26 @@ export default {
   },
   data() {
     return {
-      rollBackValue: ''
+      rollBackValue: '',
+      blurLock: false
     }
   },
   methods: {
+    handleBlur() {
+      setTimeout(() => {
+        if (!this.blurLock) {
+          this.cancelEdit()
+        } 
+      }, 0);
+    },
+    releaseBlurLock() {
+
+    },
     openEditMode() {
+      this.blurLock = true;
+      setTimeout(() => {
+        this.blurLock = false;
+      }, 1400);
       this.$store.commit('setEditedItemId', this.key);
       let editedNameHeight = this.$refs.itemName.clientHeight;
       let editedNameWidth = this.$refs.itemName.clientWidth;
@@ -97,6 +112,7 @@ export default {
       this.$store.commit('setEditedItemId', null);
     },
     commitEdit() {
+      this.blurLock = true;
       let freshItem = Object.assign({}, this.item);
       this.executeUpdate(freshItem);
       this.$store.commit('setEditedItemId', null);
@@ -128,19 +144,24 @@ export default {
               originalItem = Object.assign({}, freshItem);
               freshItem = originalItemBackup;
               this.$store.commit('updateItem', { originalItem, freshItem });
+              this.blurLock = false;
             } else if (this.rollBackValue) {
               this.$store.commit('updateItem', { originalItem, freshItem });
               this.rollBackValue = '';
+              this.blurLock = false;
             }
           });        
     },
     async deleteItem() {
+      this.blurLock = true;
       ItemService.deleteItem(this.item.id, await this.$auth.getTokenSilently())
         .then(res => {
           if (res.data[0] === 'SUCCESS') {
             this.$store.commit('deleteItem', this.item);
+            this.blurLock = false;
           } else {
             this.$store.commit('showGenericError');
+            this.blurLock = false;
           }
         });
     }
