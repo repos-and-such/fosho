@@ -172,6 +172,8 @@ export default {
 .list-open {
   color: white;
   background-color: rgb(218, 98, 84);
+  background-image: linear-gradient(160deg, rgb(134, 63, 130), rgb(96, 86, 141));
+
 }
 
 .list-closed {

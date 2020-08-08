@@ -46,7 +46,8 @@ export default {
   display: -webkit -flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(187, 57, 42);
+  /* background-color: rgb(187, 57, 42); */
+  background-image: linear-gradient(160deg, rgb(72, 0, 90), rgb(0, 77, 90));
   color: white;
   width: 100%;
   font-size: 28px;

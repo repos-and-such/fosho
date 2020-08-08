@@ -93,6 +93,8 @@ export default {
   max-width: 180px;
   height: 26px;
   font-size: 18px;
+  box-shadow: none;
+  border: none;
 }
 
 #insert-list-name {

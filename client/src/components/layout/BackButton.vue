@@ -35,7 +35,8 @@ export default {
   align-items: center;
   width: 48px;
   height: 48px;
-  background-color: rgb(187, 57, 42);
+  /* background-color: rgb(187, 57, 42); */
+  background-image: linear-gradient(160deg, rgb(72, 0, 90), rgb(0, 77, 90));
   border-radius: 30px;
   color: white;
   box-shadow: 0px 0px 5px 5px white;

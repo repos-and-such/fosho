@@ -79,7 +79,7 @@ export default {
 }
 
 .material-icons {
-  color: rgb(65, 156, 92); 
+  color: rgb(65, 148, 156); 
   font-size: 38px;
 }
 

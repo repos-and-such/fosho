@@ -1,7 +1,7 @@
 <template>
   <div class="item-menu">
     <div 
-      v-for="category in categories.sort()" 
+      v-for="category in categories" 
       :key="category"
       @click="setCategory(category)"
       class="selection-element"
@@ -22,7 +22,7 @@ export default {
   props: { item: Object },
   data() {
     return {
-      categories: ['none', 'fruit', 'vegetable', 'bread-and-bakery', 'meat', 'grains-and-dry', 'dairy', 'drink', 'personal-care', 'household']
+      categories: ['none', 'fruit', 'vegetable', 'bread-and-bakery', 'meat', 'grains-and-dry', 'dairy', 'drink', 'personal-care', 'household'].sort()
     }
   },
   methods: {
