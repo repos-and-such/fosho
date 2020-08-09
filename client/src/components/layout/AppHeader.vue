@@ -140,6 +140,7 @@ export default {
   #app-header {
     box-shadow: 0px -5px 5px rgb(171, 171, 171);
     margin: 0px 6px 6px 6px;
+    border-bottom: none;
   }
 }
 </style>

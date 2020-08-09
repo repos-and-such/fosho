@@ -176,19 +176,13 @@ export default {
   -webkit-transform: skew(5deg);
   -moz-transform: skew(5deg);
   -o-transform: skew(5deg);
-  margin-right: 2px;
+  margin: 0px 2px;
 }
 
 .list-closed {
   color: rgb(151, 151, 151);
   background-color: rgb(255, 253, 252);
-}
-
-.list-text-open {
-  transform: skew(-5deg);
-  -webkit-transform: skew(-5deg);
-  -moz-transform: skew(-5deg);
-  -o-transform: skew(-5deg);
+  margin-top: 2px !important;
 }
 
 .list-name {
@@ -266,6 +260,15 @@ export default {
   margin: 4px 16px 4px 0px;
 }
 
+@media screen and (min-width: 800px) {
+  .list-text-open {
+  transform: skew(-5deg);
+  -webkit-transform: skew(-5deg);
+  -moz-transform: skew(-5deg);
+  -o-transform: skew(-5deg);
+}
+}
+
 @media screen and (max-width: 800px) {
   #list-header {
   transform: none;
@@ -275,5 +278,10 @@ export default {
   margin: 0px;
   box-shadow: none;
   }
+
+  .list-closed {
+    margin-top: 20px;
+  }
+
 }
 </style>

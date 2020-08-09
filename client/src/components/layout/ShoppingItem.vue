@@ -89,14 +89,11 @@ export default {
         } 
       }, 0);
     },
-    releaseBlurLock() {
-
-    },
     openEditMode() {
       this.blurLock = true;
       setTimeout(() => {
         this.blurLock = false;
-      }, 1400);
+      }, 1000);
       this.$store.commit('setEditedItemId', this.key);
       let editedNameHeight = this.$refs.itemName.clientHeight;
       let editedNameWidth = this.$refs.itemName.clientWidth;
@@ -309,9 +306,9 @@ export default {
   cursor: pointer;
 }
 
-@media screen and (max-height: 700px) {
-#shopping-item {
-  zoom: 0.85;
+@media screen and (max-width: 330px) {
+.text-field {
+  zoom: 0.9;
 } 
 }
 </style>

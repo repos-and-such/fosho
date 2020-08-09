@@ -74,8 +74,6 @@ export default {
 .text-field {
   width: 90%;
   padding-top: 7px;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .material-icons {
@@ -105,7 +103,7 @@ export default {
 
 @media screen and (max-width: 330px) {
 .text-field {
-  zoom: 0.85;
+  zoom: 0.9;
 } 
 }
 

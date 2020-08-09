@@ -162,7 +162,7 @@ export default {
 
 @media screen and (min-width: 800px){
 #shopping-list-body {
-  margin-left: 2px;
+  margin-left: 4px;
   box-shadow: 0px 0px 3px gray;
 }
 }
