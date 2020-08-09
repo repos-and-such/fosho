@@ -203,6 +203,7 @@ export default {
 
 .list-open-count {
   border: 1px solid white;
+  transform: skew(-5deg);
 }
 
 .list-closed-count {

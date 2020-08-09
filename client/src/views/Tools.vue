@@ -13,7 +13,11 @@
     <div class="separator-line"></div>
     <div class="sub-heading">Bulk add item categories</div>
     <div style="display: flex; flex-direction: column; align-items: flex-start;">
-      <textarea class="text-field" v-model="category" />
+      <textarea 
+        class="text-field"
+        maxlength="3000"
+        v-model="category" 
+      />
     </div>
     <div class="separator-line"></div>
     </div>

@@ -1,16 +1,15 @@
 
 <template>
   <div id="insert-list-name">
-    {{ entryLengthExceeded }}
-    {{ entry.length }}
     <textarea 
-      maxlength="20"
+      maxlength="200"
       ref="nameField"
-      :class="{ 'length-exceeded': entryLengthExceeded }"
       class="text-field"
       spellcheck="false" 
       :placeholder="'list name (optional)'" 
       v-model="entry" 
+      @keydown="validateLength"
+      @keydown.enter.prevent
       @keydown.enter="insertListName"
       @blur="handleBlur"
     />
@@ -81,6 +80,12 @@ export default {
     }, 
     closeNameField() {
       this.$store.commit('setEditedListId', null);      
+    },
+    // hack for mobile browsers
+    validateLength() {
+      if (this.entry && this.entry.length > 19) {
+        this.entry = this.entry.slice(0,19);
+      }
     }
   },
   computed: {
@@ -90,12 +95,6 @@ export default {
     listBeforeUpdate() {
       return this.$store.getters.getListById(this.key);
     },
-    entryLengthExceeded() {
-      if (this.entry && this.entry.length > 20) {
-        return true;
-      }
-      return false;
-    }
   },
   created() {
     setTimeout(() => {

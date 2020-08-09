@@ -94,8 +94,9 @@ export default {
   align-items: center;
   justify-content: space-between;
   background-image: linear-gradient(176deg, rgb(72, 0, 90), rgb(0, 69, 90));
-  -webkit-tap-highlight-color: transparent;
   border-bottom: 3px solid rgb(255, 253, 252);
+  min-height: 46px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #plus-button {
