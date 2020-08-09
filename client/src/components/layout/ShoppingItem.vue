@@ -77,7 +77,6 @@ export default {
   },
   data() {
     return {
-      rollBackValue: '',
       blurLock: false
     }
   },
@@ -87,7 +86,7 @@ export default {
         if (!this.blurLock) {
           this.cancelEdit()
         } 
-      }, 0);
+      }, 300);
     },
     openEditMode() {
       this.blurLock = true;
@@ -140,6 +139,7 @@ export default {
       }
       ItemService.updateItem(freshItem, this.item, await this.$auth.getTokenSilently())
           .then(res => {
+            console.log('sain response')
             if (res.data[0] !== 'SUCCESS') {
               this.$store.commit('showGenericError');
               originalItem = Object.assign({}, freshItem);
@@ -147,9 +147,7 @@ export default {
               this.$store.commit('updateItem', { originalItem, freshItem });
               this.blurLock = false;
             } else if (this.rollBackValue) {
-              this.$store.commit('updateItem', { originalItem, freshItem });
-              this.rollBackValue = '';
-              this.blurLock = false;
+              console.log('jõudsin siia')
             }
           });        
     },

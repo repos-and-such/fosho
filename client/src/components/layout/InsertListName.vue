@@ -1,6 +1,8 @@
 
 <template>
   <div id="insert-list-name">
+    {{ entryLengthExceeded }}
+    {{ entry.length }}
     <textarea 
       maxlength="20"
       ref="nameField"
