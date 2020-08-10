@@ -17,7 +17,7 @@
         NB! This will be replaced with a drop-down menu. At the moment, you need to enter a valid category 
         (fruit, vegetable, bread-and-bakery, meat, grains-and-dry, dairy, drink, personal-care or household) for this to work.
       </div>      
-      <span style="display: flex; flex-direction: row; margin-top: 10px;">
+      <span style="display: flex; flex-direction: row; margin-top: 10px; width: 100%;">
         <textarea 
           class="text-field"
           maxlength="30"
@@ -96,17 +96,25 @@ export default {
 </script>
 
 <style scoped>
+.text-field {
+  width: 100%;
+  height: 42px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
 #large-text-field {
   height: 30vh;
-  width: 94%;
-  max-width: 900px;
   padding: 18px;
   margin: 12px 12px 12px 0px;
   border-radius: 24px;
   overflow-wrap: anywhere;
   word-wrap: break-word;
   white-space: pre-wrap;
-  overflow: auto;
+  overflow: auto; 
 }
 
 .note {
