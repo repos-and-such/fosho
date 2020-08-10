@@ -12,10 +12,6 @@
       <span class="material-icons" style="color: rgb(91, 181, 207);">info</span>
       <span class="text">About</span>
     </button>
-    <button class="button" name="selection-element" @click="setRoute('testPage')">
-      <span class="material-icons" style="color: rgb(91, 181, 207);">info</span>
-      <span class="text">TestPage</span>
-    </button>
     <button class="button" name="selection-element" @click="logout">
       <span class="material-icons" style="color: rgb(148, 71, 71);">exit_to_app</span>
       <span class="text">Log out</span>

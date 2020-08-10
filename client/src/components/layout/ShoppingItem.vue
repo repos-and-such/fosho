@@ -139,15 +139,12 @@ export default {
       }
       ItemService.updateItem(freshItem, this.item, await this.$auth.getTokenSilently())
           .then(res => {
-            console.log('sain response')
             if (res.data[0] !== 'SUCCESS') {
               this.$store.commit('showGenericError');
               originalItem = Object.assign({}, freshItem);
               freshItem = originalItemBackup;
               this.$store.commit('updateItem', { originalItem, freshItem });
               this.blurLock = false;
-            } else if (this.rollBackValue) {
-              console.log('jõudsin siia')
             }
           });        
     },

@@ -113,12 +113,12 @@ export default {
         if (this.itemsBought.length === 0) {
           if (this.items.length === 1) {
             if (this.listsLength < 4) {
-              this.listBodyTip = `${this.tapOrClick} the circle next to item name to change category`;
+              this.listBodyTip = `${this.tapOrClick} the circle next to item name to change item category`;
             } else {
               this.listBodyTip = `To delete a list, ${this.iconOrSwipe}`;
             }
           } else if (this.items.length === 2) {
-            this.listBodyTip = `${this.tapOrClick} item name to mark as bought`;
+            this.listBodyTip = `${this.tapOrClick} item name to mark item as bought`;
           } else if (this.items.length === 3) {
             this.listBodyTip = `${this.tapOrClick} and hold item name to edit or delete?`;
           }

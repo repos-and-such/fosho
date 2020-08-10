@@ -119,6 +119,6 @@ export default new Vuex.Store({
     },
     getItemsByListId: state => id => {
       return state.items.filter(item => item.list_id === id);
-    },
+    }
   }
 });

@@ -203,7 +203,6 @@ export default {
 
 .list-open-count {
   border: 1px solid white;
-  transform: skew(-5deg);
 }
 
 .list-closed-count {
@@ -262,16 +261,20 @@ export default {
 }
 
 @media screen and (min-width: 800px) {
-  .list-text-open {
+.list-text-open {
   transform: skew(-5deg);
   -webkit-transform: skew(-5deg);
   -moz-transform: skew(-5deg);
   -o-transform: skew(-5deg);
 }
+
+.list-open-count {
+  transform: skew(-5deg);
+}
 }
 
 @media screen and (max-width: 800px) {
-  #list-header {
+#list-header {
   transform: none;
   -webkit-transform: none;
   -moz-transform: none;
@@ -280,7 +283,7 @@ export default {
   box-shadow: none;
   }
 
-  .list-closed {
+.list-closed {
     margin-top: 20px;
   }
 
