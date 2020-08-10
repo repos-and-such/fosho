@@ -2,11 +2,14 @@
   <div id="page-header">
     <span class="mobile-hide" style="width: 155px;"></span>
     <span class="desktop-hide"></span>
-    <div>{{ text }}</div>
+    <span style="display:flex; justify-content: center; align-items: center;">
+      <span class="material-icons">{{ icon }}</span>
+      <div>{{ text }}</div>
+    </span>
     <button class="mobile-hide">
       <span @click.prevent="back" class="header-button" id="back-button">
         <i class="material-icons">keyboard_backspace</i>
-        <span style="font-size: 24px; font-family: Montserrat;">BACK</span>
+        <span style="font-size: 20px; font-family: Montserrat;">BACK</span>
       </span>
     </button>
   </div>
@@ -37,8 +40,9 @@ export default {
 }
 
 .material-icons {
-  padding-right: 6px;
-  font-size: 34px;
+  color: rgb(245, 233, 232); 
+  font-size: 30px;
+  margin-right: 8px;
 }
 
 #page-header {

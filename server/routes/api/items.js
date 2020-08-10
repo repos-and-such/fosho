@@ -112,21 +112,14 @@ router.post('/category', checkJwt, async (req,res) => {
     let rawItemsArray = req.body.items.split(/\r?,/);
     let itemsArray = [];
     rawItemsArray.forEach(item => {
-      if (item.length > 1) {
+      item = item.replace(/ +(?= )/g,'');
+      console.log(item);
+      console.log(item.length);
+      if (item.length > 1 && item !== ' ') {
         item = item.trim();
         item = item.toLowerCase();
         item = item.replace(/\.|\,/g, '');
         itemsArray.includes(item)|| itemsArray.push(item);
-        if (item.charAt(item.length - 1) !== 's' && rawItemsArray[0] === 'EN') {
-          let plural;
-          if (item.charAt(item.length - 1) === 'y') {
-            plural = item.slice(0, item.length - 1) + 'ies';
-            itemsArray.includes(plural) || itemsArray.push(plural);
-          } else {
-            plural = item + 's';
-            itemsArray.includes(plural) || itemsArray.push(plural);
-          }
-        }
       }
     });
 

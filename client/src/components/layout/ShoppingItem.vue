@@ -21,19 +21,19 @@
           @blur="handleBlur"
         />
         <span class="icon-container">
-          <i 
+          <button
             class="material-icons" 
             @click="commitEdit" 
-            style="margin-right: 16px; color: rgb(65, 148, 156);"
+            style="margin: 0px 16px 0px 16px; color: rgb(65, 148, 156);"
           >
             check
-          </i>
-          <i 
+          </button>
+          <button
             class="material-icons"
             @click="deleteItem"
             style="margin-right: 16px; color: rgb(180, 3, 3);">
             delete_forever
-          </i>
+          </button>
         </span>
       </span>
       <span 

@@ -3,7 +3,7 @@
     <page-header :icon="'settings'" :text="'Tools'" />
     <div class="page-body">
       <div class="note">
-        Note: This app is still in development. More tools and settings coming up.
+        NB! This app is still in development. More tools and settings coming up.
       </div>
     <div class="separator-line"></div>
     <div class="sub-heading">
@@ -13,10 +13,34 @@
     <div class="separator-line"></div>
     <div class="sub-heading">Bulk add item categories</div>
     <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <div class="note">
+        NB! This will be replaced with a drop-down menu. At the moment, you need to enter a valid category 
+        (fruit, vegetable, bread-and-bakery, meat, grains-and-dry, dairy, drink, personal-care or household) for this to work.
+      </div>      
+      <span style="display: flex; flex-direction: row; margin-top: 10px;">
+        <textarea 
+          class="text-field"
+          maxlength="30"
+          v-model="category"
+          placeholder="Enter item category"
+          spellcheck="false"
+        />
+        <button
+          @click="submitItems"
+          type="insert"
+          class="material-icons" 
+          id="check-button" 
+          spellcheck="false"
+        >
+          check
+        </button>
+      </span>
       <textarea 
         class="text-field"
+        id="large-text-field"
         maxlength="3000"
-        v-model="category" 
+        v-model="items"
+        placeholder="Enter items that belong to this category, separated by commas."
       />
     </div>
     <div class="separator-line"></div>
@@ -45,7 +69,7 @@ export default {
     back() {
       this.$router.push('/');
     },
-    async submit() {
+    async submitItems() {
       ItemService.bindCategory(
         { category: this.category, items: this.items }, 
         await this.$auth.getTokenSilently()
@@ -72,18 +96,27 @@ export default {
 </script>
 
 <style scoped>
+#large-text-field {
+  height: 30vh;
+  width: 94%;
+  max-width: 900px;
+  padding: 18px;
+  margin: 12px 12px 12px 0px;
+  border-radius: 24px;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow: auto;
+}
+
 .note {
   padding: 28px 22px 20px 20px;
   color: rgb(172, 170, 170);
 }
-.text-field {
-  align-self: center;
-  padding: 10px 5vw;
-  height: 30vh;
-  width: 80%;
-  max-width: 900px;
-  border-radius: 0px;
-  word-wrap: break-word;
-  overflow: auto;
+
+.material-icons {
+  color: rgb(65, 148, 156); 
+  font-size: 42px;
 }
+
 </style>

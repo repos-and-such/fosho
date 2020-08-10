@@ -9,7 +9,7 @@
       <span class="text">Help</span>
     </button>
     <button class="button" name="selection-element" @click="setRoute('about')">
-      <span class="material-icons" style="color: rgb(91, 181, 207);">info</span>
+      <span class="material-icons" style="color: rgb(91, 181, 207);">info_outline</span>
       <span class="text">About</span>
     </button>
     <button class="button" name="selection-element" @click="logout">
