@@ -34,7 +34,6 @@ router.get(`/`, checkJwt, async (req,res) => {
 });
 
 router.post('/', checkJwt, async (req,res) => {
-  console.log(req.body.localTimestamp);
   res.send(await (async () => {
     const client = await pool.connect()
     try {
