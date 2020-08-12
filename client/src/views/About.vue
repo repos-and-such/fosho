@@ -6,7 +6,7 @@
         <div class="sub-text">Personal use, developing my skills and showcasing some of the stuff I've learned so far</div>
         <div class="separator-line"></div>
       <div class="sub-heading">Tools and Services used</div>
-        <div class="sub-text">Node, Express, Postgres, Vue, Vuex Auth0, Heroku</div>
+        <div class="sub-text">Node, Express, Postgres, Vue, Vuex, Auth0, Heroku</div>
         <div class="separator-line"></div>
       <div class="sub-heading">Check out the repo and my profile!</div>
         <span class="logos">

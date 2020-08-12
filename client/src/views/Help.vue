@@ -36,6 +36,7 @@
         </div>
         <div id="separator-line"/>
       </span>
+      <div style="height: 55px"></div>
     </div>
     <back-button class="desktop-hide" />
   </div>

@@ -118,7 +118,7 @@ export default {
               this.listBodyTip = `To delete a list, ${this.iconOrSwipe}`;
             }
           } else if (this.items.length === 2) {
-            this.listBodyTip = `${this.tapOrClick} item name to mark item as bought`;
+            this.listBodyTip = `${this.tapOrClick} item name to mark as bought`;
           } else if (this.items.length === 3) {
             this.listBodyTip = `${this.tapOrClick} and hold item name to edit or delete?`;
           }

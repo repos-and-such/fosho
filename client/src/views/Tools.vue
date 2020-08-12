@@ -43,7 +43,7 @@
         placeholder="Enter items that belong to this category, separated by commas."
       />
     </div>
-    <div class="separator-line"></div>
+    <div style="height: 85px"></div>
     </div>
     <back-button class="desktop-hide" />
     <div>

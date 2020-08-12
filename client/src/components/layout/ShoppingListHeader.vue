@@ -35,8 +35,8 @@
         <i id="delete-list" class="material-icons" @click="openDeleteConfirmation">delete_forever</i>
       </span>
       </button>
-      <span v-if="itemCount > 0" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" id="item-count">
-        {{ itemCount }}
+      <span v-if="itemsToBuyCount > -1" :class="{ 'list-open-count': isOpen, 'list-closed-count': !isOpen }" id="item-count">
+        {{ itemsToBuyCount }}
        </span>
     </div>
     <div v-else-if="deleting" class="delete-confirmation">
@@ -153,8 +153,9 @@ export default {
     editedListId() {
       return this.$store.state.editedListId;
     },
-    itemCount() {
-      return this.items.length > 0 ? this.items.length : '';
+    itemsToBuyCount() {
+      let itemsToBuyCount = this.items.filter(item => !item.bought).length;
+      return this.items.length > 0 ? itemsToBuyCount : -1;
     },
     items() {
       return this.$store.getters.getItemsByListId(this.key);

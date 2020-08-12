@@ -55,14 +55,15 @@ export default {
 
 .button {
   display: flex;
+  align-items: center;
   justify-content: flex-start;
   display: -webkit-flex;
   justify-self: start;
-  align-items: center;
+  text-align: center;
   padding: 10px 6px;
   cursor: pointer;
   transition: 250ms ease-in-out, transform 150ms ease;
-  color:rgb(83, 83, 83);
+  color:gray;
 
 }
 
@@ -71,7 +72,7 @@ export default {
 }
 
 .material-icons {
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .icon {
@@ -81,12 +82,14 @@ export default {
 
 .text {
   margin-left: 8px;
-  font-size: 26px;
+  font-size: 22px;
+  padding-top: 1px;
 }
 
 @media screen and (max-width: 1000px){
 .selection-box {
   right: 0px;
+  top: 49px;
 }
 }
 
