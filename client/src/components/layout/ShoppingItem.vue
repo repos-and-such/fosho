@@ -104,7 +104,7 @@ export default {
       }, 0);
     },
     cancelEdit() {
-      this.item.name = this.rollBackValue;
+      this.item ? this.item.name = this.rollBackValue : false;
       this.$store.commit('setEditedItemId', null);
     },
     commitEdit() {
