@@ -35,7 +35,6 @@ router.get('/:id', checkJwt, async (req,res) => {
         client.release()
       }
     })().catch(err => {
-      console.log(err.stack);
       return [ 'ERROR', err.stack ];
     }))
 });
@@ -109,36 +108,10 @@ router.delete('/:id', checkJwt, async (req, res) => {
 router.post('/category', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect();
-    let rawItemsArray = req.body.items.split(/\r?,/);
-    let itemsArray = [];
-    rawItemsArray.forEach(item => {
-      item = item.replace(/ +(?= )/g,'');
-      console.log(item);
-      console.log(item.length);
-      if (item.length > 1 && item !== ' ') {
-        item = item.trim();
-        item = item.toLowerCase();
-        item = item.replace(/\.|\,/g, '');
-        itemsArray.includes(item)|| itemsArray.push(item);
-      }
-    });
 
-    let user = req.user.sub.split('|')[1];
-    let isAdmin = user === process.env.ADMIN_ID;
-    if (isAdmin) {
-      user = 'admin';
-    }
-
-    // Build query
-    let query = "insert into category (name, item, user_id, global_category, created_on) values ";
-    let params = [req.body.category, user, isAdmin];
-
-    for (let i = 0; i < itemsArray.length; i++) {
-      query = query.concat(`($1, $${ (i + 4) }, $2, $3, now()), `);
-      params.push(itemsArray[i])
-    }
-    query = query.slice(0, query.length - 2);
-    query = query.concat(` on conflict (item, user_id) do update set name = $1, created_on = now() returning *`);
+    let queryAndParams = prepareQueryAndParams(req);
+    let query = queryAndParams.query;
+    let params = queryAndParams.params;
     try {
       const res = await client.query(query, params);
       return ['SUCCESS', res.rows];
@@ -150,5 +123,44 @@ router.post('/category', checkJwt, async (req,res) => {
     console.log(err.stack);
   }))
 });
+
+function prepareQueryAndParams(req) {
+  let itemsArray = prepareItemsArray(req.body.items);
+
+  let user = req.user.sub.split('|')[1];
+  let isAdmin = user === process.env.ADMIN_ID;
+  if (isAdmin) {
+    user = 'admin';
+  }
+
+  let params = [req.body.category, user, isAdmin];
+  
+  let query = "insert into category (name, item, user_id, global_category, created_on) values ";
+
+  for (let i = 0; i < itemsArray.length; i++) {
+    query = query.concat(`($1, $${ (i + 4) }, $2, $3, now()), `);
+    params.push(itemsArray[i])
+  }
+  query = query.slice(0, query.length - 2);
+  query = query.concat(` on conflict (item, user_id) do update set name = $1, created_on = now() returning *`);
+
+  return { query: query, params: params };
+}
+
+function prepareItemsArray(items) {
+  let rawItemsArray = items.split(/\r?,/);
+  let itemsArray = [];
+  rawItemsArray.forEach(item => {
+    item = item.replace(/ +(?= )/g,'');
+
+    if (item.length > 1 && item !== ' ') {
+      item = item.trim();
+      item = item.toLowerCase();
+      item = item.replace(/\.|\,/g, '');
+      itemsArray.includes(item) || itemsArray.push(item);
+    }
+  });
+  return itemsArray;
+}
 
 module.exports = router;
