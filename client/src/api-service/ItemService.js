@@ -1,5 +1,4 @@
 import axios from 'axios';
-import moment from 'moment';
 
 const url = 'api/items/';
 
@@ -23,7 +22,6 @@ class ItemService {
       return axios.post(url, {
         name: item.name,
         list_id: item.list_id,
-        localTimeStamp: moment().format()
       }, 
       {
         headers: { Authorization: `Bearer ${token}` }
@@ -35,7 +33,6 @@ class ItemService {
     }
 
     static updateItem(item, oldItem, token) {
-      item.localTimeStamp = moment().format();      
       return axios.put(url, item, 
       {
         headers: { Authorization: `Bearer ${token}` }

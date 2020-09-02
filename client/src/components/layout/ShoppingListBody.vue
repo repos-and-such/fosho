@@ -129,7 +129,7 @@ export default {
       this.slideDuration = 0;
       setTimeout(() => {
         if (this.items.length === 0 && !this.listNameFieldOpen) {
-          this.listBodyTip = `${this.tapOrClick} check-mark or hit Enter to to submit an item`; 
+          this.listBodyTip = `Welcome to Fo Sho shopping assistant! ${this.tapOrClick} check-mark or hit Enter to submit an item.`; 
         } 
 
       }, 400);

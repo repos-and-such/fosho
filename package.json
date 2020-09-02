@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/repos-and-such/fosho#readme",
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

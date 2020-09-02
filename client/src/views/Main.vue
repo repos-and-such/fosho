@@ -19,7 +19,7 @@ export default {
     AppBody
   },
   methods: {
-    async getRecentItems(lists) {
+    async getRecentLists(lists) {
 
       let recentListIds = [];
       lists.forEach(list => {
@@ -61,7 +61,7 @@ export default {
         .then(res => {
           if (res[0] === 'SUCCESS') {
             var listsFromApi = res[1];
-            this.getRecentItems(listsFromApi);
+            this.getRecentLists(listsFromApi);
             this.$store.commit('setLists', listsFromApi);
             this.$store.commit('setLoading', false);
           } else {

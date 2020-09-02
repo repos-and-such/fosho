@@ -44,14 +44,14 @@ router.post('/', checkJwt, async (req,res) => {
     const client = await pool.connect()
     try {
       const res = await client.query(`
-      insert into item as i (name, list_id, user_id, bought, created_on) values ($1, $2, $3, false, $4) 
+      insert into item as i (name, list_id, user_id, bought, created_on) values ($1, $2, $3, false, now()::timestamp) 
       returning id, name, list_id, user_id, 
       (
         select name from category c where lower(i.name) like '%' || lower(c.item) || '%' and (user_id = 'admin' or user_id = $3) 
         order by global_category, character_length(item) desc limit 1
       )
       as category, bought, created_on
-      `, [req.body.name, req.body.list_id, req.user.sub.split('|')[1], req.body.localTimeStamp]);
+      `, [req.body.name, req.body.list_id, req.user.sub.split('|')[1]]);
       return ['SUCCESS', res.rows[0]];
 
     } finally {
@@ -138,11 +138,11 @@ function prepareQueryAndParams(req) {
   let query = "insert into category (name, item, user_id, global_category, created_on) values ";
 
   for (let i = 0; i < itemsArray.length; i++) {
-    query = query.concat(`($1, $${ (i + 4) }, $2, $3, now()), `);
+    query = query.concat(`($1, $${ (i + 4) }, $2, $3, now()::timestamp), `);
     params.push(itemsArray[i])
   }
   query = query.slice(0, query.length - 2);
-  query = query.concat(` on conflict (item, user_id) do update set name = $1, created_on = now() returning *`);
+  query = query.concat(` on conflict (item, user_id) do update set name = $1, created_on = now()::timestamp returning *`);
 
   return { query: query, params: params };
 }
