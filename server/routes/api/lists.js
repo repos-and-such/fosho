@@ -37,7 +37,7 @@ router.post('/', checkJwt, async (req,res) => {
   res.send(await (async () => {
     const client = await pool.connect()
     try {
-      const res = await client.query("insert into list (name, user_id, created_on) values (null, $1, now()::timestamp) returning id, name, user_id, created_on",
+      const res = await client.query("insert into list (name, user_id, created_on) values (null, $1, now()) returning id, name, user_id, created_on",
       [req.user.sub.split('|')[1]]);
       return ['SUCCESS', res.rows[0]];
     } finally {

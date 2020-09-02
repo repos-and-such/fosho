@@ -116,25 +116,19 @@ export default {
     },
     dateTimeDisplay() {
       if (this.list.created_on) {
-        let time = this.list.created_on.split('T')[1];
-        time = time.slice(0,5);
+        let createdTime = moment(this.list.created_on).format('HH:mm');
+        let createdDate = moment.utc(this.list.created_on).format('DD-MM-YYYY');
 
-        let currentDate = moment().format('YYYY-MM-DD');
-        let yesterDaysDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
-
-        let createdDate = moment.utc(this.list.created_on).format('YYYY-MM-DD');
+        let currentDate = moment().format('DD-MM-YYYY');
+        let yesterDaysDate = moment().subtract(1, 'days').format('DD-MM-YYYY');
 
         if (createdDate === currentDate) {
-          return 'Today ' + time;
+          return 'Today ' + createdTime;
         } else if (createdDate === yesterDaysDate) {
-          return 'Yesterday ' + time;
-        } else if (this.list.created_on) {
-          let createdDateArray = createdDate.split('-');
-          let createdDateReversed = createdDateArray.reverse().join('-');  
-          return createdDateReversed + ' ' + time;
+          return 'Yesterday ' + createdTime;
         } else {
-          return '';
-        }
+          return createdDate + ' ' + createdTime;
+        } 
       } else return null; 
     },
     key() {
