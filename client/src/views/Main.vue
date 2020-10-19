@@ -23,7 +23,7 @@ export default {
 
       let recentListIds = [];
       lists.forEach(list => {
-        if (moment().unix() - moment(list.created_on).unix() < 2629743) {
+        if (moment().unix() - moment(list.created_on).unix() < 5184000000) {
           recentListIds.push(list.id)
         }
       });
