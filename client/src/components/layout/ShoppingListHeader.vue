@@ -75,7 +75,8 @@ export default {
             if (res[0] === 'SUCCESS') {
               var itemsFromApi = res[1];
               this.$store.commit('addItems', itemsFromApi);
-              this.$store.commit('addLoadedListId', this.key)
+              this.$store.commit('addLoadedListId', this.key);
+              this.$store.commit('setopenListId', this.key);
             } else {
               this.$store.commit('showGenericError');
             }
